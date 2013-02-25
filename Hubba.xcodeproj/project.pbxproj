@@ -24,6 +24,9 @@
 		59ABA74616DB51E300F711DB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72516DB51E300F711DB /* CoreData.framework */; };
 		59ABA74E16DB51E300F711DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA74C16DB51E300F711DB /* InfoPlist.strings */; };
 		59ABA75116DB51E300F711DB /* HubbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75016DB51E300F711DB /* HubbaTests.m */; };
+		59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
+		59ABA76516DB6D9100F711DB /* SLMainVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVCViewController.m */; };
+		59ABA76716DB6DBB00F711DB /* SLMainVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVCViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,11 @@
 		59ABA74D16DB51E300F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		59ABA74F16DB51E300F711DB /* HubbaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubbaTests.h; sourceTree = "<group>"; };
 		59ABA75016DB51E300F711DB /* HubbaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HubbaTests.m; sourceTree = "<group>"; };
+		59ABA75C16DB6A1300F711DB /* SLOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOAuth2Client.h; path = Classes/SLOAuth2Client.h; sourceTree = "<group>"; };
+		59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOAuth2Client.m; path = Classes/SLOAuth2Client.m; sourceTree = "<group>"; };
+		59ABA76216DB6D9100F711DB /* SLMainVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMainVCViewController.h; path = Classes/SLMainVCViewController.h; sourceTree = "<group>"; };
+		59ABA76316DB6D9100F711DB /* SLMainVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMainVCViewController.m; path = Classes/SLMainVCViewController.m; sourceTree = "<group>"; };
+		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/SLMainVCViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +128,7 @@
 		59ABA72716DB51E300F711DB /* Hubba */ = {
 			isa = PBXGroup;
 			children = (
-				59ABA73016DB51E300F711DB /* SLAppDelegate.h */,
-				59ABA73116DB51E300F711DB /* SLAppDelegate.m */,
+				59ABA75A16DB69F000F711DB /* Classes */,
 				59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */,
 				59ABA72816DB51E300F711DB /* Supporting Files */,
 			);
@@ -159,6 +166,36 @@
 				59ABA74C16DB51E300F711DB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		59ABA75A16DB69F000F711DB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA76116DB6D6F00F711DB /* View Controllers */,
+				59ABA75B16DB69FA00F711DB /* Networking */,
+				59ABA73016DB51E300F711DB /* SLAppDelegate.h */,
+				59ABA73116DB51E300F711DB /* SLAppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		59ABA75B16DB69FA00F711DB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA75C16DB6A1300F711DB /* SLOAuth2Client.h */,
+				59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		59ABA76116DB6D6F00F711DB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA76216DB6D9100F711DB /* SLMainVCViewController.h */,
+				59ABA76316DB6D9100F711DB /* SLMainVCViewController.m */,
+				59ABA76916DB6DBB00F711DB /* SLMainVCViewController.xib */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +274,7 @@
 				59ABA73416DB51E300F711DB /* Default.png in Resources */,
 				59ABA73616DB51E300F711DB /* Default@2x.png in Resources */,
 				59ABA73816DB51E300F711DB /* Default-568h@2x.png in Resources */,
+				59ABA76716DB6DBB00F711DB /* SLMainVCViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +312,8 @@
 				59ABA72E16DB51E300F711DB /* main.m in Sources */,
 				59ABA73216DB51E300F711DB /* SLAppDelegate.m in Sources */,
 				59ABA73B16DB51E300F711DB /* Hubba.xcdatamodeld in Sources */,
+				59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */,
+				59ABA76516DB6D9100F711DB /* SLMainVCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +351,15 @@
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
+		};
+		59ABA76916DB6DBB00F711DB /* SLMainVCViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59ABA76816DB6DBB00F711DB /* en */,
+			);
+			name = SLMainVCViewController.xib;
+			path = Hubba;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
