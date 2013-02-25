@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
+		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
+		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
+		59ABA72616DB51E300F711DB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72516DB51E300F711DB /* CoreData.framework */; };
+		59ABA72C16DB51E300F711DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA72A16DB51E300F711DB /* InfoPlist.strings */; };
+		59ABA72E16DB51E300F711DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA72D16DB51E300F711DB /* main.m */; };
+		59ABA73216DB51E300F711DB /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA73116DB51E300F711DB /* SLAppDelegate.m */; };
+		59ABA73416DB51E300F711DB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA73316DB51E300F711DB /* Default.png */; };
+		59ABA73616DB51E300F711DB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA73516DB51E300F711DB /* Default@2x.png */; };
+		59ABA73816DB51E300F711DB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA73716DB51E300F711DB /* Default-568h@2x.png */; };
+		59ABA73B16DB51E300F711DB /* Hubba.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */; };
+		59ABA74316DB51E300F711DB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA74216DB51E300F711DB /* SenTestingKit.framework */; };
+		59ABA74416DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
+		59ABA74516DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
+		59ABA74616DB51E300F711DB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72516DB51E300F711DB /* CoreData.framework */; };
+		59ABA74E16DB51E300F711DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA74C16DB51E300F711DB /* InfoPlist.strings */; };
+		59ABA75116DB51E300F711DB /* HubbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75016DB51E300F711DB /* HubbaTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59ABA74716DB51E300F711DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59ABA71416DB51E300F711DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59ABA71B16DB51E300F711DB;
+			remoteInfo = Hubba;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		59ABA72316DB51E300F711DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		59ABA72516DB51E300F711DB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		59ABA72916DB51E300F711DB /* Hubba-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hubba-Info.plist"; sourceTree = "<group>"; };
+		59ABA72B16DB51E300F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		59ABA72D16DB51E300F711DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		59ABA72F16DB51E300F711DB /* Hubba-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hubba-Prefix.pch"; sourceTree = "<group>"; };
+		59ABA73016DB51E300F711DB /* SLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
+		59ABA73116DB51E300F711DB /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
+		59ABA73316DB51E300F711DB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		59ABA73516DB51E300F711DB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		59ABA73716DB51E300F711DB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		59ABA73A16DB51E300F711DB /* Hubba.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hubba.xcdatamodel; sourceTree = "<group>"; };
+		59ABA74116DB51E300F711DB /* HubbaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HubbaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59ABA74216DB51E300F711DB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HubbaTests-Info.plist"; sourceTree = "<group>"; };
+		59ABA74D16DB51E300F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		59ABA74F16DB51E300F711DB /* HubbaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubbaTests.h; sourceTree = "<group>"; };
+		59ABA75016DB51E300F711DB /* HubbaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HubbaTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		59ABA71916DB51E300F711DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */,
+				59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */,
+				59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */,
+				59ABA72616DB51E300F711DB /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59ABA73D16DB51E300F711DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA74316DB51E300F711DB /* SenTestingKit.framework in Frameworks */,
+				59ABA74416DB51E300F711DB /* UIKit.framework in Frameworks */,
+				59ABA74516DB51E300F711DB /* Foundation.framework in Frameworks */,
+				59ABA74616DB51E300F711DB /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		59ABA71316DB51E300F711DB = {
+			isa = PBXGroup;
+			children = (
+				59ABA72716DB51E300F711DB /* Hubba */,
+				59ABA74916DB51E300F711DB /* HubbaTests */,
+				59ABA71E16DB51E300F711DB /* Frameworks */,
+				59ABA71D16DB51E300F711DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		59ABA71D16DB51E300F711DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA71C16DB51E300F711DB /* Hubba.app */,
+				59ABA74116DB51E300F711DB /* HubbaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		59ABA71E16DB51E300F711DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA71F16DB51E300F711DB /* UIKit.framework */,
+				59ABA72116DB51E300F711DB /* Foundation.framework */,
+				59ABA72316DB51E300F711DB /* CoreGraphics.framework */,
+				59ABA72516DB51E300F711DB /* CoreData.framework */,
+				59ABA74216DB51E300F711DB /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59ABA72716DB51E300F711DB /* Hubba */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA73016DB51E300F711DB /* SLAppDelegate.h */,
+				59ABA73116DB51E300F711DB /* SLAppDelegate.m */,
+				59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */,
+				59ABA72816DB51E300F711DB /* Supporting Files */,
+			);
+			path = Hubba;
+			sourceTree = "<group>";
+		};
+		59ABA72816DB51E300F711DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA72916DB51E300F711DB /* Hubba-Info.plist */,
+				59ABA72A16DB51E300F711DB /* InfoPlist.strings */,
+				59ABA72D16DB51E300F711DB /* main.m */,
+				59ABA72F16DB51E300F711DB /* Hubba-Prefix.pch */,
+				59ABA73316DB51E300F711DB /* Default.png */,
+				59ABA73516DB51E300F711DB /* Default@2x.png */,
+				59ABA73716DB51E300F711DB /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		59ABA74916DB51E300F711DB /* HubbaTests */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA74F16DB51E300F711DB /* HubbaTests.h */,
+				59ABA75016DB51E300F711DB /* HubbaTests.m */,
+				59ABA74A16DB51E300F711DB /* Supporting Files */,
+			);
+			path = HubbaTests;
+			sourceTree = "<group>";
+		};
+		59ABA74A16DB51E300F711DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */,
+				59ABA74C16DB51E300F711DB /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		59ABA71B16DB51E300F711DB /* Hubba */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59ABA75416DB51E300F711DB /* Build configuration list for PBXNativeTarget "Hubba" */;
+			buildPhases = (
+				59ABA71816DB51E300F711DB /* Sources */,
+				59ABA71916DB51E300F711DB /* Frameworks */,
+				59ABA71A16DB51E300F711DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hubba;
+			productName = Hubba;
+			productReference = 59ABA71C16DB51E300F711DB /* Hubba.app */;
+			productType = "com.apple.product-type.application";
+		};
+		59ABA74016DB51E300F711DB /* HubbaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59ABA75716DB51E300F711DB /* Build configuration list for PBXNativeTarget "HubbaTests" */;
+			buildPhases = (
+				59ABA73C16DB51E300F711DB /* Sources */,
+				59ABA73D16DB51E300F711DB /* Frameworks */,
+				59ABA73E16DB51E300F711DB /* Resources */,
+				59ABA73F16DB51E300F711DB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59ABA74816DB51E300F711DB /* PBXTargetDependency */,
+			);
+			name = HubbaTests;
+			productName = HubbaTests;
+			productReference = 59ABA74116DB51E300F711DB /* HubbaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		59ABA71416DB51E300F711DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SL;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Sakun Labs";
+			};
+			buildConfigurationList = 59ABA71716DB51E300F711DB /* Build configuration list for PBXProject "Hubba" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 59ABA71316DB51E300F711DB;
+			productRefGroup = 59ABA71D16DB51E300F711DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				59ABA71B16DB51E300F711DB /* Hubba */,
+				59ABA74016DB51E300F711DB /* HubbaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		59ABA71A16DB51E300F711DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA72C16DB51E300F711DB /* InfoPlist.strings in Resources */,
+				59ABA73416DB51E300F711DB /* Default.png in Resources */,
+				59ABA73616DB51E300F711DB /* Default@2x.png in Resources */,
+				59ABA73816DB51E300F711DB /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59ABA73E16DB51E300F711DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA74E16DB51E300F711DB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59ABA73F16DB51E300F711DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59ABA71816DB51E300F711DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA72E16DB51E300F711DB /* main.m in Sources */,
+				59ABA73216DB51E300F711DB /* SLAppDelegate.m in Sources */,
+				59ABA73B16DB51E300F711DB /* Hubba.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59ABA73C16DB51E300F711DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59ABA75116DB51E300F711DB /* HubbaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59ABA74816DB51E300F711DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59ABA71B16DB51E300F711DB /* Hubba */;
+			targetProxy = 59ABA74716DB51E300F711DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		59ABA72A16DB51E300F711DB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59ABA72B16DB51E300F711DB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		59ABA74C16DB51E300F711DB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59ABA74D16DB51E300F711DB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		59ABA75216DB51E300F711DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		59ABA75316DB51E300F711DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		59ABA75516DB51E300F711DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";
+				INFOPLIST_FILE = "Hubba/Hubba-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		59ABA75616DB51E300F711DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";
+				INFOPLIST_FILE = "Hubba/Hubba-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		59ABA75816DB51E300F711DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hubba.app/Hubba";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";
+				INFOPLIST_FILE = "HubbaTests/HubbaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		59ABA75916DB51E300F711DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hubba.app/Hubba";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";
+				INFOPLIST_FILE = "HubbaTests/HubbaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		59ABA71716DB51E300F711DB /* Build configuration list for PBXProject "Hubba" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59ABA75216DB51E300F711DB /* Debug */,
+				59ABA75316DB51E300F711DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59ABA75416DB51E300F711DB /* Build configuration list for PBXNativeTarget "Hubba" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59ABA75516DB51E300F711DB /* Debug */,
+				59ABA75616DB51E300F711DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		59ABA75716DB51E300F711DB /* Build configuration list for PBXNativeTarget "HubbaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59ABA75816DB51E300F711DB /* Debug */,
+				59ABA75916DB51E300F711DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				59ABA73A16DB51E300F711DB /* Hubba.xcdatamodel */,
+			);
+			currentVersion = 59ABA73A16DB51E300F711DB /* Hubba.xcdatamodel */;
+			path = Hubba.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 59ABA71416DB51E300F711DB /* Project object */;
+}
