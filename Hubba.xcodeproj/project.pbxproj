@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */; };
+		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -23,7 +25,6 @@
 		59ABA74516DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA74616DB51E300F711DB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72516DB51E300F711DB /* CoreData.framework */; };
 		59ABA74E16DB51E300F711DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA74C16DB51E300F711DB /* InfoPlist.strings */; };
-		59ABA75116DB51E300F711DB /* HubbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75016DB51E300F711DB /* HubbaTests.m */; };
 		59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59ABA76516DB6D9100F711DB /* SLMainVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVCViewController.m */; };
 		59ABA76716DB6DBB00F711DB /* SLMainVCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVCViewController.xib */; };
@@ -40,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLOAuthClientTests.h; sourceTree = "<group>"; };
+		592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientTests.m; sourceTree = "<group>"; };
+		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,13 +63,11 @@
 		59ABA74216DB51E300F711DB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HubbaTests-Info.plist"; sourceTree = "<group>"; };
 		59ABA74D16DB51E300F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		59ABA74F16DB51E300F711DB /* HubbaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubbaTests.h; sourceTree = "<group>"; };
-		59ABA75016DB51E300F711DB /* HubbaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HubbaTests.m; sourceTree = "<group>"; };
 		59ABA75C16DB6A1300F711DB /* SLOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOAuth2Client.h; path = Classes/SLOAuth2Client.h; sourceTree = "<group>"; };
 		59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOAuth2Client.m; path = Classes/SLOAuth2Client.m; sourceTree = "<group>"; };
 		59ABA76216DB6D9100F711DB /* SLMainVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMainVCViewController.h; path = Classes/SLMainVCViewController.h; sourceTree = "<group>"; };
 		59ABA76316DB6D9100F711DB /* SLMainVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMainVCViewController.m; path = Classes/SLMainVCViewController.m; sourceTree = "<group>"; };
-		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/SLMainVCViewController.xib; sourceTree = "<group>"; };
+		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SLMainVCViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */,
 				59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */,
 				59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */,
 				59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */,
@@ -97,6 +100,7 @@
 		59ABA71316DB51E300F711DB = {
 			isa = PBXGroup;
 			children = (
+				592905C116DBCA0B00B0B9FE /* QuartzCore.framework */,
 				59ABA72716DB51E300F711DB /* Hubba */,
 				59ABA74916DB51E300F711DB /* HubbaTests */,
 				59ABA71E16DB51E300F711DB /* Frameworks */,
@@ -152,9 +156,9 @@
 		59ABA74916DB51E300F711DB /* HubbaTests */ = {
 			isa = PBXGroup;
 			children = (
-				59ABA74F16DB51E300F711DB /* HubbaTests.h */,
-				59ABA75016DB51E300F711DB /* HubbaTests.m */,
 				59ABA74A16DB51E300F711DB /* Supporting Files */,
+				592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */,
+				592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */,
 			);
 			path = HubbaTests;
 			sourceTree = "<group>";
@@ -321,7 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59ABA75116DB51E300F711DB /* HubbaTests.m in Sources */,
+				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +499,7 @@
 				59ABA75616DB51E300F711DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59ABA75716DB51E300F711DB /* Build configuration list for PBXNativeTarget "HubbaTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +508,7 @@
 				59ABA75916DB51E300F711DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

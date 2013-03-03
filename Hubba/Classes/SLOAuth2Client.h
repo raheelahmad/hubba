@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SLOAuth2Client : NSObject
+@interface SLOAuth2Client : NSObject <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
++ (SLOAuth2Client *) sharedClient;
+- (void)initiateAuthorizationWithWebView:(UIWebView *)webView;
+
+// exposing for testing
+- (NSString *)codeFromRequest:(NSURLRequest *)request;
+- (NSURLRequest *)tokenRequestForCode:(NSString *)code;
+- (NSURLRequest *)authorizationRequest;
+
+BOOL isTemporaryCodeRequest(NSURLRequest *request);
+	
 @end

@@ -7,12 +7,27 @@
 //
 
 #import "SLMainVCViewController.h"
+#import "SLOAuth2Client.h"
 
 @interface SLMainVCViewController ()
 
+- (IBAction)initiateLogin:(id)sender;
+
+@property (nonatomic, strong) IBOutlet UIWebView *authWebView;
+
 @end
 
+
 @implementation SLMainVCViewController
+
+#pragma mark - Login
+
+- (IBAction)initiateLogin:(id)sender {
+	[self.view addSubview:self.authWebView];
+	[[SLOAuth2Client sharedClient] initiateAuthorizationWithWebView:self.authWebView];
+}
+
+#pragma mark - View Controller
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	self.authWebView.frame = CGRectMake(10, 10, CGRectGetWidth(self.view.frame) - 20, CGRectGetHeight(self.view.frame) - 20);
+	self.authWebView.layer.borderWidth = 1.0f;
 }
 
 - (void)didReceiveMemoryWarning
