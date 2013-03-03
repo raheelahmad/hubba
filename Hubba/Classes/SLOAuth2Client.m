@@ -19,6 +19,7 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, copy) void (^completionBlock) (NSString *);
 @end
 
 @implementation SLTokenFetcher
@@ -31,10 +32,13 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 	return fetcher;
 }
 
-- (void)fetch {
+- (void)fetchWithCompletion:(void (^) (NSString *))completion {
 	self.connection = [NSURLConnection connectionWithRequest:self.request delegate:self];
 	if (self.connection) {
+		self.completionBlock = completion;
 		self.responseData = [NSMutableData data];
+	} else {
+		completion(nil);
 	}
 }
 
@@ -48,6 +52,9 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	NSLog(@"Error loading: %@", error);
+	if (self.completionBlock) {
+		self.completionBlock(nil);
+	}
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[self.responseData setLength:0];
@@ -59,7 +66,9 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	NSString *response = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-	NSLog(@"Finished!!!!\n%@", response);
+	if (self.completionBlock) {
+		self.completionBlock(response);
+	}
 }
 
 @end
@@ -90,7 +99,9 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 - (void)fetchTokenForRequest:(NSURLRequest *)request {
 	NSURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
 	self.tokenFetcher = [SLTokenFetcher fetcherWithRequest:redirectedRequestForToken];
-	[self.tokenFetcher fetch];
+	[self.tokenFetcher fetchWithCompletion:^(NSString *token) {
+		NSLog(@"Token is: %@", token);
+	}];
 }
 
 #pragma mark - Loading requests
