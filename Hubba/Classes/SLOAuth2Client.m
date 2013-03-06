@@ -7,6 +7,7 @@
 //
 
 #import "SLOAuth2Client.h"
+#import "SLFetcher.h"
 
 static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
 static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
@@ -15,68 +16,12 @@ static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/a
 static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
 static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=%@";
 
-@interface SLTokenFetcher : NSObject <NSURLConnectionDataDelegate>
-@property (nonatomic, strong) NSMutableData *responseData;
-@property (nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, copy) void (^completionBlock) (NSString *);
-@end
-
-@implementation SLTokenFetcher
-
-#pragma mark - NSURLConnection delegate
-
-+ (SLTokenFetcher *)fetcherWithRequest:(NSURLRequest *)request {
-	SLTokenFetcher *fetcher = [[SLTokenFetcher alloc] init];
-	fetcher.request = request;
-	return fetcher;
-}
-
-- (void)fetchWithCompletion:(void (^) (NSString *))completion {
-	self.connection = [NSURLConnection connectionWithRequest:self.request delegate:self];
-	if (self.connection) {
-		self.completionBlock = completion;
-		self.responseData = [NSMutableData data];
-	} else {
-		completion(nil);
-	}
-}
-
-+ (NSURLRequest *)tokenRequestForCode:(NSString *)code {
-	NSString *body = [NSString stringWithFormat:kSLTokenPostBody, kSLClientID, kSLClientSecret, code];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kSLTokenRequestURL]];
-	[request setHTTPMethod:@"POST"];
-	[request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-	return request;
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	NSLog(@"Error loading: %@", error);
-	if (self.completionBlock) {
-		self.completionBlock(nil);
-	}
-}
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	[self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	[self.responseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSString *response = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-	if (self.completionBlock) {
-		self.completionBlock(response);
-	}
-}
-
-@end
+static NSString * const kAccessTokenKey = @"access_token";
 
 @interface SLOAuth2Client ()
 
 @property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) SLTokenFetcher *tokenFetcher;
+@property (nonatomic, strong) SLFetcher *fetcher;
 
 @end
 
@@ -98,13 +43,37 @@ static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=
 
 - (void)fetchTokenForRequest:(NSURLRequest *)request {
 	NSURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
-	self.tokenFetcher = [SLTokenFetcher fetcherWithRequest:redirectedRequestForToken];
-	[self.tokenFetcher fetchWithCompletion:^(NSString *token) {
+	[self.fetcher request:redirectedRequestForToken completion:^(NSString *response) {
+		NSString *token = [self accessTokenFromResponse:response];
 		NSLog(@"Token is: %@", token);
+		NSString *repoString = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", token];
+		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:repoString]];
+		[self.fetcher request:request completion:^(NSString *response) {
+			NSLog(@"Response: %@", response);
+		}];
 	}];
 }
 
-#pragma mark - Loading requests
+#pragma mark - Helpers
+
+- (NSString *)accessTokenFromResponse:(NSString *)response {
+	if (!response) {
+		return nil;
+	}
+	NSString *accessToken;
+	
+	NSArray *components = [response componentsSeparatedByString:@"&"];
+	for (NSString *component in components) {
+		NSArray *keyValue = [component componentsSeparatedByString:@"="];
+		if (keyValue.count != 2 || ![keyValue[0] isEqualToString:kAccessTokenKey]) {
+			continue;
+		}
+		accessToken = keyValue[1];
+		break;
+	}
+
+	return accessToken;
+}
 
 - (NSString *)codeFromRequest:(NSURLRequest *)request {
 	NSString *URLString = request.URL.absoluteString;
@@ -127,13 +96,6 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	return components.count >= 2 && clientSecretRange.location == NSNotFound;
 }
 
-- (void)initiateAuthorizationWithWebView:(UIWebView *)webView {
-	self.webView.delegate = nil;
-	self.webView = webView;
-	self.webView.delegate = self;
-	[webView loadRequest:self.authorizationRequest];
-}
-
 - (NSURLRequest *)authorizationRequest {
 	NSString *URLString = [NSString stringWithFormat:kSLAuthorizationURL, kSLClientID];
 	NSURL *url = [NSURL URLWithString:URLString];
@@ -141,7 +103,20 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 }
 
 - (NSURLRequest *)tokenRequestForCode:(NSString *)code {
-	return [SLTokenFetcher tokenRequestForCode:code];
+	NSString *body = [NSString stringWithFormat:kSLTokenPostBody, kSLClientID, kSLClientSecret, code];
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kSLTokenRequestURL]];
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+	return request;
+}
+
+#pragma mark - Loading requests
+
+- (void)initiateAuthorizationWithWebView:(UIWebView *)webView {
+	self.webView.delegate = nil;
+	self.webView = webView;
+	self.webView.delegate = self;
+	[webView loadRequest:self.authorizationRequest];
 }
 
 #pragma mark - Basics
@@ -156,6 +131,13 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	return _sharedClient;
 }
 
+- (id)init {
+	self = [super init];
+	if (self) {
+		_fetcher = [[SLFetcher alloc] init];
+	}
+	return self;
+}
 
 - (void)dealloc {
 	self.webView.delegate = nil;

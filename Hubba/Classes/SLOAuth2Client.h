@@ -17,7 +17,7 @@
 - (NSString *)codeFromRequest:(NSURLRequest *)request;
 - (NSURLRequest *)tokenRequestForCode:(NSString *)code;
 - (NSURLRequest *)authorizationRequest;
-
+- (NSString *)accessTokenFromResponse:(NSString *)response;
 BOOL isTemporaryCodeRequest(NSURLRequest *request);
 	
 @end

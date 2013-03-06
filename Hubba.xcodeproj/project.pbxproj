@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */; };
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
+		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
+		5951D59916E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -44,6 +46,8 @@
 		592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLOAuthClientTests.h; sourceTree = "<group>"; };
 		592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientTests.m; sourceTree = "<group>"; };
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5951D59616E423060018764B /* SLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFetcher.h; path = Classes/SLFetcher.h; sourceTree = "<group>"; };
+		5951D59716E423060018764B /* SLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFetcher.m; path = Classes/SLFetcher.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -188,6 +192,8 @@
 			children = (
 				59ABA75C16DB6A1300F711DB /* SLOAuth2Client.h */,
 				59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */,
+				5951D59616E423060018764B /* SLFetcher.h */,
+				5951D59716E423060018764B /* SLFetcher.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 				59ABA73B16DB51E300F711DB /* Hubba.xcdatamodeld in Sources */,
 				59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */,
 				59ABA76516DB6D9100F711DB /* SLMainVCViewController.m in Sources */,
+				5951D59816E423060018764B /* SLFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
+				5951D59916E423060018764B /* SLFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

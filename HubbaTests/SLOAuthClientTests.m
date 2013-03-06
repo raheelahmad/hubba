@@ -22,7 +22,16 @@
 	STAssertFalse(isTemporaryCodeRequest(incorrectRequest), @"A POST request with code should not be parsed as token request");
 }
 
-- (void)testTokenParsingFromRequest {
+- (void)testTokenParsingFromResponse {
+	NSString *response = @"access_token=868d3eefad5a046607bb31a5a3089329977397ff&token_type=bearer";
+	NSString *anotherResponse = @"token_type=bearer&access_token=868d3eefad5a046607bb31a5a3089329977397ff";
+	STAssertTrue([[self.client accessTokenFromResponse:response] isEqualToString:@"868d3eefad5a046607bb31a5a3089329977397ff"],
+				 @"Access token should be parsed properly from the response");
+	STAssertTrue([[self.client accessTokenFromResponse:anotherResponse] isEqualToString:@"868d3eefad5a046607bb31a5a3089329977397ff"],
+				 @"Access token should be parsed properly from the response");
+}
+
+- (void)testCodeParsingFromRequest {
 	NSString *code = @"asjdhkjasd";
 	NSURLRequest *request = [self requestForTokenWithCode:code];
 	STAssertTrue([code isEqualToString:[self.client codeFromRequest:request]], @"Code should be correctly parsed from a request");
