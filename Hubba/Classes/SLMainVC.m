@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Sakun Labs. All rights reserved.
 //
 
-#import "SLMainVCViewController.h"
+#import "SLMainVC.h"
 #import "SLOAuth2Client.h"
 
-@interface SLMainVCViewController ()
+@interface SLMainVC ()
 
 - (IBAction)initiateLogin:(id)sender;
 
@@ -18,7 +18,7 @@
 @end
 
 
-@implementation SLMainVCViewController
+@implementation SLMainVC
 
 #pragma mark - Login
 

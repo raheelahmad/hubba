@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface SLMainVCViewController : UIViewController
+@interface SLMainVC : UIViewController
 
 @end
