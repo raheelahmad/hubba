@@ -24,7 +24,7 @@
 
 - (IBAction)initiateLogin:(id)sender {
 	[self.view addSubview:self.authWebView];
-	[[SLOAuth2Client sharedClient] initiateAuthorizationWithWebView:self.authWebView];
+	[[SLOAuth2Client sharedClientWithAPIName:@"Github"] initiateAuthorizationWithWebView:self.authWebView];
 }
 
 #pragma mark - View Controller
@@ -41,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.authWebView.frame = CGRectMake(10, 10, CGRectGetWidth(self.view.frame) - 20, CGRectGetHeight(self.view.frame) - 20);
+	self.authWebView.frame = CGRectMake(10, 40, CGRectGetWidth(self.view.frame) - 20, CGRectGetHeight(self.view.frame) - 80);
 	self.authWebView.layer.borderWidth = 1.0f;
 }
 

@@ -10,7 +10,9 @@
 
 @interface SLOAuth2Client : NSObject <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
-+ (SLOAuth2Client *) sharedClient;
+@property (strong, nonatomic) NSString *APIName;
+
++ (SLOAuth2Client *) sharedClientWithAPIName:(NSString *)APIName;
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView;
 
 // exposing for testing

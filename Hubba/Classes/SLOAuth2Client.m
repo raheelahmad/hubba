@@ -8,6 +8,7 @@
 
 #import "SLOAuth2Client.h"
 #import "SLFetcher.h"
+#import "SFHFKeychainUtils.h"
 
 static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
 static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
@@ -17,6 +18,7 @@ static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/ac
 static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=%@";
 
 static NSString * const kAccessTokenKey = @"access_token";
+static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 @interface SLOAuth2Client ()
 
@@ -46,6 +48,18 @@ static NSString * const kAccessTokenKey = @"access_token";
 	[self.fetcher request:redirectedRequestForToken completion:^(NSString *response) {
 		NSString *token = [self accessTokenFromResponse:response];
 		NSLog(@"Token is: %@", token);
+		NSError *error;
+		if (![SFHFKeychainUtils storeUsername:self.APIName andPassword:token forServiceName:kServiceName updateExisting:YES error:&error]) {
+			NSLog(@"ERROR: could not fetch token to KeyChain: %@", error);
+			return;
+		}
+		
+		// fetch token from local keychain store, and access the API for testing
+		token = [SFHFKeychainUtils getPasswordForUsername:self.APIName andServiceName:kServiceName error:&error];
+		if (!token) {
+			NSLog(@"ERROR: could not fetch token from KeyChain: %@", error);
+			return;
+		}
 		NSString *repoString = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", token];
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:repoString]];
 		[self.fetcher request:request completion:^(NSString *response) {
@@ -121,20 +135,21 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 
 #pragma mark - Basics
 
-+ (SLOAuth2Client *) sharedClient {
++ (SLOAuth2Client *) sharedClientWithAPIName:(NSString *)APIName {
 	static SLOAuth2Client *_sharedClient = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		_sharedClient = [[SLOAuth2Client alloc] init];
+		_sharedClient = [[SLOAuth2Client alloc] initWithServiceName:APIName];
 	});
 	
 	return _sharedClient;
 }
 
-- (id)init {
+- (id)initWithServiceName:(NSString *)APIName {
 	self = [super init];
 	if (self) {
 		_fetcher = [[SLFetcher alloc] init];
+		_APIName = APIName;
 	}
 	return self;
 }
