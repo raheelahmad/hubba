@@ -10,5 +10,7 @@
 
 @interface SLFetcher : NSObject
 
+// the string argument in callback will be nil if request fails
 - (void)request:(NSURLRequest *)request completion:(void (^)(NSString *))completion;
+
 @end

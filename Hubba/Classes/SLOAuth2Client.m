@@ -12,7 +12,6 @@
 
 static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
 static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
-static NSString * const kSLCallBackURL = @"hubba://oauth";
 static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/authorize?client_id=%@";;
 static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
 static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=%@";
@@ -24,6 +23,8 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) SLFetcher *fetcher;
+@property (nonatomic, readonly) NSString *token;
+@property (nonatomic, copy) AuthenticationCompletionBlock completionBlock;
 
 @end
 
@@ -36,7 +37,9 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+	// intercept load request from auth server containing temporary code
 	if (isTemporaryCodeRequest(request)) {
+		// fetch token instead using NSURLConnection
 		[self fetchTokenForRequest:request];
 		return NO;
 	}
@@ -51,21 +54,32 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 		NSError *error;
 		if (![SFHFKeychainUtils storeUsername:self.APIName andPassword:token forServiceName:kServiceName updateExisting:YES error:&error]) {
 			NSLog(@"ERROR: could not fetch token to KeyChain: %@", error);
+			self.completionBlock(NO);
 			return;
 		}
+		self.completionBlock(YES);
 		
+		// TESTING only!
 		// fetch token from local keychain store, and access the API for testing
-		token = [SFHFKeychainUtils getPasswordForUsername:self.APIName andServiceName:kServiceName error:&error];
-		if (!token) {
-			NSLog(@"ERROR: could not fetch token from KeyChain: %@", error);
-			return;
-		}
+		/**
+		token = self.token;
 		NSString *repoString = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", token];
 		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:repoString]];
 		[self.fetcher request:request completion:^(NSString *response) {
 			NSLog(@"Response: %@", response);
 		}];
+		 **/
 	}];
+}
+
+#pragma mark - Authenticated?
+
+- (BOOL)authenticated {
+	return self.token != nil;
+}
+
+- (NSString *)token {
+	return [SFHFKeychainUtils getPasswordForUsername:self.APIName andServiceName:kServiceName error:NULL];
 }
 
 #pragma mark - Helpers
@@ -124,9 +138,20 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	return request;
 }
 
-#pragma mark - Loading requests
+#pragma mark - Authentication
 
-- (void)initiateAuthorizationWithWebView:(UIWebView *)webView {
+- (BOOL)resetAuthentication {
+	NSError *error;
+	if (![SFHFKeychainUtils deleteItemForUsername:self.APIName andServiceName:kServiceName error:&error]) {
+		NSLog(@"Unable to reset authentication: %@", error);
+		return NO;
+	}
+	return YES;
+}
+
+- (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock {
+	self.completionBlock = completionBlock;
+	
 	self.webView.delegate = nil;
 	self.webView = webView;
 	self.webView.delegate = self;
@@ -135,17 +160,7 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 
 #pragma mark - Basics
 
-+ (SLOAuth2Client *) sharedClientWithAPIName:(NSString *)APIName {
-	static SLOAuth2Client *_sharedClient = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_sharedClient = [[SLOAuth2Client alloc] initWithServiceName:APIName];
-	});
-	
-	return _sharedClient;
-}
-
-- (id)initWithServiceName:(NSString *)APIName {
+- (id)initWithAPIName:(NSString *)APIName {
 	self = [super init];
 	if (self) {
 		_fetcher = [[SLFetcher alloc] init];
