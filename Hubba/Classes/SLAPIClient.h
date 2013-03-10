@@ -7,11 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SLOAuth2Client.h"
 
 @interface SLAPIClient : NSObject
 
 // Service basics
-@property (nonatomic, strong) NSString *serviceName;
+@property (nonatomic, strong) NSString *APIName;
 @property (nonatomic, strong) NSString *baseURL;
+@property (nonatomic, readonly) BOOL authenticated;
 
++ (SLAPIClient *)sharedClientWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL;
+
+- (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock;
+- (BOOL)resetAuthentication;
+	
 @end
