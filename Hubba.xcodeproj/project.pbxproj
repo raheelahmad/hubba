@@ -32,6 +32,7 @@
 		59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVC.xib */; };
 		59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF6FC16EBE40A00637007 /* SLAPIClient.m */; };
 		59CDF6FF16EBE83600637007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59CDF6FE16EBE83600637007 /* Security.framework */; };
+		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
 		59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		59CDF6FB16EBE40A00637007 /* SLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLAPIClient.h; path = Classes/SLAPIClient.h; sourceTree = "<group>"; };
 		59CDF6FC16EBE40A00637007 /* SLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLAPIClient.m; path = Classes/SLAPIClient.m; sourceTree = "<group>"; };
 		59CDF6FE16EBE83600637007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		59CDF70116EC726F00637007 /* SLRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRepository.h; path = Classes/SLRepository.h; sourceTree = "<group>"; };
+		59CDF70216EC726F00637007 /* SLRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRepository.m; path = Classes/SLRepository.m; sourceTree = "<group>"; };
 		59F3FA5316E9286C00566C09 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Vendor/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Vendor/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +193,7 @@
 		59ABA75A16DB69F000F711DB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				59CDF70016EC726000637007 /* Models */,
 				59ABA76116DB6D6F00F711DB /* View Controllers */,
 				59ABA75B16DB69FA00F711DB /* Networking */,
 				59ABA73016DB51E300F711DB /* SLAppDelegate.h */,
@@ -219,6 +223,15 @@
 				59ABA76916DB6DBB00F711DB /* SLMainVC.xib */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		59CDF70016EC726000637007 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59CDF70116EC726F00637007 /* SLRepository.h */,
+				59CDF70216EC726F00637007 /* SLRepository.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		59F3FA5216E9282D00566C09 /* Vendor */ = {
@@ -349,6 +362,7 @@
 				5951D59816E423060018764B /* SLFetcher.m in Sources */,
 				59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */,
 				59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */,
+				59CDF70316EC726F00637007 /* SLRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

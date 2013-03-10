@@ -8,6 +8,7 @@
 
 #import "SLMainVC.h"
 #import "SLAPIClient.h"
+#import "SLRepository.h"
 
 @interface SLMainVC ()
 
@@ -15,7 +16,11 @@
 
 @property (nonatomic, strong) IBOutlet UIWebView *authWebView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *fetchReposButton;
 @property (strong, nonatomic) SLAPIClient *APIClient;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSFetchedResultsController *repositoriesResultsController;
 
 @end
 
@@ -25,14 +30,44 @@
 #pragma mark - Fetching Data
 
 - (IBAction)fetchRepos:(id)sender {
-	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, NSString *response) {
+	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, id response) {
 		if (success) {
-			NSLog(@"Got: %@", response);
+			[self parseRepositories:response];
+			[self.tableView reloadData];
 		} else {
 			NSLog(@"Could not fetch! %@", response);
 		}
 	}];
 }
+
+- (void)parseRepositories:(id)parsedResponse {
+	if ([parsedResponse isKindOfClass:[NSArray class]]) {
+		for (id rawRepository in parsedResponse) {
+			SLRepository *repository = [SLRepository objectForRemoteResponse:rawRepository];
+			[repository updateWithRemoteResponse:rawRepository];
+		}
+	}
+}
+
+#pragma mark - UITableView delegate + data source
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellId = @"Repository Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId forIndexPath:indexPath];
+//	cell.textLabel
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
 
 #pragma mark - Login
 
@@ -60,12 +95,14 @@
 
 - (void)updateUI {
 	if (self.APIClient.authenticated) {
-		self.loginButton.action = @selector(fetchRepos:);
-		[self.loginButton setTitle:NSLocalizedString(@"Fetch Repos", nil)];
+		self.loginButton.action = @selector(logout:);
+		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
+		self.navigationItem.leftBarButtonItem = self.fetchReposButton;
 		[self.authWebView removeFromSuperview];
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
 		[self.loginButton setTitle:NSLocalizedString(@"Log In", nil)];
+		self.navigationItem.leftBarButtonItem = nil;
 	}
 }
 
@@ -87,6 +124,8 @@
 	self.authWebView.layer.borderWidth = 1.0f;
 	self.APIClient = [SLAPIClient sharedClientWithAPIName:@"Github" baseURL:@"https://api.github.com"];
 	self.loginButton.target = self;
+	self.fetchReposButton.target = self;
+	self.fetchReposButton.action = @selector(fetchRepos:);
 	
 	[self updateUI];
 }
