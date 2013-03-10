@@ -11,10 +11,27 @@
 @interface SLAPIClient ()
 
 @property (nonatomic, strong) SLOAuth2Client *oauthClient;
+@property (nonatomic, strong) SLFetcher *fetcher;
 
 @end
 
 @implementation SLAPIClient
+
+#pragma mark - Requests
+
+- (void)get:(NSString *)getURLString onCompletion:(FetchCompletionBlock)completionBlock {
+	if (!self.authenticated) {
+		completionBlock(NO, nil);
+	} else {
+		NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForPath:getURLString]];
+		[self.fetcher request:request completion:completionBlock];
+	}
+}
+
+- (NSURL *)URLForPath:(NSString *)path {
+	NSString *URLString = [self.baseURL stringByAppendingFormat:@"%@?access_token=%@", path, self.oauthClient.token];
+	return [NSURL URLWithString:URLString];
+}
 
 #pragma mark - Authentication
 
@@ -39,7 +56,9 @@
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		_client = [[SLAPIClient alloc] init];
+		_client.fetcher = [[SLFetcher alloc] init];
 		_client.APIName = APIName;
+		_client.baseURL = baseURL;
 		_client.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:APIName];
 	});
 	

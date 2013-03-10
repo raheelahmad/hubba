@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SLOAuth2Client.h"
+#import "SLFetcher.h"
 
 @interface SLAPIClient : NSObject
 
@@ -18,7 +19,11 @@
 
 + (SLAPIClient *)sharedClientWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL;
 
+// Authentication
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock;
 - (BOOL)resetAuthentication;
-	
+
+// Requests
+- (void)get:(NSString *)getURLString onCompletion:(FetchCompletionBlock)completionBlock;
+
 @end

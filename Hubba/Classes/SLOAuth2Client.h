@@ -14,6 +14,7 @@ typedef void (^AuthenticationCompletionBlock) (BOOL success);
 
 @property (strong, nonatomic) NSString *APIName;
 @property (readonly) BOOL authenticated;
+@property (nonatomic, readonly) NSString *token;
 
 - (id)initWithAPIName:(NSString *)APIName;
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock;

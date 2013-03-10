@@ -23,7 +23,6 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) SLFetcher *fetcher;
-@property (nonatomic, readonly) NSString *token;
 @property (nonatomic, copy) AuthenticationCompletionBlock completionBlock;
 
 @end
@@ -48,16 +47,20 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 - (void)fetchTokenForRequest:(NSURLRequest *)request {
 	NSURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
-	[self.fetcher request:redirectedRequestForToken completion:^(NSString *response) {
-		NSString *token = [self accessTokenFromResponse:response];
-		NSLog(@"Token is: %@", token);
-		NSError *error;
-		if (![SFHFKeychainUtils storeUsername:self.APIName andPassword:token forServiceName:kServiceName updateExisting:YES error:&error]) {
-			NSLog(@"ERROR: could not fetch token to KeyChain: %@", error);
+	[self.fetcher request:redirectedRequestForToken completion:^(BOOL success, NSString *response) {
+		if (success) {
+			NSString *token = [self accessTokenFromResponse:response];
+			NSLog(@"Token is: %@", token);
+			NSError *error;
+			if (![SFHFKeychainUtils storeUsername:self.APIName andPassword:token forServiceName:kServiceName updateExisting:YES error:&error]) {
+				NSLog(@"ERROR: could not fetch token to KeyChain: %@", error);
+				self.completionBlock(NO);
+				return;
+			}
+			self.completionBlock(YES);
+		} else {
 			self.completionBlock(NO);
-			return;
 		}
-		self.completionBlock(YES);
 		
 		// TESTING only!
 		// fetch token from local keychain store, and access the API for testing

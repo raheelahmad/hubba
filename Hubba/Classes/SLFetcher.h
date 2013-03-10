@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^FetchCompletionBlock) (BOOL success, NSString *response);
+
 @interface SLFetcher : NSObject
 
 // the string argument in callback will be nil if request fails
-- (void)request:(NSURLRequest *)request completion:(void (^)(NSString *))completion;
+- (void)request:(NSURLRequest *)request completion:(FetchCompletionBlock)completion;
 
 @end
