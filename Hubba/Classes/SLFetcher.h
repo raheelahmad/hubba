@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^FetchCompletionBlock) (BOOL success, NSString *response);
+typedef void (^FetchCompletionBlock) (BOOL success, id response);
 
 @interface SLFetcher : NSObject
+
+@property (nonatomic, assign) BOOL parseAsJSON;
 
 // the string argument in callback will be nil if request fails
 - (void)request:(NSURLRequest *)request completion:(FetchCompletionBlock)completion;

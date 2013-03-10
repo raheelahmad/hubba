@@ -45,10 +45,29 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSString *response = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+	NSError *error;
+	id response = nil;
+	if (self.parseAsJSON) {
+		response = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableContainers error:&error];
+	} else {
+		response = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+	}
+	if (!response) {
+		NSLog(@"Could not parse response: %@", error);
+		self.completionBlock(NO, nil);
+	}
 	if (self.completionBlock) {
 		self.completionBlock(YES, response);
 	}
 	self.connection = nil;
 }
+
+- (id)init {
+	self = [super init];
+	if (self) {
+		self.parseAsJSON = YES;
+	}
+	return self;
+}
+
 @end

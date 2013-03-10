@@ -167,6 +167,7 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	self = [super init];
 	if (self) {
 		_fetcher = [[SLFetcher alloc] init];
+		_fetcher.parseAsJSON = NO;
 		_APIName = APIName;
 	}
 	return self;
