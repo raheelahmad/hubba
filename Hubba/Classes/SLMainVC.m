@@ -22,6 +22,18 @@
 
 @implementation SLMainVC
 
+#pragma mark - Fetching Data
+
+- (IBAction)fetchRepos:(id)sender {
+	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, NSString *response) {
+		if (success) {
+			NSLog(@"Got: %@", response);
+		} else {
+			NSLog(@"Could not fetch! %@", response);
+		}
+	}];
+}
+
 #pragma mark - Login
 
 - (IBAction)initiateLogin:(id)sender {
@@ -31,6 +43,7 @@
 		if (success) {
 			NSLog(@"Yay! success");
 			NSLog(@"Authenticated: %d", self.APIClient.authenticated);
+			[self fetchRepos:nil];
 		} else {
 			NSLog(@"FAIL!!!");
 		}
@@ -47,8 +60,8 @@
 
 - (void)updateUI {
 	if (self.APIClient.authenticated) {
-		self.loginButton.enabled = NO;
-		[self.loginButton setTitle:NSLocalizedString(@"Authenticated", nil)];
+		self.loginButton.action = @selector(fetchRepos:);
+		[self.loginButton setTitle:NSLocalizedString(@"Fetch Repos", nil)];
 		[self.authWebView removeFromSuperview];
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
