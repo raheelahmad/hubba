@@ -21,7 +21,7 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 @interface SLOAuth2Client ()
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, weak) UIWebView *webView;
 @property (nonatomic, strong) SLFetcher *fetcher;
 @property (nonatomic, copy) AuthenticationCompletionBlock completionBlock;
 
@@ -32,7 +32,8 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 #pragma mark - UIWebViewDelegate
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	NSLog(@"Error loading: %@", error);
+//	NSLog(@"Error loading: %@", error);
+	[self.webView stopLoading];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -47,6 +48,7 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 
 - (void)fetchTokenForRequest:(NSURLRequest *)request {
 	NSURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
+	[[NSURLCache sharedURLCache] removeCachedResponseForRequest:redirectedRequestForToken];
 	[self.fetcher request:redirectedRequestForToken completion:^(BOOL success, NSString *response) {
 		if (success) {
 			NSString *token = [self accessTokenFromResponse:response];
@@ -61,17 +63,6 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 		} else {
 			self.completionBlock(NO);
 		}
-		
-		// TESTING only!
-		// fetch token from local keychain store, and access the API for testing
-		/**
-		token = self.token;
-		NSString *repoString = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", token];
-		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:repoString]];
-		[self.fetcher request:request completion:^(NSString *response) {
-			NSLog(@"Response: %@", response);
-		}];
-		 **/
 	}];
 }
 
@@ -130,12 +121,13 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 - (NSURLRequest *)authorizationRequest {
 	NSString *URLString = [NSString stringWithFormat:kSLAuthorizationURL, kSLClientID];
 	NSURL *url = [NSURL URLWithString:URLString];
-	return [NSURLRequest requestWithURL:url];
+	return [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
 }
 
 - (NSURLRequest *)tokenRequestForCode:(NSString *)code {
 	NSString *body = [NSString stringWithFormat:kSLTokenPostBody, kSLClientID, kSLClientSecret, code];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kSLTokenRequestURL]];
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:kSLTokenRequestURL] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+															timeoutInterval:60];
 	[request setHTTPMethod:@"POST"];
 	[request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
 	return request;
@@ -144,6 +136,11 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 #pragma mark - Authentication
 
 - (BOOL)resetAuthentication {
+	self.webView = nil;
+	NSHTTPCookie *aCookie;
+	for (aCookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:aCookie];
+	}
 	NSError *error;
 	if (![SFHFKeychainUtils deleteItemForUsername:self.APIName andServiceName:kServiceName error:&error]) {
 		NSLog(@"Unable to reset authentication: %@", error);
@@ -158,7 +155,9 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	self.webView.delegate = nil;
 	self.webView = webView;
 	self.webView.delegate = self;
-	[webView loadRequest:self.authorizationRequest];
+	NSURLRequest *authorizationRequest = self.authorizationRequest;
+	[[NSURLCache sharedURLCache] removeCachedResponseForRequest:authorizationRequest];
+	[webView loadRequest:authorizationRequest];
 }
 
 #pragma mark - Basics
