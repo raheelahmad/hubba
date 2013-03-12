@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */; };
 		592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */; };
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLCoreDataManager.h; path = Classes/SLCoreDataManager.h; sourceTree = "<group>"; };
+		5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLCoreDataManager.m; path = Classes/SLCoreDataManager.m; sourceTree = "<group>"; };
 		592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLOAuthClientTests.h; sourceTree = "<group>"; };
 		592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientTests.m; sourceTree = "<group>"; };
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -230,6 +233,8 @@
 			children = (
 				59CDF70116EC726F00637007 /* SLRepository.h */,
 				59CDF70216EC726F00637007 /* SLRepository.m */,
+				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
+				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */,
 				59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */,
 				59CDF70316EC726F00637007 /* SLRepository.m in Sources */,
+				5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
