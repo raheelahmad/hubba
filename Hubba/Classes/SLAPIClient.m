@@ -46,23 +46,21 @@
 #pragma mark - Startup
 
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock {
+	self	.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:self.APIName]; // create a new OAuth client
 	[self.oauthClient initiateAuthorizationWithWebView:webView onCompletion:completionBlock];
 }
 
 #pragma mark - Basics
 
-+ (SLAPIClient *)sharedClientWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL {
-	static SLAPIClient *_client;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_client = [[SLAPIClient alloc] init];
-		_client.fetcher = [[SLFetcher alloc] init];
-		_client.APIName = APIName;
-		_client.baseURL = baseURL;
-		_client.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:APIName];
-	});
-	
-	return _client;
+- (id)initWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL {
+	self = [super init];
+	if (self) {
+		self.fetcher = [[SLFetcher alloc] init];
+		self.APIName = APIName;
+		self.baseURL = baseURL;
+	}
+	return self;
 }
+
 
 @end
