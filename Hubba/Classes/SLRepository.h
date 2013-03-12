@@ -18,5 +18,7 @@
 
 + (SLRepository *)objectForRemoteResponse:(NSDictionary *)remoteResponse;
 - (void)updateWithRemoteResponse:(NSDictionary *)remoteResponse;
-
++ (NSFetchedResultsController *)allObjcetsController;
++ (void)parseFromResponse:(id)parsedResponse;
+	
 @end

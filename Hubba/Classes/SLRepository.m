@@ -7,7 +7,7 @@
 //
 
 #import "SLRepository.h"
-#import "SLAppDelegate.h"
+#import "SLCoreDataManager.h"
 
 @implementation SLRepository
 
@@ -15,12 +15,39 @@
 @dynamic name;
 @dynamic remoteDescription;
 
++ (NSFetchedResultsController *)allObjcetsController {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLRepository class])];
+	fetchRequest.sortDescriptors = [self sortDescriptors];
+//	NSArray *results [[self mainMOC] executeFetchRequest:fetchRequest error:&error];
+	NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																						managedObjectContext:[self mainMOC] sectionNameKeyPath:nil cacheName:nil];
+	NSError *error;
+	if (![resultsController performFetch:&error]) {
+		NSLog(@"Error executing fetch request for SLRepository: %@", error);
+	}
+	
+	return resultsController;
+}
+
++ (NSArray *)sortDescriptors {
+	return @[ [NSSortDescriptor sortDescriptorWithKey:@"remoteID" ascending:YES] ];
+}
+
 + (NSDictionary *)remoteToLocalMappings {
 	return @{
 			   @"id"			: @"remoteID",
 			   @"name"			: @"name",
 			   @"description"	: @"remoteDescription"
 		   };
+}
+
++ (void)parseFromResponse:(id)parsedResponse {
+	if ([parsedResponse isKindOfClass:[NSArray class]]) {
+		for (id rawRepository in parsedResponse) {
+			SLRepository *repository = [SLRepository objectForRemoteResponse:rawRepository];
+			[repository updateWithRemoteResponse:rawRepository];
+		}
+	}
 }
 
 - (void)updateWithRemoteResponse:(NSDictionary *)remoteResponse {
@@ -68,7 +95,7 @@
 }
 
 + (NSManagedObjectContext *)mainMOC {
-	SLAppDelegate *appDelegate = (SLAppDelegate *)[[UIApplication sharedApplication] delegate];
-	return appDelegate.managedObjectContext;
+	return [[SLCoreDataManager sharedManager] managedObjectContext];
 }
+
 @end
