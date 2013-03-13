@@ -46,7 +46,6 @@
 #pragma mark - Startup
 
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock {
-	self	.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:self.APIName]; // create a new OAuth client
 	[self.oauthClient initiateAuthorizationWithWebView:webView onCompletion:completionBlock];
 }
 
@@ -55,9 +54,10 @@
 - (id)initWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL {
 	self = [super init];
 	if (self) {
-		self.fetcher = [[SLFetcher alloc] init];
 		self.APIName = APIName;
 		self.baseURL = baseURL;
+		self.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:self.APIName]; // create a new OAuth client
+		self.fetcher = [[SLFetcher alloc] init];
 	}
 	return self;
 }
