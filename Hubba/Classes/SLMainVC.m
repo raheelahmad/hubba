@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) IBOutlet UIWebView *authWebView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *fetchReposButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *fetchButton;
 @property (strong, nonatomic) SLAPIClient *APIClient;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -30,7 +30,7 @@
 
 #pragma mark - Fetching Data
 
-- (IBAction)fetchRepos:(id)sender {
+- (IBAction)fetchFromRemote:(id)sender {
 	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, id response) {
 		if (success) {
 			[SLRepository parseFromResponse:response];
@@ -132,7 +132,7 @@
 		if (success) {
 			NSLog(@"Yay! success");
 			NSLog(@"Authenticated: %d", self.APIClient.authenticated);
-			[self fetchRepos:nil];
+			[self fetchFromRemote:nil];
 		} else {
 			NSLog(@"FAIL!!!");
 		}
@@ -159,7 +159,7 @@
 	if (self.APIClient.authenticated) {
 		self.loginButton.action = @selector(logout:);
 		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
-		self.navigationItem.leftBarButtonItem = self.fetchReposButton;
+		self.navigationItem.leftBarButtonItem = self.fetchButton;
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
 		[self.loginButton setTitle:NSLocalizedString(@"Log In", nil)];
@@ -192,8 +192,8 @@
     [super viewDidLoad];
 	self.APIClient = [[SLAPIClient alloc] initWithAPIName:@"Github" baseURL:@"https://api.github.com"];
 	self.loginButton.target = self;
-	self.fetchReposButton.target = self;
-	self.fetchReposButton.action = @selector(fetchRepos:);
+	self.fetchButton.target = self;
+	self.fetchButton.action = @selector(fetchFromRemote:);
 	
 	[self updateUI];
 }

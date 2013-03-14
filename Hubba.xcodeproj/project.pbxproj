@@ -86,6 +86,7 @@
 		59CDF70216EC726F00637007 /* SLRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRepository.m; path = Classes/SLRepository.m; sourceTree = "<group>"; };
 		59F3FA5316E9286C00566C09 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Vendor/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Vendor/SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteFetchable.h; path = Classes/SLRemoteFetchable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +236,7 @@
 				59CDF70216EC726F00637007 /* SLRepository.m */,
 				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
 				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
+				59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
