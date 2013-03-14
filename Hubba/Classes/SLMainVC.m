@@ -11,6 +11,9 @@
 #import "SLRepository.h"
 #import "SLCoreDataManager.h"
 
+NSString * const kServiceName = @"Foursquare";
+NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
+
 @interface SLMainVC ()
 
 - (IBAction)initiateLogin:(id)sender;
@@ -125,7 +128,7 @@
 #pragma mark - Login
 
 - (IBAction)initiateLogin:(id)sender {
-	self.APIClient = [[SLAPIClient alloc] initWithAPIName:@"Github" baseURL:@"https://api.github.com"];
+	self.APIClient = [[SLAPIClient alloc] initWithAPIName:kServiceName baseURL:kServiceBaseURL];
 	[self.view addSubview:self.authWebView];
 	NSLog(@"Current: %@", self.authWebView.request.URL);
 	[self.APIClient initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
@@ -143,7 +146,7 @@
 	}];
 }
 
-- (IBAction)	logout:(id)sender {
+- (IBAction)logout:(id)sender {
 	[[SLCoreDataManager sharedManager] resetCoreDataStack];
 	[self.APIClient resetAuthentication];
 //	[[NSURLCache sharedURLCache] removeAllCachedResponses];
@@ -173,6 +176,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+		self.title = kServiceName;
     }
     return self;
 }
