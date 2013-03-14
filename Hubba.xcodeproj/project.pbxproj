@@ -35,6 +35,7 @@
 		59CDF6FF16EBE83600637007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59CDF6FE16EBE83600637007 /* Security.framework */; };
 		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
 		59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		59F3FA5316E9286C00566C09 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Vendor/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Vendor/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteFetchable.h; path = Classes/SLRemoteFetchable.h; sourceTree = "<group>"; };
+		59FD7B5716F1801E00DE3D5C /* SLFSQCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSQCheckin.h; sourceTree = "<group>"; };
+		59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSQCheckin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 		59CDF70016EC726000637007 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				59FD7B5716F1801E00DE3D5C /* SLFSQCheckin.h */,
+				59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */,
 				59CDF70116EC726F00637007 /* SLRepository.h */,
 				59CDF70216EC726F00637007 /* SLRepository.m */,
 				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
@@ -371,6 +376,7 @@
 				59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */,
 				59CDF70316EC726F00637007 /* SLRepository.m in Sources */,
 				5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */,
+				59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

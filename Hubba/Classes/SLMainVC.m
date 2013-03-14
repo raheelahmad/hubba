@@ -8,7 +8,7 @@
 
 #import "SLMainVC.h"
 #import "SLAPIClient.h"
-#import "SLRepository.h"
+#import "SLFSQCheckin.h"
 #import "SLCoreDataManager.h"
 
 NSString * const kServiceName = @"Foursquare";
@@ -34,9 +34,9 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 #pragma mark - Fetching Data
 
 - (IBAction)fetchFromRemote:(id)sender {
-	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, id response) {
+	[self.APIClient get:@"/checkins/recent" onCompletion:^(BOOL success, id response) {
 		if (success) {
-			[SLRepository parseFromResponse:response];
+			[SLFSQCheckin updateWithRemoteResponse:response];
 			[self.tableView reloadData];
 		} else {
 			NSLog(@"Could not fetch! %@", response);
@@ -46,7 +46,7 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 
 - (NSFetchedResultsController *)repositoriesResultsController {
 	if (!_repositoriesResultsController) {
-		_repositoriesResultsController = [SLRepository allObjcetsController];
+		_repositoriesResultsController = [SLFSQCheckin allObjcetsController];
 		_repositoriesResultsController.delegate = self;
 	}
 	return _repositoriesResultsController;
@@ -119,16 +119,15 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	SLRepository *repository = [self.repositoriesResultsController objectAtIndexPath:indexPath];
-	cell.textLabel.text = repository.name;
-	cell.detailTextLabel.text = repository.remoteDescription;
+	SLFSQCheckin *checkIn = [self.repositoriesResultsController objectAtIndexPath:indexPath];
+	cell.textLabel.text = checkIn.venueName;
+	cell.detailTextLabel.text = checkIn.venueCity;
 }
 
 
 #pragma mark - Login
 
 - (IBAction)initiateLogin:(id)sender {
-	self.APIClient = [[SLAPIClient alloc] initWithAPIName:kServiceName baseURL:kServiceBaseURL];
 	[self.view addSubview:self.authWebView];
 	NSLog(@"Current: %@", self.authWebView.request.URL);
 	[self.APIClient initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
@@ -176,7 +175,7 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		self.title = kServiceName;
+		self.APIClient = [[SLAPIClient alloc] initWithAPIName:kServiceName baseURL:kServiceBaseURL];
     }
     return self;
 }
@@ -194,7 +193,7 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.APIClient = [[SLAPIClient alloc] initWithAPIName:@"Github" baseURL:@"https://api.github.com"];
+	self.title = kServiceName;
 	self.loginButton.target = self;
 	self.fetchButton.target = self;
 	self.fetchButton.action = @selector(fetchFromRemote:);

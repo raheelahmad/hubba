@@ -9,7 +9,19 @@
 #import <Foundation/Foundation.h>
 
 @protocol SLRemoteFetchable <NSObject>
+
+#pragma mark - Local
+
 + (NSFetchedResultsController *)allObjcetsController;
-+ (id<SLRemoteFetchable>)objectForRemoteResponse:(NSDictionary *)remoteResponse;
-- (void)updateWithRemoteResponse:(NSDictionary *)remoteResponse;
++ (NSArray *)sortDescriptors;
+
+#pragma mark - Remote
+
++ (id<SLRemoteFetchable>)objectForRemoteInfo:(NSDictionary *)remoteInfo;
++ (void)updateWithRemoteResponse:(id)remoteResponse;
+- (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo;
++ (NSDictionary *)remoteToLocalMappings;
++ (BOOL)appearsAsCollection;
++ (NSString *)pathToObject;
+
 @end
