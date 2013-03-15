@@ -10,20 +10,22 @@
 #import "SLFetcher.h"
 #import "SFHFKeychainUtils.h"
 
-//static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
-//static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
-//static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/authorize?client_id=%@";;
-//static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
-//static NSString * const kSLTokenPostBody = @"client_id=%@&client_secret=%@&code=%@";
 static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
-static NSString * const kSLClientID = @"DMPRD2BLYBQCBSSYK2RL42VMDQEHFVXIDEDOTKFP2YNR3BFU";
-static NSString * const kSLClientSecret = @"OO01YZOEGYA0O2NAXWSI14CYEBR2IOTYOKTDTU2RQQWLNUGI";
-static NSString * const kSLAuthorizationURL = @"https://foursquare.com/oauth2/authenticate";;
-static NSString * const kSLAuthorizationQueryStringFormat = @"?client_id=%@&response_type=code&redirect_uri=%@";
-static NSString * const kSLTokenRequestURL = @"https://foursquare.com/oauth2/access_token";
-static NSString * const kSLTokenParamString = @"?client_id=%@&client_secret=%@&code=%@&redirect_uri=%@&grant_type=authorization_code";
-static BOOL kSLUsePostForTokenRequest = NO;
-static BOOL kSLUseJSONForParsingAccessToken = YES;
+static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
+static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
+static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/authorize";;
+static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&client_secret=%@";
+static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
+static NSString * const kSLTokenParamString = @"client_id=%@&client_secret=%@&code=%@";
+//static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
+//static NSString * const kSLClientID = @"DMPRD2BLYBQCBSSYK2RL42VMDQEHFVXIDEDOTKFP2YNR3BFU";
+//static NSString * const kSLClientSecret = @"OO01YZOEGYA0O2NAXWSI14CYEBR2IOTYOKTDTU2RQQWLNUGI";
+//static NSString * const kSLAuthorizationURL = @"https://foursquare.com/oauth2/authenticate";;
+//static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&response_type=code&redirect_uri=%@";
+//static NSString * const kSLTokenRequestURL = @"https://foursquare.com/oauth2/access_token";
+//static NSString * const kSLTokenParamString = @"?lient_id=%@&client_secret=%@&code=%@&redirect_uri=%@&grant_type=authorization_code";
+static BOOL kSLUsePostForTokenRequest = YES;
+static BOOL kSLUseJSONForParsingAccessToken = NO;
 
 static NSString * const kAccessTokenKey = @"access_token";
 static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
@@ -142,14 +144,14 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 }
 
 - (NSURLRequest *)authorizationRequest {
-	NSString *queryString = [NSString stringWithFormat:kSLAuthorizationQueryStringFormat, kSLClientID, kSLRedirectURI];
-	NSString *URLString = [NSString stringWithFormat:@"%@%@", kSLAuthorizationURL, queryString];
+	NSString *queryString = [NSString stringWithFormat:kSLAuthorizationQueryStringFormat, kSLClientID, kSLClientSecret];
+	NSString *URLString = [NSString stringWithFormat:@"%@?%@", kSLAuthorizationURL, queryString];
 	NSURL *url = [NSURL URLWithString:URLString];
 	return [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
 }
 
 - (NSURLRequest *)tokenRequestForCode:(NSString *)code {
-	NSString *queryString = [NSString stringWithFormat:kSLTokenParamString, kSLClientID, kSLClientSecret, code, kSLRedirectURI];
+	NSString *queryString = [NSString stringWithFormat:kSLTokenParamString, kSLClientID, kSLClientSecret, code];
 	NSURLRequest *request = nil;
 	if (kSLUsePostForTokenRequest) {
 		NSURL *tokenRequestURL = [NSURL URLWithString:kSLTokenRequestURL];
@@ -157,7 +159,7 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 		[(NSMutableURLRequest *)request setHTTPMethod:@"POST"];
 		[(NSMutableURLRequest *)request setHTTPBody:[queryString dataUsingEncoding:NSUTF8StringEncoding]];
 	} else {
-		NSURL *tokenRequestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSLTokenRequestURL, queryString]];
+		NSURL *tokenRequestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", kSLTokenRequestURL, queryString]];
 		request = [NSURLRequest requestWithURL:tokenRequestURL];
 	}
 	return request;

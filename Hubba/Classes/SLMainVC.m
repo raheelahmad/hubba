@@ -11,8 +11,8 @@
 #import "SLFSQCheckin.h"
 #import "SLCoreDataManager.h"
 
-NSString * const kServiceName = @"Foursquare";
-NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
+NSString * const kServiceName = @"Github";
+NSString * const kServiceBaseURL = @"https://api.github.com";
 
 @interface SLMainVC ()
 
@@ -129,10 +129,8 @@ NSString * const kServiceBaseURL = @"https://api.foursquare.com/v2";
 
 - (IBAction)initiateLogin:(id)sender {
 	[self.view addSubview:self.authWebView];
-	NSLog(@"Current: %@", self.authWebView.request.URL);
 	[self.APIClient initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
 		if (success) {
-			NSLog(@"Yay! success");
 			NSLog(@"Authenticated: %d", self.APIClient.authenticated);
 			[self fetchFromRemote:nil];
 		} else {
