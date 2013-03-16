@@ -8,13 +8,20 @@
 
 #import "SLAppDelegate.h"
 #import "SLMainVC.h"
+#import "SLAPIClient.h"
 #import "SLCoreDataManager.h"
 
 @implementation SLAppDelegate
 
+NSString * const kServiceName = @"Github";
+NSString * const kServiceBaseURL = @"https://api.github.com";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	SLAPIClient *client = [SLAPIClient sharedClient];
+	client.APIName = kServiceName;
+	client.baseURL = kServiceBaseURL;
+	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

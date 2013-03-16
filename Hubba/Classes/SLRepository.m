@@ -15,6 +15,10 @@
 @dynamic name;
 @dynamic remoteDescription;
 
++ (NSString *)endPoint {
+	return @"/user/repos";
+}
+
 + (NSArray *)sortDescriptors {
 	return @[ [NSSortDescriptor sortDescriptorWithKey:@"remoteID" ascending:YES] ];
 }

@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSString *baseURL;
 @property (nonatomic, readonly) BOOL authenticated;
 
-- (id)initWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL;
++ (SLAPIClient *)sharedClient;
 	
 // Authentication
 - (void)initiateAuthorizationWithWebView:(UIWebView *)webView onCompletion:(AuthenticationCompletionBlock)completionBlock;

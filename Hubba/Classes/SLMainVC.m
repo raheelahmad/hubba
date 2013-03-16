@@ -12,8 +12,6 @@
 #import "SLCoreDataManager.h"
 #import "SLRepository.h"
 
-NSString * const kServiceName = @"Github";
-NSString * const kServiceBaseURL = @"https://api.github.com";
 
 @interface SLMainVC ()
 
@@ -22,7 +20,6 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 @property (nonatomic, strong) IBOutlet UIWebView *authWebView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *fetchButton;
-@property (strong, nonatomic) SLAPIClient *APIClient;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSFetchedResultsController *repositoriesResultsController;
@@ -35,14 +32,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 #pragma mark - Fetching Data
 
 - (IBAction)fetchFromRemote:(id)sender {
-	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, id response) {
-		if (success) {
-			[SLRepository updateWithRemoteResponse:response];
-			[self.tableView reloadData];
-		} else {
-			NSLog(@"Could not fetch! %@", response);
-		}
-	}];
+	[SLRepository refresh];
 }
 
 - (NSFetchedResultsController *)repositoriesResultsController {
@@ -134,7 +124,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 
 - (IBAction)initiateLogin:(id)sender {
 	[self.view addSubview:self.authWebView];
-	[self.APIClient initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
+	[[SLAPIClient sharedClient] initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
 		if (success) {
 			[self fetchFromRemote:nil];
 		} else {
@@ -149,7 +139,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 
 - (IBAction)logout:(id)sender {
 	[[SLCoreDataManager sharedManager] resetCoreDataStack];
-	[self.APIClient resetAuthentication];
+	[[SLAPIClient sharedClient] resetAuthentication];
 //	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	[self updateUI];
 	self.repositoriesResultsController.delegate = nil;
@@ -160,7 +150,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 #pragma mark - UI
 
 - (void)updateUI {
-	if (self.APIClient.authenticated) {
+	if ([SLAPIClient sharedClient].authenticated) {
 		self.loginButton.action = @selector(logout:);
 		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
 		self.navigationItem.leftBarButtonItem = self.fetchButton;
@@ -177,7 +167,6 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		self.APIClient = [[SLAPIClient alloc] initWithAPIName:kServiceName baseURL:kServiceBaseURL];
     }
     return self;
 }
@@ -195,7 +184,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = kServiceName;
+	self.title = [[SLAPIClient sharedClient] APIName];
 	self.loginButton.target = self;
 	self.fetchButton.target = self;
 	self.fetchButton.action = @selector(fetchFromRemote:);

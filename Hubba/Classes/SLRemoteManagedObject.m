@@ -8,8 +8,19 @@
 
 #import "SLRemoteManagedObject.h"
 #import "SLCoreDataManager.h"
+#import "SLAPIClient.h"
 
 @implementation SLRemoteManagedObject
+
++ (void)refresh {
+	[[SLAPIClient sharedClient] get:[self endPoint] onCompletion:^(BOOL success, id response) {
+		if (success) {
+			[self updateWithRemoteResponse:response];
+		} else {
+			NSLog(@"Could not fetch! %@", response);
+		}
+	}];
+}
 
 + (NSFetchedResultsController *)allObjcetsController {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([self class])];
@@ -84,6 +95,10 @@
 }
 
 #pragma mark - For the subclass
+
++ (NSString *)endPoint {
+	return nil;
+}
 
 + (NSDictionary *)remoteToLocalMappings {
 	return nil;

@@ -51,12 +51,22 @@
 
 #pragma mark - Basics
 
-- (id)initWithAPIName:(NSString *)APIName baseURL:(NSString *)baseURL {
+- (void)setAPIName:(NSString *)APIName {
+	_APIName = APIName;
+	self.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:APIName]; // create a new OAuth client
+}
+
++ (SLAPIClient *)sharedClient {
+	static SLAPIClient *_sharedClient = nil;
+	if (!_sharedClient) {
+		_sharedClient = [[SLAPIClient alloc] init];
+	}
+	return _sharedClient;
+}
+
+- (id)init {
 	self = [super init];
 	if (self) {
-		self.APIName = APIName;
-		self.baseURL = baseURL;
-		self.oauthClient = [[SLOAuth2Client alloc] initWithAPIName:self.APIName]; // create a new OAuth client
 		self.fetcher = [[SLFetcher alloc] init];
 	}
 	return self;

@@ -17,6 +17,8 @@
 
 #pragma mark - Remote
 
++ (void)refresh;
++ (NSString *)endPoint;
 + (SLRemoteManagedObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject;
 + (void)updateWithRemoteResponse:(id)remoteResponse;
