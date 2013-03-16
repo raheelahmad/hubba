@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="SLFSQCheckin" representedClassName="SLFSQCheckin" syncable="YES">
         <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="venueCity" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,9 +9,19 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLUser" inverseName="ownedRepositories" inverseEntity="SLUser" syncable="YES"/>
+    </entity>
+    <entity name="SLUser" representedClassName="SLUser" syncable="YES">
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="ownedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLRepository" inverseName="owner" inverseEntity="SLRepository" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SLRepository" positionX="160" positionY="192" width="128" height="90"/>
         <element name="SLFSQCheckin" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="SLRepository" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="SLUser" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>
