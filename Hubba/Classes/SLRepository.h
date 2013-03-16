@@ -8,17 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "SLRemoteManagedObject.h"
 
-
-@interface SLRepository : NSManagedObject
+@interface SLRepository : SLRemoteManagedObject
 
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * remoteDescription;
 
-+ (SLRepository *)objectForRemoteResponse:(NSDictionary *)remoteResponse;
-- (void)updateWithRemoteResponse:(NSDictionary *)remoteResponse;
-+ (NSFetchedResultsController *)allObjcetsController;
-+ (void)parseFromResponse:(id)parsedResponse;
-	
 @end

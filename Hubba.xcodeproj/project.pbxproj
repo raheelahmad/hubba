@@ -12,6 +12,7 @@
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
 		5951D59916E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
+		59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -56,6 +57,8 @@
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5951D59616E423060018764B /* SLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFetcher.h; path = Classes/SLFetcher.h; sourceTree = "<group>"; };
 		5951D59716E423060018764B /* SLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFetcher.m; path = Classes/SLFetcher.m; sourceTree = "<group>"; };
+		59559BAF16F4245D007A2E2A /* SLRemoteManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteManagedObject.h; path = Classes/SLRemoteManagedObject.h; sourceTree = "<group>"; };
+		59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRemoteManagedObject.m; path = Classes/SLRemoteManagedObject.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -120,6 +123,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		59559BAE16F4242F007A2E2A /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
+				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
+				59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */,
+				59559BAF16F4245D007A2E2A /* SLRemoteManagedObject.h */,
+				59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		59ABA71316DB51E300F711DB = {
 			isa = PBXGroup;
 			children = (
@@ -239,9 +254,7 @@
 				59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */,
 				59CDF70116EC726F00637007 /* SLRepository.h */,
 				59CDF70216EC726F00637007 /* SLRepository.m */,
-				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
-				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
-				59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */,
+				59559BAE16F4242F007A2E2A /* Support */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -377,6 +390,7 @@
 				59CDF70316EC726F00637007 /* SLRepository.m in Sources */,
 				5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */,
 				59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */,
+				59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

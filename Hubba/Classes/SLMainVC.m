@@ -10,6 +10,7 @@
 #import "SLAPIClient.h"
 #import "SLFSQCheckin.h"
 #import "SLCoreDataManager.h"
+#import "SLRepository.h"
 
 NSString * const kServiceName = @"Github";
 NSString * const kServiceBaseURL = @"https://api.github.com";
@@ -34,9 +35,9 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 #pragma mark - Fetching Data
 
 - (IBAction)fetchFromRemote:(id)sender {
-	[self.APIClient get:@"/checkins/recent" onCompletion:^(BOOL success, id response) {
+	[self.APIClient get:@"/user/repos" onCompletion:^(BOOL success, id response) {
 		if (success) {
-			[SLFSQCheckin updateWithRemoteResponse:response];
+			[SLRepository updateWithRemoteResponse:response];
 			[self.tableView reloadData];
 		} else {
 			NSLog(@"Could not fetch! %@", response);
@@ -46,7 +47,7 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 
 - (NSFetchedResultsController *)repositoriesResultsController {
 	if (!_repositoriesResultsController) {
-		_repositoriesResultsController = [SLFSQCheckin allObjcetsController];
+		_repositoriesResultsController = [SLRepository allObjcetsController];
 		_repositoriesResultsController.delegate = self;
 	}
 	return _repositoriesResultsController;
@@ -119,11 +120,15 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	SLFSQCheckin *checkIn = [self.repositoriesResultsController objectAtIndexPath:indexPath];
-	cell.textLabel.text = checkIn.venueName;
-	cell.detailTextLabel.text = checkIn.venueCity;
+	SLRepository *repository = [self.repositoriesResultsController objectAtIndexPath:indexPath];
+	cell.textLabel.text = repository.name;
+	cell.detailTextLabel.text = repository.remoteDescription;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 64.0f;
+}
 
 #pragma mark - Login
 
@@ -131,7 +136,6 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
 	[self.view addSubview:self.authWebView];
 	[self.APIClient initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
 		if (success) {
-			NSLog(@"Authenticated: %d", self.APIClient.authenticated);
 			[self fetchFromRemote:nil];
 		} else {
 			NSLog(@"FAIL!!!");
