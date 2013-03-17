@@ -10,8 +10,10 @@
 #import "SLAPIClient.h"
 #import "SLFSQCheckin.h"
 #import "SLCoreDataManager.h"
-#import "SLRepository.h"
 
+#import "SLRepository.h"
+#import "SLUser.h"
+#import "SLMe.h"
 
 @interface SLMainVC ()
 
@@ -32,6 +34,7 @@
 
 - (void)refresh {
 	if ([SLAPIClient sharedClient].authenticated) {
+		[SLMe refresh];
 		[SLRepository refresh];
 	}
 }
@@ -114,6 +117,9 @@
 	SLRepository *repository = [self.repositoriesResultsController objectAtIndexPath:indexPath];
 	cell.textLabel.text = repository.name;
 	cell.detailTextLabel.text = repository.remoteDescription;
+	if (repository.owner.login) {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"Owner: %@", repository.owner.login];
+	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -149,13 +155,19 @@
 
 #pragma mark - UI
 
+- (void)showUser {
+	
+}
+
 - (void)updateUI {
 	if ([SLAPIClient sharedClient].authenticated) {
 		self.loginButton.action = @selector(logout:);
 		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showUser)];
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
 		[self.loginButton setTitle:NSLocalizedString(@"Log In", nil)];
+		self.navigationItem.leftBarButtonItem = nil;
 	}
 }
 

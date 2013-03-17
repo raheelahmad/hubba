@@ -80,8 +80,9 @@
 }
 
 - (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo {
-	NSDictionary *mapping = [self.class remoteToLocalMappings];
+	[self beforeUpdate];
 	
+	NSDictionary *mapping = [self.class remoteToLocalMappings];
 	for (NSString *remotePropery in [mapping allKeys]) {
 		NSString *localPropertyPath = mapping[remotePropery];
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
@@ -89,18 +90,17 @@
 			id localValue = [self valueForKeyPath:localPropertyPath];
 			// this property's description in the model
 			id entityProperty = [self entityPropertyForPropertyName:localPropertyPath];
-			if ([entityProperty isKindOfClass:[NSAttributeDescription class]]) {
-				if (![remoteValue isEqual:localValue]) {
-					[self setValue:remoteValue forKey:localPropertyPath];
-				}
-			} else if ([entityProperty isKindOfClass:[NSRelationshipDescription class]]) {
+			if ([entityProperty isKindOfClass:[NSRelationshipDescription class]]) {
 				NSRelationshipDescription *relationshipDescription = (NSRelationshipDescription *)entityProperty;
-				NSLog(@"For %@: %@", localPropertyPath, relationshipDescription.destinationEntity.managedObjectClassName);
 				Class destinationClass = NSClassFromString(relationshipDescription.destinationEntity.managedObjectClassName);
 				if ([destinationClass isSubclassOfClass:[SLRemoteManagedObject class]]) {
 					SLRemoteManagedObject *destinationObject = [destinationClass objectForRemoteInfo:remoteValue];
 					[destinationObject updateWithRemoteInfo:remoteValue];
 					[self setValue:destinationObject forKeyPath:localPropertyPath];
+				}
+			} else {
+				if (![remoteValue isEqual:localValue]) {
+					[self setValue:remoteValue forKeyPath:localPropertyPath];
 				}
 			}
 		}
@@ -120,6 +120,10 @@
 
 + (NSDictionary *)remoteToLocalMappings {
 	return nil;
+}
+
+- (void)beforeUpdate {
+	
 }
 
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
