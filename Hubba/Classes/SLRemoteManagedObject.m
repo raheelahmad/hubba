@@ -87,11 +87,29 @@
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
 		if (remoteValue) {
 			id localValue = [self valueForKeyPath:localPropertyPath];
-			if (![remoteValue isEqual:localValue]) {
-				[self setValue:remoteValue forKey:localPropertyPath];
+			// this property's description in the model
+			id entityProperty = [self entityPropertyForPropertyName:localPropertyPath];
+			if ([entityProperty isKindOfClass:[NSAttributeDescription class]]) {
+				if (![remoteValue isEqual:localValue]) {
+					[self setValue:remoteValue forKey:localPropertyPath];
+				}
+			} else if ([entityProperty isKindOfClass:[NSRelationshipDescription class]]) {
+				NSRelationshipDescription *relationshipDescription = (NSRelationshipDescription *)entityProperty;
+				NSLog(@"For %@: %@", localPropertyPath, relationshipDescription.destinationEntity.managedObjectClassName);
+				Class destinationClass = NSClassFromString(relationshipDescription.destinationEntity.managedObjectClassName);
+				if ([destinationClass isSubclassOfClass:[SLRemoteManagedObject class]]) {
+					SLRemoteManagedObject *destinationObject = [destinationClass objectForRemoteInfo:remoteValue];
+					[destinationObject updateWithRemoteInfo:remoteValue];
+					[self setValue:destinationObject forKeyPath:localPropertyPath];
+				}
 			}
 		}
 	}
+}
+
+- (id)entityPropertyForPropertyName:(NSString *)propertyName {
+	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([self class]) inManagedObjectContext:[SLCoreDataManager sharedManager].managedObjectContext];
+	return [entityDescription propertiesByName][propertyName];
 }
 
 #pragma mark - For the subclass
