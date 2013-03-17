@@ -8,12 +8,14 @@
 
 #import "SLRepository.h"
 #import "SLCoreDataManager.h"
+#import "SLUser.h"
 
 @implementation SLRepository
 
 @dynamic remoteID;
 @dynamic name;
 @dynamic remoteDescription;
+@dynamic owner;
 
 + (NSString *)endPoint {
 	return @"/user/repos";
@@ -39,7 +41,8 @@
 	return @{
 			   @"id"			: @"remoteID",
 			   @"name"			: @"name",
-			   @"description"	: @"remoteDescription"
+			   @"description"	: @"remoteDescription",
+			   @"owner"			: @"owner",
 		   };
 }
 
