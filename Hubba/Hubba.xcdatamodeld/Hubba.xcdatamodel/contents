@@ -5,6 +5,16 @@
         <attribute name="venueCity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="venueName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SLMe" representedClassName="SLMe" syncable="YES">
+        <attribute name="diskUsage" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="planCollaborators" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="planName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="planSpace" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalOwnedRepos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalPrivateRepos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLUser" inverseName="me" inverseEntity="SLUser" syncable="YES"/>
+    </entity>
     <entity name="SLRepository" representedClassName="SLRepository" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,11 +27,13 @@
         <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="me" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLMe" inverseName="user" inverseEntity="SLMe" syncable="YES"/>
         <relationship name="ownedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLRepository" inverseName="owner" inverseEntity="SLRepository" syncable="YES"/>
     </entity>
     <elements>
         <element name="SLFSQCheckin" positionX="160" positionY="192" width="128" height="90"/>
         <element name="SLRepository" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="SLUser" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="SLUser" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="SLMe" positionX="160" positionY="192" width="128" height="165"/>
     </elements>
 </model>

@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "SLRemoteManagedObject.h"
 
+@class SLMe;
 @interface SLUser : SLRemoteManagedObject
 
 @property (nonatomic, retain) NSString * name;
@@ -18,5 +19,6 @@
 @property (nonatomic, retain) NSString * company;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSSet *ownedRepositories;
+@property (nonatomic, strong) SLMe *me;
 
 @end

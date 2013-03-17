@@ -14,6 +14,7 @@
 		5951D59916E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
 		59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
+		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -60,8 +61,10 @@
 		5951D59716E423060018764B /* SLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFetcher.m; path = Classes/SLFetcher.m; sourceTree = "<group>"; };
 		59559BAF16F4245D007A2E2A /* SLRemoteManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteManagedObject.h; path = Classes/SLRemoteManagedObject.h; sourceTree = "<group>"; };
 		59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRemoteManagedObject.m; path = Classes/SLRemoteManagedObject.m; sourceTree = "<group>"; };
-		59627C8516F4E59A00E73178 /* SLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLUser.h; path = Hubba/Classes/SLUser.h; sourceTree = "<group>"; };
-		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Hubba/Classes/SLUser.m; sourceTree = "<group>"; };
+		59627C8516F4E59A00E73178 /* SLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLUser.h; path = Classes/SLUser.h; sourceTree = "<group>"; };
+		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Classes/SLUser.m; sourceTree = "<group>"; };
+		59627C8D16F5828C00E73178 /* SLMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMe.h; path = Classes/SLMe.h; sourceTree = "<group>"; };
+		59627C8E16F5828C00E73178 /* SLMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMe.m; path = Classes/SLMe.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,6 +132,7 @@
 		59559BAE16F4242F007A2E2A /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */,
 				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
 				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
 				59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */,
@@ -141,8 +145,6 @@
 		59ABA71316DB51E300F711DB = {
 			isa = PBXGroup;
 			children = (
-				59627C8516F4E59A00E73178 /* SLUser.h */,
-				59627C8616F4E59A00E73178 /* SLUser.m */,
 				59CDF6FE16EBE83600637007 /* Security.framework */,
 				59ABA72716DB51E300F711DB /* Hubba */,
 				59ABA74916DB51E300F711DB /* HubbaTests */,
@@ -178,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				59ABA75A16DB69F000F711DB /* Classes */,
-				59ABA73916DB51E300F711DB /* Hubba.xcdatamodeld */,
 				59ABA72816DB51E300F711DB /* Supporting Files */,
 			);
 			path = Hubba;
@@ -259,6 +260,10 @@
 				59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */,
 				59CDF70116EC726F00637007 /* SLRepository.h */,
 				59CDF70216EC726F00637007 /* SLRepository.m */,
+				59627C8516F4E59A00E73178 /* SLUser.h */,
+				59627C8616F4E59A00E73178 /* SLUser.m */,
+				59627C8D16F5828C00E73178 /* SLMe.h */,
+				59627C8E16F5828C00E73178 /* SLMe.m */,
 				59559BAE16F4242F007A2E2A /* Support */,
 			);
 			name = Models;
@@ -397,6 +402,7 @@
 				59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */,
 				59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */,
 				59627C8716F4E59A00E73178 /* SLUser.m in Sources */,
+				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

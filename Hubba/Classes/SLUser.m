@@ -17,9 +17,10 @@
 @dynamic company;
 @dynamic email;
 @dynamic ownedRepositories;
+@dynamic me;
 
 + (NSString *)endPoint {
-	return @"/user";
+	return @"/user/%@";
 }
 
 + (NSArray *)sortDescriptors {
