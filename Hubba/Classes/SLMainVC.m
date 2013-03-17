@@ -19,7 +19,6 @@
 
 @property (nonatomic, strong) IBOutlet UIWebView *authWebView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *fetchButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSFetchedResultsController *repositoriesResultsController;
@@ -31,8 +30,10 @@
 
 #pragma mark - Fetching Data
 
-- (IBAction)fetchFromRemote:(id)sender {
-	[SLRepository refresh];
+- (void)refresh {
+	if ([SLAPIClient sharedClient].authenticated) {
+		[SLRepository refresh];
+	}
 }
 
 - (NSFetchedResultsController *)repositoriesResultsController {
@@ -126,7 +127,7 @@
 	[self.view addSubview:self.authWebView];
 	[[SLAPIClient sharedClient] initiateAuthorizationWithWebView:self.authWebView onCompletion:^(BOOL success) {
 		if (success) {
-			[self fetchFromRemote:nil];
+			[self refresh];
 		} else {
 			NSLog(@"FAIL!!!");
 		}
@@ -140,7 +141,6 @@
 - (IBAction)logout:(id)sender {
 	[[SLCoreDataManager sharedManager] resetCoreDataStack];
 	[[SLAPIClient sharedClient] resetAuthentication];
-//	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	[self updateUI];
 	self.repositoriesResultsController.delegate = nil;
 	self.repositoriesResultsController = nil;
@@ -153,11 +153,9 @@
 	if ([SLAPIClient sharedClient].authenticated) {
 		self.loginButton.action = @selector(logout:);
 		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
-		self.navigationItem.leftBarButtonItem = self.fetchButton;
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
 		[self.loginButton setTitle:NSLocalizedString(@"Log In", nil)];
-		self.navigationItem.leftBarButtonItem = nil;
 	}
 }
 
@@ -186,9 +184,8 @@
     [super viewDidLoad];
 	self.title = [[SLAPIClient sharedClient] APIName];
 	self.loginButton.target = self;
-	self.fetchButton.target = self;
-	self.fetchButton.action = @selector(fetchFromRemote:);
 	
+	[self refresh];
 	[self updateUI];
 }
 
