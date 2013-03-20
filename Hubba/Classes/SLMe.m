@@ -41,22 +41,23 @@
 	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
 }
 
-+ (NSDictionary *)remoteToLocalMappings {
-	NSDictionary *userMappings = [SLUser remoteToLocalMappings];
++ (NSDictionary *)localToRemoteMappings {
+	NSDictionary *userMappings = [SLUser localToRemoteMappings];
 	NSMutableDictionary *mappings = [NSMutableDictionary dictionaryWithCapacity:12];
 	[userMappings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		NSString *localKeyPath = (NSString *)obj;
+		NSString *localKeyPath = (NSString *)key;
 		NSString *adjustedToUserKeyPath = [NSString stringWithFormat:@"user.%@", localKeyPath];
-		[mappings setObject:adjustedToUserKeyPath forKey:key];
+		[mappings setObject:obj forKey:adjustedToUserKeyPath];
 	}];
 	[mappings addEntriesFromDictionary:@{
-		  @"id"								: @"remoteID",
-		  @"total_private_repos"			: @"totalPrivateRepos",
-		  @"owned_private_repos"			: @"totalOwnedRepos",
-		  @"disk_usage"						: @"diskUsage",
-		  @"plan.name"						: @"planName",
-		  @"plan.space"						: @"planSpace",
-		  @"plan.collaborators"				: @"planCollaborators",
+		  @"remoteID"						: @"id",
+		  @"user.remoteID"					: @"id",
+		  @"totalPrivateRepos"				: @"total_private_repos",
+		  @"totalOwnedRepos"				: @"owned_private_repos",
+		  @"diskUsage"						: @"disk_usage",
+		  @"planName"						: @"plan.name",
+		  @"planSpace"						: @"plan.space",
+		  @"planCollaborators"				: @"plan.collaborators",
 	  }];
 	
 	return mappings;

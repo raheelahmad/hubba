@@ -82,9 +82,9 @@
 
 - (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo {
 	
-	NSDictionary *mapping = [self.class remoteToLocalMappings];
-	for (NSString *remotePropery in [mapping allKeys]) {
-		NSString *localPropertyPath = mapping[remotePropery];
+	NSDictionary *mapping = [self.class localToRemoteMappings];
+	for (NSString *localPropertyPath in [mapping allKeys]) {
+		NSString *remotePropery = mapping[localPropertyPath];
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
 		if (remoteValue) {
 			NSArray *localPropertyPathArray = [localPropertyPath componentsSeparatedByString:@"."];
@@ -144,7 +144,7 @@
 	return nil;
 }
 
-+ (NSDictionary *)remoteToLocalMappings {
++ (NSDictionary *)localToRemoteMappings {
 	return nil;
 }
 

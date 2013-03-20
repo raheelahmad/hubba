@@ -23,7 +23,9 @@
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject;
 + (void)updateWithRemoteResponse:(id)remoteResponse;
 - (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo;
-+ (NSDictionary *)remoteToLocalMappings;
+// local -> remote, since local properties ought to be unique in this mapping
+// (not the other way; so we can have different local properties map to same remote property
++ (NSDictionary *)localToRemoteMappings;
 + (BOOL)appearsAsCollection;
 + (NSString *)pathToObject;
 

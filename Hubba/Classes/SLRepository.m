@@ -37,12 +37,12 @@
 	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
 }
 
-+ (NSDictionary *)remoteToLocalMappings {
++ (NSDictionary *)localToRemoteMappings {
 	return @{
-			   @"id"			: @"remoteID",
-			   @"name"			: @"name",
-			   @"description"	: @"remoteDescription",
-			   @"owner"			: @"owner",
+			   @"remoteID"			: @"id",
+			   @"name"				: @"name",
+			   @"remoteDescription"	: @"description",
+			   @"owner"				: @"owner",
 		   };
 }
 
