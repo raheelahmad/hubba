@@ -8,7 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface SLRemoteManagedObject : NSManagedObject
+@interface SLManagedRemoteObject : NSManagedObject
 
 #pragma mark - Local
 
@@ -19,7 +19,7 @@
 
 + (void)refresh;
 + (NSString *)endPoint;
-+ (SLRemoteManagedObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
++ (SLManagedRemoteObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject;
 + (void)updateWithRemoteResponse:(id)remoteResponse;
 - (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo;

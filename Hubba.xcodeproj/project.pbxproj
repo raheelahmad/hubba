@@ -12,7 +12,7 @@
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
 		5951D59916E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
-		59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */; };
+		59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
@@ -59,8 +59,8 @@
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5951D59616E423060018764B /* SLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFetcher.h; path = Classes/SLFetcher.h; sourceTree = "<group>"; };
 		5951D59716E423060018764B /* SLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFetcher.m; path = Classes/SLFetcher.m; sourceTree = "<group>"; };
-		59559BAF16F4245D007A2E2A /* SLRemoteManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteManagedObject.h; path = Classes/SLRemoteManagedObject.h; sourceTree = "<group>"; };
-		59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRemoteManagedObject.m; path = Classes/SLRemoteManagedObject.m; sourceTree = "<group>"; };
+		59559BAF16F4245D007A2E2A /* SLManagedRemoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLManagedRemoteObject.h; path = Classes/SLManagedRemoteObject.h; sourceTree = "<group>"; };
+		59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLManagedRemoteObject.m; path = Classes/SLManagedRemoteObject.m; sourceTree = "<group>"; };
 		59627C8516F4E59A00E73178 /* SLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLUser.h; path = Classes/SLUser.h; sourceTree = "<group>"; };
 		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Classes/SLUser.m; sourceTree = "<group>"; };
 		59627C8D16F5828C00E73178 /* SLMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMe.h; path = Classes/SLMe.h; sourceTree = "<group>"; };
@@ -136,8 +136,8 @@
 				5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */,
 				5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */,
 				59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */,
-				59559BAF16F4245D007A2E2A /* SLRemoteManagedObject.h */,
-				59559BB016F4245D007A2E2A /* SLRemoteManagedObject.m */,
+				59559BAF16F4245D007A2E2A /* SLManagedRemoteObject.h */,
+				59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -400,7 +400,7 @@
 				59CDF70316EC726F00637007 /* SLRepository.m in Sources */,
 				5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */,
 				59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */,
-				59559BB116F4245D007A2E2A /* SLRemoteManagedObject.m in Sources */,
+				59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */,
 				59627C8716F4E59A00E73178 /* SLUser.m in Sources */,
 				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
 			);

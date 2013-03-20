@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "SLRemoteManagedObject.h"
+#import "SLManagedRemoteObject.h"
 
 @class SLMe;
-@interface SLUser : SLRemoteManagedObject
+@interface SLUser : SLManagedRemoteObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * login;

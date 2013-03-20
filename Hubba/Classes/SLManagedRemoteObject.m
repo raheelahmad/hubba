@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Sakun Labs. All rights reserved.
 //
 
-#import "SLRemoteManagedObject.h"
+#import "SLManagedRemoteObject.h"
 #import "SLCoreDataManager.h"
 #import "SLAPIClient.h"
 
-@implementation SLRemoteManagedObject
+@implementation SLManagedRemoteObject
 
 + (void)refresh {
 	[[SLAPIClient sharedClient] get:[self endPoint] onCompletion:^(BOOL success, id response) {
@@ -36,8 +36,8 @@
 	return fetchController;
 }
 
-+ (SLRemoteManagedObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo {
-	SLRemoteManagedObject * localObject = nil;
++ (SLManagedRemoteObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo {
+	SLManagedRemoteObject * localObject = nil;
 	NSManagedObjectContext *context = [[SLCoreDataManager sharedManager] managedObjectContext];
 	
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([self class])];
@@ -65,12 +65,12 @@
 	if ([self appearsAsCollection]) {
 		if ([remoteResponse isKindOfClass:[NSArray class]]) {
 			for (NSDictionary *remoteInfo in remoteResponse) {
-				SLRemoteManagedObject *localObject = [self objectForRemoteInfo:remoteInfo];
+				SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteInfo];
 				[localObject updateWithRemoteInfo:remoteInfo];
 			}
 		}
 	} else {
-		SLRemoteManagedObject *localObject = [self objectForRemoteInfo:remoteResponse];
+		SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteResponse];
 		[localObject updateWithRemoteInfo:remoteResponse];
 	}
 	
@@ -88,7 +88,7 @@
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
 		if (remoteValue) {
 			NSArray *localPropertyPathArray = [localPropertyPath componentsSeparatedByString:@"."];
-			SLRemoteManagedObject *receiver = self; // in the loop, the object on which to do valueForKey:
+			SLManagedRemoteObject *receiver = self; // in the loop, the object on which to do valueForKey:
 			for (NSString *key in localPropertyPathArray) {
 				// this property's description in the model
 				id entityProperty = [receiver entityPropertyForPropertyName:key];
@@ -96,9 +96,9 @@
 					// if the key is a relationship
 					NSRelationshipDescription *relationshipDescription = (NSRelationshipDescription *)entityProperty;
 					Class destinationClass = NSClassFromString(relationshipDescription.destinationEntity.managedObjectClassName);
-					if ([destinationClass isSubclassOfClass:[SLRemoteManagedObject class]]) {
+					if ([destinationClass isSubclassOfClass:[SLManagedRemoteObject class]]) {
 						// if this is a remote managed object, we can insert/update it
-						SLRemoteManagedObject *destinationObject = nil;
+						SLManagedRemoteObject *destinationObject = nil;
 						if ([localPropertyPathArray lastObject] == key) {
 							// if this is the last key, then since it maps to an object, we should expect
 							// that the remoteValue is a dictionary, and try to fetch and update it as we do in

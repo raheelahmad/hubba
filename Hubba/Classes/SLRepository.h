@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "SLRemoteManagedObject.h"
+#import "SLManagedRemoteObject.h"
 
 @class SLUser;
-@interface SLRepository : SLRemoteManagedObject
+@interface SLRepository : SLManagedRemoteObject
 
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSString * name;
