@@ -11,7 +11,7 @@
 @interface SLAPIClient ()
 
 @property (nonatomic, strong) SLOAuth2Client *oauthClient;
-@property (nonatomic, strong) SLFetcher *fetcher;
+@property (nonatomic, strong) NSMutableArray *fetchers;
 
 @end
 
@@ -24,7 +24,17 @@
 		completionBlock(NO, nil);
 	} else {
 		NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForPath:getURLString]];
-		[self.fetcher request:request completion:completionBlock];
+		SLFetcher *fetcher = [[SLFetcher alloc] init];
+		[self.fetchers addObject:fetcher];
+		// construct our wrapper completiobn block, so we can let go of fetcher upon its completion
+		FetchCompletionBlock _completionBlock = ^(BOOL success, id response) {
+			[self.fetchers removeObject:fetcher];
+			if (completionBlock) {
+				completionBlock(success, response);
+			}
+		};
+		
+		[fetcher request:request completion:_completionBlock];
 	}
 }
 
@@ -67,7 +77,7 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-		self.fetcher = [[SLFetcher alloc] init];
+		self.fetchers = [NSMutableArray arrayWithCapacity:10];
 	}
 	return self;
 }
