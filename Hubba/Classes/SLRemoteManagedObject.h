@@ -19,7 +19,6 @@
 
 + (void)refresh;
 + (NSString *)endPoint;
-- (void)beforeUpdate;
 + (SLRemoteManagedObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject;
 + (void)updateWithRemoteResponse:(id)remoteResponse;

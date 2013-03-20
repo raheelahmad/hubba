@@ -12,6 +12,7 @@
 
 @implementation SLMe
 
+@dynamic remoteID;
 @dynamic totalPrivateRepos;
 @dynamic totalOwnedRepos;
 @dynamic diskUsage;
@@ -40,14 +41,6 @@
 	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
 }
 
-- (void)beforeUpdate {
-	// make sure that there is a user for the mappinngs to work
-	if (!self.user) {
-		self.user = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([SLUser class])
-												  inManagedObjectContext:self.managedObjectContext];
-	}
-}
-
 + (NSDictionary *)remoteToLocalMappings {
 	NSDictionary *userMappings = [SLUser remoteToLocalMappings];
 	NSMutableDictionary *mappings = [NSMutableDictionary dictionaryWithCapacity:12];
@@ -63,9 +56,10 @@
 		  @"disk_usage"						: @"diskUsage",
 		  @"plan.name"						: @"planName",
 		  @"plan.space"						: @"planSpace",
-		  @"plan.collaborators"				: @"planSpace",
+		  @"plan.collaborators"				: @"planCollaborators",
 	  }];
 	
 	return mappings;
 }
+
 @end
