@@ -145,6 +145,10 @@
 	return nil;
 }
 
++ (NSArray *)relationshipMappings {
+	return nil;
+}
+
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
 	return nil;
 }
