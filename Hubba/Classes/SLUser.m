@@ -19,34 +19,29 @@
 @dynamic ownedRepositories;
 @dynamic me;
 
-+ (NSString *)endPoint {
-	return @"/user/%@";
-}
-
-+ (NSArray *)sortDescriptors {
-	return @[ [NSSortDescriptor sortDescriptorWithKey:@"remoteID" ascending:YES] ];
-}
-
-+ (NSString *)pathToObject {
-	return nil;
-}
-
-+ (BOOL)appearsAsCollection {
-	return NO;
-}
-
-+ (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
-	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
-}
-
-+ (NSDictionary *)localToRemoteMappings {
-	return @{
++ (SLMapping *)remoteMapping {
+	SLMapping *mapping = [[SLMapping alloc] init];
+	mapping.endPointForObject = ^(id object) {
+		return [NSString stringWithFormat:@"/user/%@", [object valueForKey:@"remoteID"]];
+	};
+	mapping.appearsAsCollection = NO;
+	mapping.localToRemoteMapping = @{
 			   @"remoteID"		: @"id",
 			   @"name"			: @"name",
 			   @"login"			: @"login",
 			   @"company"		: @"company",
 			   @"email"			: @"email",
 	  };
+	
+	return mapping;
+}
+
++ (NSArray *)sortDescriptors {
+	return @[ [NSSortDescriptor sortDescriptorWithKey:@"remoteID" ascending:YES] ];
+}
+
++ (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
+	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "SLFetcher.h"
 
 @interface SLFetcher ()
+@property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, copy) FetchCompletionBlock completionBlock;
@@ -19,6 +20,7 @@
 #pragma mark - NSURLConnection delegate
 
 - (void)request:(NSURLRequest *)request completion:(FetchCompletionBlock)completion {
+	self.request = request;
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	if (self.connection) {
 		self.completionBlock = completion;

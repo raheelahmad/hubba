@@ -21,6 +21,32 @@
 @dynamic planCollaborators;
 @dynamic user;
 
++ (SLMapping *)remoteMapping {
+	SLMapping *mapping = [[SLMapping alloc] init];
+	mapping.endPoint = @"/user";
+	mapping.appearsAsCollection = NO;
+	NSDictionary *userMappings = [[SLUser remoteMapping] localToRemoteMapping];
+	NSMutableDictionary *mappings = [NSMutableDictionary dictionaryWithCapacity:12];
+	[userMappings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		NSString *localKeyPath = (NSString *)key;
+		NSString *adjustedToUserKeyPath = [NSString stringWithFormat:@"user.%@", localKeyPath];
+		[mappings setObject:obj forKey:adjustedToUserKeyPath];
+	}];
+	[mappings addEntriesFromDictionary:@{
+		  @"remoteID"						: @"id",
+		  @"user.remoteID"					: @"id",
+		  @"totalPrivateRepos"				: @"total_private_repos",
+		  @"totalOwnedRepos"				: @"owned_private_repos",
+		  @"diskUsage"						: @"disk_usage",
+		  @"planName"						: @"plan.name",
+		  @"planSpace"						: @"plan.space",
+		  @"planCollaborators"				: @"plan.collaborators",
+	  }];
+	mapping.localToRemoteMapping = mappings;
+	
+	return mapping;
+}
+
 + (NSString *)endPoint {
 	return @"/user";
 }
@@ -39,28 +65,6 @@
 
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
 	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
-}
-
-+ (NSDictionary *)localToRemoteMappings {
-	NSDictionary *userMappings = [SLUser localToRemoteMappings];
-	NSMutableDictionary *mappings = [NSMutableDictionary dictionaryWithCapacity:12];
-	[userMappings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		NSString *localKeyPath = (NSString *)key;
-		NSString *adjustedToUserKeyPath = [NSString stringWithFormat:@"user.%@", localKeyPath];
-		[mappings setObject:obj forKey:adjustedToUserKeyPath];
-	}];
-	[mappings addEntriesFromDictionary:@{
-		  @"remoteID"						: @"id",
-		  @"user.remoteID"					: @"id",
-		  @"totalPrivateRepos"				: @"total_private_repos",
-		  @"totalOwnedRepos"				: @"owned_private_repos",
-		  @"diskUsage"						: @"disk_usage",
-		  @"planName"						: @"plan.name",
-		  @"planSpace"						: @"plan.space",
-		  @"planCollaborators"				: @"plan.collaborators",
-	  }];
-	
-	return mappings;
 }
 
 @end

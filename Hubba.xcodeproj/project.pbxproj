@@ -13,6 +13,7 @@
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
 		5951D59916E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
+		59556F3017079B7F00601A37 /* SLMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59556F2F17079B7F00601A37 /* SLMapping.m */; };
 		59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
@@ -62,6 +63,8 @@
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5951D59616E423060018764B /* SLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFetcher.h; path = Classes/SLFetcher.h; sourceTree = "<group>"; };
 		5951D59716E423060018764B /* SLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFetcher.m; path = Classes/SLFetcher.m; sourceTree = "<group>"; };
+		59556F2E17079B7F00601A37 /* SLMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMapping.h; path = Classes/SLMapping.h; sourceTree = "<group>"; };
+		59556F2F17079B7F00601A37 /* SLMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMapping.m; path = Classes/SLMapping.m; sourceTree = "<group>"; };
 		59559BAF16F4245D007A2E2A /* SLManagedRemoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLManagedRemoteObject.h; path = Classes/SLManagedRemoteObject.h; sourceTree = "<group>"; };
 		59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLManagedRemoteObject.m; path = Classes/SLManagedRemoteObject.m; sourceTree = "<group>"; };
 		59627C8516F4E59A00E73178 /* SLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLUser.h; path = Classes/SLUser.h; sourceTree = "<group>"; };
@@ -132,6 +135,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		59556F2D17079A2700601A37 /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+				59556F2E17079B7F00601A37 /* SLMapping.h */,
+				59556F2F17079B7F00601A37 /* SLMapping.m */,
+			);
+			name = Mappings;
+			sourceTree = "<group>";
+		};
 		59559BAE16F4242F007A2E2A /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +271,7 @@
 		59CDF70016EC726000637007 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				59556F2D17079A2700601A37 /* Mappings */,
 				59FD7B5716F1801E00DE3D5C /* SLFSQCheckin.h */,
 				59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */,
 				59CDF70116EC726F00637007 /* SLRepository.h */,
@@ -409,6 +422,7 @@
 				59627C8716F4E59A00E73178 /* SLUser.m in Sources */,
 				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
 				591AED6916F977B900224B08 /* SLOrganization.m in Sources */,
+				59556F3017079B7F00601A37 /* SLMapping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

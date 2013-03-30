@@ -13,7 +13,7 @@
 @implementation SLManagedRemoteObject
 
 + (void)refresh {
-	[[SLAPIClient sharedClient] get:[self endPoint] onCompletion:^(BOOL success, id response) {
+	[[SLAPIClient sharedClient] get:[self remoteMapping].endPoint onCompletion:^(BOOL success, id response) {
 		if (success) {
 			NSLog(@"Fetched for: %@", NSStringFromClass([self class]));
 			[self updateWithRemoteResponse:response];
@@ -59,10 +59,11 @@
 
 + (void)updateWithRemoteResponse:(id)remoteResponse {
 	// if nested, let's access the branch
-	if ([self pathToObject]) {
-		remoteResponse = [remoteResponse valueForKeyPath:[self pathToObject]];
+	SLMapping *mapping = [self remoteMapping];
+	if (mapping.pathToObject) {
+		remoteResponse = [remoteResponse valueForKeyPath:mapping.pathToObject];
 	}
-	if ([self appearsAsCollection]) {
+	if (mapping.appearsAsCollection) {
 		if ([remoteResponse isKindOfClass:[NSArray class]]) {
 			for (NSDictionary *remoteInfo in remoteResponse) {
 				SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteInfo];
@@ -81,10 +82,10 @@
 }
 
 - (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo {
-	
-	NSDictionary *mapping = [self.class localToRemoteMappings];
-	for (NSString *localPropertyPath in [mapping allKeys]) {
-		NSString *remotePropery = mapping[localPropertyPath];
+	SLMapping *mapping = [self.class remoteMapping];
+	NSDictionary *mappingDictioanry = mapping.localToRemoteMapping;
+	for (NSString *localPropertyPath in [mappingDictioanry allKeys]) {
+		NSString *remotePropery = mappingDictioanry[localPropertyPath];
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
 		if (remoteValue) {
 			NSArray *localPropertyPathArray = [localPropertyPath componentsSeparatedByString:@"."];
@@ -140,11 +141,7 @@
 
 #pragma mark - For the subclass
 
-+ (NSString *)endPoint {
-	return nil;
-}
-
-+ (NSDictionary *)localToRemoteMappings {
++ (SLMapping *)remoteMapping {
 	return nil;
 }
 
@@ -153,14 +150,6 @@
 }
 
 + (NSArray *)sortDescriptors {
-	return nil;
-}
-
-+ (BOOL)appearsAsCollection {
-	return NO;
-}
-
-+ (NSString *)pathToObject {
 	return nil;
 }
 

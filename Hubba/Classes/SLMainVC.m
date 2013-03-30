@@ -37,7 +37,6 @@
 	if ([SLAPIClient sharedClient].authenticated) {
 		[SLMe refresh];
 		[SLRepository refresh];
-		[SLOrganization refresh];
 	}
 }
 

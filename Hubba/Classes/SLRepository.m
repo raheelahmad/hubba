@@ -17,33 +17,25 @@
 @dynamic remoteDescription;
 @dynamic owner;
 
-+ (NSString *)endPoint {
-	return @"/user/repos";
++ (SLMapping *)remoteMapping {
+	SLMapping *mapping = [[SLMapping alloc] init];
+	mapping.endPoint = @"/user/repos";
+	mapping.appearsAsCollection = YES;
+	mapping.localToRemoteMapping = @{
+			   @"remoteID"			: @"id",
+			   @"name"				: @"name",
+			   @"remoteDescription"	: @"description",
+			   @"owner"				: @"owner",
+		   };
+	return mapping;
 }
 
 + (NSArray *)sortDescriptors {
 	return @[ [NSSortDescriptor sortDescriptorWithKey:@"remoteID" ascending:YES] ];
 }
 
-+ (NSString *)pathToObject {
-	return nil;
-}
-
-+ (BOOL)appearsAsCollection {
-	return YES;
-}
-
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
 	return [NSPredicate predicateWithFormat:@"remoteID == %@", [remoteObject valueForKey:@"id"]];
-}
-
-+ (NSDictionary *)localToRemoteMappings {
-	return @{
-			   @"remoteID"			: @"id",
-			   @"name"				: @"name",
-			   @"remoteDescription"	: @"description",
-			   @"owner"				: @"owner",
-		   };
 }
 
 @end
