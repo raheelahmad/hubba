@@ -17,6 +17,7 @@
 		59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
+		59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59905A551707AB7C003ABB08 /* SLRelationMapping.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -71,6 +72,8 @@
 		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Classes/SLUser.m; sourceTree = "<group>"; };
 		59627C8D16F5828C00E73178 /* SLMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMe.h; path = Classes/SLMe.h; sourceTree = "<group>"; };
 		59627C8E16F5828C00E73178 /* SLMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMe.m; path = Classes/SLMe.m; sourceTree = "<group>"; };
+		59905A541707AB7C003ABB08 /* SLRelationMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRelationMapping.h; path = Classes/SLRelationMapping.h; sourceTree = "<group>"; };
+		59905A551707AB7C003ABB08 /* SLRelationMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRelationMapping.m; path = Classes/SLRelationMapping.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 			children = (
 				59556F2E17079B7F00601A37 /* SLMapping.h */,
 				59556F2F17079B7F00601A37 /* SLMapping.m */,
+				59905A541707AB7C003ABB08 /* SLRelationMapping.h */,
+				59905A551707AB7C003ABB08 /* SLRelationMapping.m */,
 			);
 			name = Mappings;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
 				591AED6916F977B900224B08 /* SLOrganization.m in Sources */,
 				59556F3017079B7F00601A37 /* SLMapping.m in Sources */,
+				59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
