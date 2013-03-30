@@ -14,6 +14,7 @@
 #import "SLRepository.h"
 #import "SLUser.h"
 #import "SLMe.h"
+#import "SLOrganization.h"
 
 @interface SLMainVC ()
 
@@ -36,6 +37,7 @@
 	if ([SLAPIClient sharedClient].authenticated) {
 		[SLMe refresh];
 		[SLRepository refresh];
+		[SLOrganization refresh];
 	}
 }
 
@@ -145,6 +147,13 @@
 }
 
 - (IBAction)logout:(id)sender {
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([SLMe class])];
+	NSArray *mes = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:fetchRequest error:nil];
+	SLMe *me = [mes lastObject];
+	SLUser *user = me.user;
+	NSLog(@"Me: %@", me);
+	NSLog(@"Me user: %@", user);
+	
 	[[SLCoreDataManager sharedManager] resetCoreDataStack];
 	[[SLAPIClient sharedClient] resetAuthentication];
 	[self updateUI];

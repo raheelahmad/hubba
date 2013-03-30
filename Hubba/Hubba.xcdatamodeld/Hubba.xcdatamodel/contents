@@ -15,6 +15,22 @@
         <attribute name="totalPrivateRepos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLUser" inverseName="me" inverseEntity="SLUser" syncable="YES"/>
     </entity>
+    <entity name="SLOrganization" representedClassName="SLOrganization" syncable="YES">
+        <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blog" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="htmlURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publicGists" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="publicRepos" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="SLRepository" representedClassName="SLRepository" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,8 +48,9 @@
     </entity>
     <elements>
         <element name="SLFSQCheckin" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="SLMe" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SLRepository" positionX="160" positionY="192" width="128" height="105"/>
         <element name="SLUser" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="SLMe" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="SLOrganization" positionX="160" positionY="192" width="128" height="255"/>
     </elements>
 </model>

@@ -41,7 +41,7 @@
 
 + (NSDictionary *)localToRemoteMappings {
 	return @{
-			   @"remoteID"		: @"remoteID",
+			   @"remoteID"		: @"id",
 			   @"name"			: @"name",
 			   @"login"			: @"login",
 			   @"company"		: @"company",

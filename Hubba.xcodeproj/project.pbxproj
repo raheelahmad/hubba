@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5918C2D216ED1BD30082CBCE /* SLCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */; };
+		591AED6916F977B900224B08 /* SLOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 591AED6816F977B900224B08 /* SLOrganization.m */; };
 		592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */; };
 		592905C216DBCA0B00B0B9FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592905C116DBCA0B00B0B9FE /* QuartzCore.framework */; };
 		5951D59816E423060018764B /* SLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5951D59716E423060018764B /* SLFetcher.m */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		5918C2D016ED1BD30082CBCE /* SLCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLCoreDataManager.h; path = Classes/SLCoreDataManager.h; sourceTree = "<group>"; };
 		5918C2D116ED1BD30082CBCE /* SLCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLCoreDataManager.m; path = Classes/SLCoreDataManager.m; sourceTree = "<group>"; };
+		591AED6716F977B900224B08 /* SLOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLOrganization.h; path = Classes/SLOrganization.h; sourceTree = "<group>"; };
+		591AED6816F977B900224B08 /* SLOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLOrganization.m; path = Classes/SLOrganization.m; sourceTree = "<group>"; };
 		592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLOAuthClientTests.h; sourceTree = "<group>"; };
 		592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientTests.m; sourceTree = "<group>"; };
 		592905C116DBCA0B00B0B9FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -264,6 +267,8 @@
 				59627C8616F4E59A00E73178 /* SLUser.m */,
 				59627C8D16F5828C00E73178 /* SLMe.h */,
 				59627C8E16F5828C00E73178 /* SLMe.m */,
+				591AED6716F977B900224B08 /* SLOrganization.h */,
+				591AED6816F977B900224B08 /* SLOrganization.m */,
 				59559BAE16F4242F007A2E2A /* Support */,
 			);
 			name = Models;
@@ -403,6 +408,7 @@
 				59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */,
 				59627C8716F4E59A00E73178 /* SLUser.m in Sources */,
 				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
+				591AED6916F977B900224B08 /* SLOrganization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
