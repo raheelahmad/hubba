@@ -14,9 +14,12 @@ void setupStackWithEntities(NSArray *entities) {
 	[[SLCoreDataManager sharedManager] setPersistentStoreCoordinator:nil];
 	[[SLCoreDataManager sharedManager] setManagedObjectModel:nil];
 	
-	NSManagedObjectModel *model = [[NSManagedObjectModel alloc] init];
+	NSManagedObjectModel *model;
 	if (entities.count > 0) {
+		model = [[NSManagedObjectModel alloc] init];
 		[model setEntities:entities];
+	} else {
+		model = [NSManagedObjectModel mergedModelFromBundles:nil];
 	}
 	
 	NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
