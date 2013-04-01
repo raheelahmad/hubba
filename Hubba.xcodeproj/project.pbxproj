@@ -19,9 +19,11 @@
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
 		59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59905A551707AB7C003ABB08 /* SLRelationMapping.m */; };
 		59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
-		59A62F111708E8020084C169 /* SLKiwiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F101708E8020084C169 /* SLKiwiTests.m */; };
-		59A62F141708E93F0084C169 /* SLOAuthClientTests2.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F131708E93F0084C169 /* SLOAuthClientTests2.m */; };
+		59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */; };
 		59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F161708ED620084C169 /* SLMappingSpec.m */; };
+		59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */; };
+		59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */; };
+		59A62F21170930230084C169 /* SLPropertyOnlyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -79,10 +81,13 @@
 		59627C8E16F5828C00E73178 /* SLMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMe.m; path = Classes/SLMe.m; sourceTree = "<group>"; };
 		59905A541707AB7C003ABB08 /* SLRelationMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRelationMapping.h; path = Classes/SLRelationMapping.h; sourceTree = "<group>"; };
 		59905A551707AB7C003ABB08 /* SLRelationMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRelationMapping.m; path = Classes/SLRelationMapping.m; sourceTree = "<group>"; };
-		59A62F101708E8020084C169 /* SLKiwiTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKiwiTests.m; sourceTree = "<group>"; };
-		59A62F121708E93F0084C169 /* SLOAuthClientTests2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLOAuthClientTests2.h; sourceTree = "<group>"; };
-		59A62F131708E93F0084C169 /* SLOAuthClientTests2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientTests2.m; sourceTree = "<group>"; };
+		59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientSpecs.m; sourceTree = "<group>"; };
 		59A62F161708ED620084C169 /* SLMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLMappingSpec.m; sourceTree = "<group>"; };
+		59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackSpecs.m; sourceTree = "<group>"; };
+		59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCoreDataStackTestsHelper.h; sourceTree = "<group>"; };
+		59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackTestsHelper.m; sourceTree = "<group>"; };
+		59A62F1F170930230084C169 /* SLPropertyOnlyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPropertyOnlyEntity.h; sourceTree = "<group>"; };
+		59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPropertyOnlyEntity.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -239,10 +244,11 @@
 				59ABA74A16DB51E300F711DB /* Supporting Files */,
 				592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */,
 				592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */,
-				59A62F101708E8020084C169 /* SLKiwiTests.m */,
-				59A62F121708E93F0084C169 /* SLOAuthClientTests2.h */,
-				59A62F131708E93F0084C169 /* SLOAuthClientTests2.m */,
+				59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */,
 				59A62F161708ED620084C169 /* SLMappingSpec.m */,
+				59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */,
+				59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */,
+				59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */,
 			);
 			path = HubbaTests;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 			children = (
 				59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */,
 				59ABA74C16DB51E300F711DB /* InfoPlist.strings */,
+				59A62F1F170930230084C169 /* SLPropertyOnlyEntity.h */,
+				59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -472,9 +480,11 @@
 				59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */,
 				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
 				5951D59916E423060018764B /* SLFetcher.m in Sources */,
-				59A62F111708E8020084C169 /* SLKiwiTests.m in Sources */,
-				59A62F141708E93F0084C169 /* SLOAuthClientTests2.m in Sources */,
+				59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */,
 				59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */,
+				59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */,
+				59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */,
+				59A62F21170930230084C169 /* SLPropertyOnlyEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
