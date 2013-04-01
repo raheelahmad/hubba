@@ -3,6 +3,7 @@
 #import "SLCoreDataManager.h"
 #import "SLPropertyOnlyEntity.h"
 #import "SLCoreDataStackTestsHelper.h"
+#import "SLUser.h"
 #import "Kiwi.h"
 
 // -----------------------------------
@@ -34,8 +35,8 @@ describe(@"Property mapping", ^{
 		existingObject.name = @"Raheel";
 		
 		SLManagedRemoteObject *foundObject = [SLPropertyOnlyEntity objectForRemoteInfo:@{ @"name" : @"Raheel" }];
-		[theValue(foundObject) shouldNotBeNil];
-		[[theValue([[foundObject valueForKey:@"name"] isEqualToString:@"Raheel"]) should] beTrue];
+		[foundObject shouldNotBeNil];
+		[[[foundObject valueForKey:@"name"] should] equal:@"Raheel"];
 	});
 	
 	describe(@"#updateWithRemoteInfo", ^{

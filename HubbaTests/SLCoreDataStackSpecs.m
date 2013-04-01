@@ -26,7 +26,7 @@ describe(@"Core Data stack", ^{
 		NSDictionary *entitiesByName = [[[SLCoreDataManager sharedManager] managedObjectModel] entitiesByName];
 		[[theValue(entitiesByName.count) should] equal:theValue(1)];
 		NSString *firstEntityName = [entitiesByName allKeys][0];
-		[[theValue([firstEntityName isEqualToString:@"DummyClass"]) should] beTrue];
+		[[firstEntityName  should] equal:@"DummyClass"];
 	});
 });
 

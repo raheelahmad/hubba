@@ -43,6 +43,7 @@
 		59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59ABA76516DB6D9100F711DB /* SLMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVC.m */; };
 		59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVC.xib */; };
+		59C39583170962700017998E /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF6FC16EBE40A00637007 /* SLAPIClient.m */; };
 		59CDF6FF16EBE83600637007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59CDF6FE16EBE83600637007 /* Security.framework */; };
 		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
@@ -477,6 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59C39583170962700017998E /* SLUser.m in Sources */,
 				59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */,
 				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
 				5951D59916E423060018764B /* SLFetcher.m in Sources */,
