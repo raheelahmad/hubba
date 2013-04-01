@@ -1,9 +1,9 @@
-#import "Kiwi.h"
 #import "SLMapping.h"
 #import "SLRelationMapping.h"
 #import "SLCoreDataManager.h"
 #import "SLPropertyOnlyEntity.h"
 #import "SLCoreDataStackTestsHelper.h"
+#import "Kiwi.h"
 
 // -----------------------------------
 

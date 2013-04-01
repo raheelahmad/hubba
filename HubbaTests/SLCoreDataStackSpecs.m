@@ -1,6 +1,6 @@
-#import "Kiwi.h"
 #import "SLCoreDataManager.h"
 #import "SLCoreDataStackTestsHelper.h"
+#import "Kiwi.h"
 
 SPEC_BEGIN(CoreDataStackSetup)
 
