@@ -10,4 +10,5 @@
 
 @interface SLPropertyOnlyEntity : SLManagedRemoteObject
 @property (strong) NSString *name;
+@property (strong) NSNumber *remoteID;
 @end

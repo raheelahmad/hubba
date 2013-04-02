@@ -10,20 +10,20 @@
 
 @implementation SLPropertyOnlyEntity
 @dynamic name;
+@dynamic remoteID;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.endPoint = @"/dummy";
 	mapping.pathToObject = nil;
 	mapping.appearsAsCollection = NO;
+	mapping.modelClass = self;
 	mapping.localToRemoteMapping = @{
-								     @"name" : @"name"
+								     @"name" : @"name",
+									 @"remoteID" : @"id"
 			 };
+	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 	return mapping;
-}
-
-+ (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
-	return [NSPredicate predicateWithFormat:@"name = %@", remoteObject[@"name"]];
 }
 
 @end

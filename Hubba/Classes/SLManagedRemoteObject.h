@@ -20,10 +20,6 @@
 #pragma mark - Remote
 
 + (void)refresh;
-+ (SLManagedRemoteObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
-+ (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject;
-+ (void)updateWithRemoteResponse:(id)remoteResponse;
-- (void)updateWithRemoteInfo:(NSDictionary *)remoteInfo;
 
 + (SLMapping *)remoteMapping;
 + (NSArray *)relationshipMappings;
