@@ -26,6 +26,7 @@
 		return [NSString stringWithFormat:@"/user/%@", [object valueForKey:@"remoteID"]];
 	};
 	mapping.appearsAsCollection = NO;
+	mapping.modelClass = self;
 	mapping.localToRemoteMapping = @{
 			   @"remoteID"		: @"id",
 			   @"name"			: @"name",

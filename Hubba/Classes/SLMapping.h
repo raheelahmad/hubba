@@ -22,7 +22,8 @@ extern NSString * const kRemoteUniquePropertyKey;
 @property (nonatomic, strong) NSString *pathToObject;
 @property (nonatomic) BOOL appearsAsCollection;
 
-//- (void)updateWithRemoteResponse:(id)remoteResponse;
+- (void)updateWithRemoteResponse:(id)remoteResponse;
+- (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo;
 - (SLManagedRemoteObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo;
 - (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObjectInfo;
 	

@@ -7,10 +7,10 @@
 
 // -----------------------------------
 
-NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSString *attributeClassName) {
+NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSAttributeType attributeType, NSString *attributeClassName) {
 	NSAttributeDescription *description = [[NSAttributeDescription alloc] init];
 	description.name = attributeName;
-	description.attributeType = NSStringAttributeType; description.attributeValueClassName = attributeClassName;
+	description.attributeType = attributeType; description.attributeValueClassName = attributeClassName;
 	return description;
 }
 
@@ -18,7 +18,7 @@ NSArray *buildEntities() {
 	NSEntityDescription *descriptionForDummyClass = [[NSEntityDescription alloc] init];
 	descriptionForDummyClass.name = NSStringFromClass([SLPropertyOnlyEntity class]);
 	descriptionForDummyClass.managedObjectClassName = NSStringFromClass([SLPropertyOnlyEntity class]);
-	descriptionForDummyClass.properties = @[ attributeDescriptionForName(@"name", @"NSString"),  attributeDescriptionForName(@"remoteID", @"NSNumber")  ];
+	descriptionForDummyClass.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString"),  attributeDescriptionForName(@"remoteID", NSInteger32AttributeType, @"NSNumber")  ];
 	
 	return @[ descriptionForDummyClass ];
 }
@@ -36,10 +36,29 @@ describe(@"Property mapping", ^{
 		[[predicate.rightExpression.constantValue should] equal:@(1234)];
 	});
 	
-	context(@"Remote update", ^{
+	describe(@"#updateWithRemoteInfo", ^{
+		__block NSArray *objects;
 		beforeEach(^{
-			NSArray *entities = buildEntities();
-			setupStackWithEntities(entities);
+			setupStackWithEntities(buildEntities());
+			[[SLPropertyOnlyEntity remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522) }];
+			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPropertyOnlyEntity.class)];
+			objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
+		});
+		
+		it(@"should yield a new managed object", ^{
+			[[theValue(objects.count) should] equal:theValue(1)];
+		});
+		
+		it(@"should have a new managed object with properties set", ^{
+			SLPropertyOnlyEntity *newDummy = objects[0];
+			[[newDummy.name should] equal:@"Someone really new"];
+			[[newDummy.remoteID should] equal:@(4522)];
+		});
+	});
+	
+	context(@"Remote update helpers", ^{
+		beforeEach(^{
+			setupStackWithEntities(buildEntities());
 			SLPropertyOnlyEntity *existingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPropertyOnlyEntity.class)
 																				 inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
 			existingObject.name = @"Raheel";
@@ -60,33 +79,13 @@ describe(@"Property mapping", ^{
 		});
 		
 		it(@"should give a new local object when given remote info for an object that doesn't exist locally", ^{
-			NSDictionary *remoteObjectInfo = @{ @"name" : @"Updated Raheel", @"id" : @(2333) };
+			NSDictionary *remoteObjectInfo = @{ @"name" : @"Someone New", @"id" : @(2333) };
 			SLManagedRemoteObject *newObject = [[SLPropertyOnlyEntity remoteMapping] objectForRemoteInfo:remoteObjectInfo];
 			[newObject shouldNotBeNil];
 			[[newObject valueForKey:@"name"] shouldBeNil];
 			[[[newObject valueForKey:@"remoteID"] should] equal:@(2333)]; // only the unique property should be set
 		});
 		
-		/**
-		describe(@"#updateWithRemoteInfo", ^{
-			__block NSFetchRequest *request;
-			__block NSArray *objects;
-			beforeEach(^{
-				[[SLPropertyOnlyEntity remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Raheel", @"id" : @"1234" }];
-				request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPropertyOnlyEntity.class)];
-				objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
-			});
-			
-			it(@"should yield a new managed object", ^{
-				[[theValue(objects.count) should] equal:theValue(1)];
-			});
-			
-			it(@"should have a new managed object with properties set", ^{
-				SLPropertyOnlyEntity *newDummy = objects[0];
-				[[theValue(newDummy.name) should] equal:theValue(@"Raheel")];
-			});
-		});
-		 **/
 	});
 });
 

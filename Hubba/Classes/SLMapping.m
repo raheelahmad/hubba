@@ -47,7 +47,6 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 	return [NSPredicate predicateWithFormat:@"%K == %@", localProperty, remoteValue];
 }
 
-/**
 - (void)updateWithRemoteResponse:(id)remoteResponse {
 	// if nested, let's access the branch
 	if (self.pathToObject) {
@@ -57,19 +56,77 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 		if ([remoteResponse isKindOfClass:[NSArray class]]) {
 			for (NSDictionary *remoteInfo in remoteResponse) {
 				SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteInfo];
-				[localObject updateWithRemoteInfo:remoteInfo];
+				[self updateObject:localObject withRemoteInfo:remoteInfo];
 			}
 		}
 	} else {
 		SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteResponse];
-		[localObject updateWithRemoteInfo:remoteResponse];
+		[self updateObject:localObject withRemoteInfo:remoteResponse];
 	}
 	
-	NSError *error;
+	NSError *error = nil;
 	if (![[[SLCoreDataManager sharedManager] managedObjectContext] save:&error]) {
-		NSLog(@"Error saving after updating %@ with remote response: %@", NSStringFromClass([self class]), error);
+		NSLog(@"Error saving after updating %@ with remote response: %@", NSStringFromClass(self.modelClass), error);
 	}
 }
- **/
+
+- (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {
+	SLMapping *mapping = [self.modelClass remoteMapping];
+	NSDictionary *mappingDictioanry = mapping.localToRemoteMapping;
+	for (NSString *localPropertyPath in [mappingDictioanry allKeys]) {
+		NSString *remotePropery = mappingDictioanry[localPropertyPath];
+		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
+		if (remoteValue) {
+			NSArray *localPropertyPathArray = [localPropertyPath componentsSeparatedByString:@"."];
+			SLManagedRemoteObject *receiver = object; // in the loop, the object on which to do valueForKey:
+			for (NSString *key in localPropertyPathArray) {
+				// this property's description in the model
+				id entityProperty = [self entityPropertyForPropertyName:key];
+				if ([entityProperty isKindOfClass:[NSRelationshipDescription class]]) {
+					// if the key is a relationship
+					NSRelationshipDescription *relationshipDescription = (NSRelationshipDescription *)entityProperty;
+					Class destinationClass = NSClassFromString(relationshipDescription.destinationEntity.managedObjectClassName);
+					if ([destinationClass isSubclassOfClass:[SLManagedRemoteObject class]]) {
+						// if this is a remote managed object, we can insert/update it
+						SLManagedRemoteObject *destinationObject = nil;
+						if ([localPropertyPathArray lastObject] == key) {
+							// if this is the last key, then since it maps to an object, we should expect
+							// that the remoteValue is a dictionary, and try to fetch and update it as we do in
+							// + updateWithRemoteInfo
+							destinationObject = [[destinationClass remoteMapping] objectForRemoteInfo:remoteValue];
+							[[destinationClass remoteMapping] updateObject:destinationObject withRemoteInfo:remoteValue];
+							
+							[receiver setValue:destinationObject forKeyPath:key];
+						} else {
+							// if an intermediate relation, then we just make sure that there is a placeholder
+							// relationship object whose values will be set in further runs of this loop
+							destinationObject = [receiver valueForKey:key];
+							if (!destinationObject) {
+								destinationObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(destinationClass)
+																				  inManagedObjectContext:receiver.managedObjectContext];
+								[receiver setValue:destinationObject forKey:key];
+							}
+						}
+						
+						receiver = destinationObject; // get ready for the next run of the loop
+					} else { // FUTURE: not bothering with the case when the relationship is to a non-managed object
+						
+					}
+				} else {
+					// key is a property
+					[receiver setValue:remoteValue forKeyPath:key];
+				}
+			}
+			
+		}
+	}
+}
+
+- (id)entityPropertyForPropertyName:(NSString *)propertyName {
+	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(self.modelClass) inManagedObjectContext:[SLCoreDataManager sharedManager].managedObjectContext];
+	NSDictionary *propertiesByName = [entityDescription propertiesByName];
+	return propertiesByName[propertyName];
+}
+
 
 @end
