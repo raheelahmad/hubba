@@ -1,7 +1,8 @@
 #import "SLMapping.h"
 #import "SLRelationMapping.h"
 #import "SLCoreDataManager.h"
-#import "SLPropertyOnlyEntity.h"
+#import "SLPerson.h"
+#import "SLCompany.h"
 #import "SLCoreDataStackTestsHelper.h"
 #import "Kiwi.h"
 
@@ -14,13 +15,52 @@ NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSA
 	return description;
 }
 
-NSArray *buildEntities() {
-	NSEntityDescription *descriptionForDummyClass = [[NSEntityDescription alloc] init];
-	descriptionForDummyClass.name = NSStringFromClass([SLPropertyOnlyEntity class]);
-	descriptionForDummyClass.managedObjectClassName = NSStringFromClass([SLPropertyOnlyEntity class]);
-	descriptionForDummyClass.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString"),  attributeDescriptionForName(@"remoteID", NSInteger32AttributeType, @"NSNumber")  ];
+void addRelationships(NSEntityDescription *source, NSEntityDescription *destination,
+														  NSString *forwardName, NSString *reverseName, BOOL toMany) {
+	NSRelationshipDescription *forwardDescription = [[NSRelationshipDescription alloc] init];
+	forwardDescription.destinationEntity = destination;
+	forwardDescription.name = forwardName;
+	NSRelationshipDescription *reverseDescription = [[NSRelationshipDescription alloc] init];
+	reverseDescription.destinationEntity = source;
+	reverseDescription.name = reverseName;
 	
-	return @[ descriptionForDummyClass ];
+	forwardDescription.inverseRelationship = reverseDescription;
+	reverseDescription.inverseRelationship = forwardDescription;
+	
+	NSArray *existingForwardRelationships = source.properties;
+	NSMutableArray *newForwardRelationships = [NSMutableArray arrayWithObject:forwardDescription];
+	[newForwardRelationships addObjectsFromArray:existingForwardRelationships];
+	source.properties = newForwardRelationships;
+	
+	NSArray *existingReverseRelationships = destination.properties;
+	NSMutableArray *newReverseRelationships = [NSMutableArray arrayWithObject:reverseDescription];
+	[newReverseRelationships addObjectsFromArray:existingReverseRelationships];
+	destination.properties = newReverseRelationships;
+	
+	// use the toMany BOOL
+	if (toMany) {
+		forwardDescription.maxCount = -1;
+	} else {
+		forwardDescription.maxCount = 1;
+	}
+}
+
+NSArray *buildEntities() {
+	NSEntityDescription *personEntity = [[NSEntityDescription alloc] init];
+	personEntity.name = NSStringFromClass([SLPerson class]);
+	personEntity.managedObjectClassName = NSStringFromClass([SLPerson class]);
+	personEntity.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString"),  attributeDescriptionForName(@"remoteID", NSInteger32AttributeType, @"NSNumber")  ];
+	
+	NSEntityDescription *companyEntity = [[NSEntityDescription alloc] init];
+	companyEntity.name = NSStringFromClass([SLCompany class]);
+	companyEntity.managedObjectClassName = NSStringFromClass([SLCompany class]);
+	companyEntity.properties = @[ attributeDescriptionForName(@"title", NSStringAttributeType, @"NSString"),
+							   attributeDescriptionForName(@"address", NSStringAttributeType, @"NSString"),
+							   attributeDescriptionForName(@"id", NSInteger32AttributeType, @"NSNumber")  ];
+	
+	addRelationships(companyEntity, personEntity, @"persons", @"company", YES);
+	
+	return @[ companyEntity, personEntity ];
 }
 
 
@@ -28,11 +68,25 @@ SPEC_BEGIN(MappingSpecs)
 
 describe(@"Property mapping", ^{
 	
+	it(@"should set up the entity relationships properly", ^{
+		setupStackWithEntities(buildEntities());
+		NSEntityDescription *company = [NSEntityDescription entityForName:@"SLCompany"
+					inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
+		NSEntityDescription *person = [NSEntityDescription entityForName:@"SLPerson"
+					inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
+		[company shouldNotBeNil];
+		[person shouldNotBeNil];
+		
+		NSArray *companyRelationships = [company.relationshipsByName allKeys];
+		[[companyRelationships should] contain:@"persons"];
+		NSArray *personRelationships = [person.relationshipsByName allKeys];
+		[[personRelationships should] contain:@"company"];
+	});
+	
 	it(@"should provide correct local predicate for given remote object info", ^{
 		NSDictionary *remoteObject = @{ @"id" : @(1234), @"name" : @"Salim" };
-		NSComparisonPredicate *predicate = (NSComparisonPredicate *) [[SLPropertyOnlyEntity remoteMapping] localPredicateForRemoteObject:remoteObject];
+		NSComparisonPredicate *predicate = (NSComparisonPredicate *) [[SLPerson remoteMapping] localPredicateForRemoteObject:remoteObject];
 		[[predicate.leftExpression.keyPath should] equal:@"remoteID"];
-		NSLog(@"predicate: %@", predicate.rightExpression.constantValue);
 		[[predicate.rightExpression.constantValue should] equal:@(1234)];
 	});
 	
@@ -40,8 +94,8 @@ describe(@"Property mapping", ^{
 		__block NSArray *objects;
 		beforeEach(^{
 			setupStackWithEntities(buildEntities());
-			[[SLPropertyOnlyEntity remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522) }];
-			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPropertyOnlyEntity.class)];
+			[[SLPerson remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522) }];
+			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPerson.class)];
 			objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
 		});
 		
@@ -50,7 +104,7 @@ describe(@"Property mapping", ^{
 		});
 		
 		it(@"should have a new managed object with properties set", ^{
-			SLPropertyOnlyEntity *newDummy = objects[0];
+			SLPerson *newDummy = objects[0];
 			[[newDummy.name should] equal:@"Someone really new"];
 			[[newDummy.remoteID should] equal:@(4522)];
 		});
@@ -59,12 +113,12 @@ describe(@"Property mapping", ^{
 	context(@"Remote update helpers", ^{
 		beforeEach(^{
 			setupStackWithEntities(buildEntities());
-			SLPropertyOnlyEntity *existingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPropertyOnlyEntity.class)
+			SLPerson *existingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPerson.class)
 																				 inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
 			existingObject.name = @"Raheel";
 			existingObject.remoteID = @(1234);
 			
-			SLPropertyOnlyEntity *anotherExistingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPropertyOnlyEntity.class)
+			SLPerson *anotherExistingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPerson.class)
 																				 inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
 			anotherExistingObject.name = @"Raheel";
 			anotherExistingObject.remoteID = @(5234);
@@ -73,14 +127,14 @@ describe(@"Property mapping", ^{
 		
 		it(@"should find the existing local object for given remote info", ^{
 			NSDictionary *remoteObjectInfo = @{ @"name" : @"Updated Raheel", @"id" : @(1234) };
-			SLManagedRemoteObject *foundObject = [[SLPropertyOnlyEntity remoteMapping] objectForRemoteInfo:remoteObjectInfo];
+			SLManagedRemoteObject *foundObject = [[SLPerson remoteMapping] objectForRemoteInfo:remoteObjectInfo];
 			[foundObject shouldNotBeNil];
 			[[[foundObject valueForKey:@"name"] should] equal:@"Raheel"]; // should be the local property value, as we haven't updated it here
 		});
 		
 		it(@"should give a new local object when given remote info for an object that doesn't exist locally", ^{
 			NSDictionary *remoteObjectInfo = @{ @"name" : @"Someone New", @"id" : @(2333) };
-			SLManagedRemoteObject *newObject = [[SLPropertyOnlyEntity remoteMapping] objectForRemoteInfo:remoteObjectInfo];
+			SLManagedRemoteObject *newObject = [[SLPerson remoteMapping] objectForRemoteInfo:remoteObjectInfo];
 			[newObject shouldNotBeNil];
 			[[newObject valueForKey:@"name"] shouldBeNil];
 			[[[newObject valueForKey:@"remoteID"] should] equal:@(2333)]; // only the unique property should be set

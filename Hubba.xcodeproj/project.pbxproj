@@ -23,7 +23,7 @@
 		59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F161708ED620084C169 /* SLMappingSpec.m */; };
 		59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */; };
 		59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */; };
-		59A62F21170930230084C169 /* SLPropertyOnlyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */; };
+		59A62F21170930230084C169 /* SLPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F20170930230084C169 /* SLPerson.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -44,6 +44,7 @@
 		59ABA76516DB6D9100F711DB /* SLMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVC.m */; };
 		59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVC.xib */; };
 		59C39583170962700017998E /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
+		59C395AC170D2E7E0017998E /* SLCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C395AB170D2E7E0017998E /* SLCompany.m */; };
 		59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF6FC16EBE40A00637007 /* SLAPIClient.m */; };
 		59CDF6FF16EBE83600637007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59CDF6FE16EBE83600637007 /* Security.framework */; };
 		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
@@ -87,8 +88,8 @@
 		59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackSpecs.m; sourceTree = "<group>"; };
 		59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCoreDataStackTestsHelper.h; sourceTree = "<group>"; };
 		59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackTestsHelper.m; sourceTree = "<group>"; };
-		59A62F1F170930230084C169 /* SLPropertyOnlyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPropertyOnlyEntity.h; sourceTree = "<group>"; };
-		59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPropertyOnlyEntity.m; sourceTree = "<group>"; };
+		59A62F1F170930230084C169 /* SLPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPerson.h; sourceTree = "<group>"; };
+		59A62F20170930230084C169 /* SLPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPerson.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -113,6 +114,8 @@
 		59ABA76216DB6D9100F711DB /* SLMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMainVC.h; path = Classes/SLMainVC.h; sourceTree = "<group>"; };
 		59ABA76316DB6D9100F711DB /* SLMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMainVC.m; path = Classes/SLMainVC.m; sourceTree = "<group>"; };
 		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SLMainVC.xib; sourceTree = "<group>"; };
+		59C395AA170D2E7E0017998E /* SLCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCompany.h; sourceTree = "<group>"; };
+		59C395AB170D2E7E0017998E /* SLCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCompany.m; sourceTree = "<group>"; };
 		59CDF6FB16EBE40A00637007 /* SLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLAPIClient.h; path = Classes/SLAPIClient.h; sourceTree = "<group>"; };
 		59CDF6FC16EBE40A00637007 /* SLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLAPIClient.m; path = Classes/SLAPIClient.m; sourceTree = "<group>"; };
 		59CDF6FE16EBE83600637007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -259,8 +262,10 @@
 			children = (
 				59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */,
 				59ABA74C16DB51E300F711DB /* InfoPlist.strings */,
-				59A62F1F170930230084C169 /* SLPropertyOnlyEntity.h */,
-				59A62F20170930230084C169 /* SLPropertyOnlyEntity.m */,
+				59A62F1F170930230084C169 /* SLPerson.h */,
+				59A62F20170930230084C169 /* SLPerson.m */,
+				59C395AA170D2E7E0017998E /* SLCompany.h */,
+				59C395AB170D2E7E0017998E /* SLCompany.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -486,7 +491,8 @@
 				59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */,
 				59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */,
 				59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */,
-				59A62F21170930230084C169 /* SLPropertyOnlyEntity.m in Sources */,
+				59A62F21170930230084C169 /* SLPerson.m in Sources */,
+				59C395AC170D2E7E0017998E /* SLCompany.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

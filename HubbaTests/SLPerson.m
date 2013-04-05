@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Sakun Labs. All rights reserved.
 //
 
-#import "SLPropertyOnlyEntity.h"
+#import "SLPerson.h"
 
-@implementation SLPropertyOnlyEntity
+@implementation SLPerson
 @dynamic name;
 @dynamic remoteID;
+@dynamic company;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];

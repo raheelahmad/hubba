@@ -8,7 +8,9 @@
 
 #import "SLManagedRemoteObject.h"
 
-@interface SLPropertyOnlyEntity : SLManagedRemoteObject
+@class SLCompany;
+@interface SLPerson : SLManagedRemoteObject
 @property (strong) NSString *name;
 @property (strong) NSNumber *remoteID;
+@property (strong) SLCompany *company;
 @end
