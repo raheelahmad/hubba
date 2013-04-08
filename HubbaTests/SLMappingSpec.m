@@ -8,44 +8,7 @@
 
 // -----------------------------------
 
-NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSAttributeType attributeType, NSString *attributeClassName) {
-	NSAttributeDescription *description = [[NSAttributeDescription alloc] init];
-	description.name = attributeName;
-	description.attributeType = attributeType; description.attributeValueClassName = attributeClassName;
-	return description;
-}
-
-void addRelationships(NSEntityDescription *source, NSEntityDescription *destination,
-														  NSString *forwardName, NSString *reverseName, BOOL toMany) {
-	NSRelationshipDescription *forwardDescription = [[NSRelationshipDescription alloc] init];
-	forwardDescription.destinationEntity = destination;
-	forwardDescription.name = forwardName;
-	NSRelationshipDescription *reverseDescription = [[NSRelationshipDescription alloc] init];
-	reverseDescription.destinationEntity = source;
-	reverseDescription.name = reverseName;
-	
-	forwardDescription.inverseRelationship = reverseDescription;
-	reverseDescription.inverseRelationship = forwardDescription;
-	
-	NSArray *existingForwardRelationships = source.properties;
-	NSMutableArray *newForwardRelationships = [NSMutableArray arrayWithObject:forwardDescription];
-	[newForwardRelationships addObjectsFromArray:existingForwardRelationships];
-	source.properties = newForwardRelationships;
-	
-	NSArray *existingReverseRelationships = destination.properties;
-	NSMutableArray *newReverseRelationships = [NSMutableArray arrayWithObject:reverseDescription];
-	[newReverseRelationships addObjectsFromArray:existingReverseRelationships];
-	destination.properties = newReverseRelationships;
-	
-	// use the toMany BOOL
-	if (toMany) {
-		forwardDescription.maxCount = -1;
-	} else {
-		forwardDescription.maxCount = 1;
-	}
-}
-
-NSArray *buildEntities() {
+static NSArray *buildEntities() {
 	NSEntityDescription *personEntity = [[NSEntityDescription alloc] init];
 	personEntity.name = NSStringFromClass([SLPerson class]);
 	personEntity.managedObjectClassName = NSStringFromClass([SLPerson class]);
@@ -68,21 +31,6 @@ SPEC_BEGIN(MappingSpecs)
 
 describe(@"Property mapping", ^{
 	
-	it(@"should set up the entity relationships properly", ^{
-		setupStackWithEntities(buildEntities());
-		NSEntityDescription *company = [NSEntityDescription entityForName:@"SLCompany"
-					inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
-		NSEntityDescription *person = [NSEntityDescription entityForName:@"SLPerson"
-					inManagedObjectContext:[[SLCoreDataManager sharedManager] managedObjectContext]];
-		[company shouldNotBeNil];
-		[person shouldNotBeNil];
-		
-		NSArray *companyRelationships = [company.relationshipsByName allKeys];
-		[[companyRelationships should] contain:@"persons"];
-		NSArray *personRelationships = [person.relationshipsByName allKeys];
-		[[personRelationships should] contain:@"company"];
-	});
-	
 	it(@"should provide correct local predicate for given remote object info", ^{
 		NSDictionary *remoteObject = @{ @"id" : @(1234), @"name" : @"Salim" };
 		NSComparisonPredicate *predicate = (NSComparisonPredicate *) [[SLPerson remoteMapping] localPredicateForRemoteObject:remoteObject];
@@ -104,13 +52,13 @@ describe(@"Property mapping", ^{
 		});
 		
 		it(@"should have a new managed object with properties set", ^{
-			SLPerson *newDummy = objects[0];
-			[[newDummy.name should] equal:@"Someone really new"];
-			[[newDummy.remoteID should] equal:@(4522)];
+			SLPerson *newPerson = objects[0];
+			[[newPerson.name should] equal:@"Someone really new"];
+			[[newPerson.remoteID should] equal:@(4522)];
 		});
 	});
 	
-	context(@"Remote update helpers", ^{
+	context(@"#objectForRemoteInfo", ^{
 		beforeEach(^{
 			setupStackWithEntities(buildEntities());
 			SLPerson *existingObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(SLPerson.class)
