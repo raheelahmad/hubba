@@ -43,6 +43,7 @@
 		  @"planCollaborators"				: @"plan.collaborators",
 	  }];
 	mapping.localToRemoteMapping = mappings;
+	mapping.modelClass = self;
 	
 	return mapping;
 }

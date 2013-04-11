@@ -21,6 +21,7 @@
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.endPoint = @"/user/repos";
 	mapping.appearsAsCollection = YES;
+	mapping.modelClass = self;
 	mapping.localToRemoteMapping = @{
 			   @"remoteID"			: @"id",
 			   @"name"				: @"name",

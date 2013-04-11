@@ -53,14 +53,6 @@
 	STAssertNotNil(clientId, @"Client id should not be nil");
 }
 
-- (void)testSingleton {
-	SLOAuth2Client *client = [SLOAuth2Client sharedClient];
-	STAssertNotNil(client, @"Client should not be nil");
-	
-	SLOAuth2Client *anotherClient = [SLOAuth2Client sharedClient];
-	STAssertTrue(client == anotherClient, @"Multiple singleton calls should return the same object");
-}
-
 #pragma mark - Helpers
 
 - (NSURLRequest *)requestForTokenWithCode:(NSString *)code {

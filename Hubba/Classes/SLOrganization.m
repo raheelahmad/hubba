@@ -25,28 +25,17 @@
 @dynamic publicGists;
 @dynamic createdAt;
 
-+ (NSString *)endPoint {
-	return @"/user/orgs";
-}
-
 + (NSArray *)sortDescriptors {
 	return @[ [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES] ];
-}
-
-+ (NSString *)pathToObject {
-	return nil;
-}
-
-+ (BOOL)appearsAsCollection {
-	return YES;
 }
 
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
 	return [NSPredicate predicateWithFormat:@"id == %@", [remoteObject valueForKey:@"id"]];
 }
 
-+ (NSDictionary *)localToRemoteMappings {
-	return @{
++ (SLMapping *)remoteMapping {
+	SLMapping *mapping = [[SLMapping alloc] init];
+	mapping.localToRemoteMapping = @{
 			   @"id"			: @"id",
 			   @"name"			: @"name",
 			   @"login"			: @"login",
@@ -60,5 +49,7 @@
 			   @"publicGists"	: @"public_gists",
 			   @"createdat"		: @"created_at",
 	  };
+	
+	return mapping;
 }
 @end
