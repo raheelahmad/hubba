@@ -7,7 +7,7 @@
 //
 
 #import "SLUser.h"
-
+#import "SLOrganization.h"
 
 @implementation SLUser
 
@@ -18,6 +18,7 @@
 @dynamic email;
 @dynamic ownedRepositories;
 @dynamic me;
+@dynamic organizations;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
@@ -25,6 +26,7 @@
 		return [NSString stringWithFormat:@"/user/%@", [object valueForKey:@"remoteID"]];
 	};
 	mapping.appearsAsCollection = NO;
+	mapping.modelClass = self;
 	mapping.localToRemoteMapping = @{
 			   @"remoteID"		: @"id",
 			   @"name"			: @"name",
@@ -34,6 +36,15 @@
 	  };
 	
 	return mapping;
+}
+
++ (NSArray *)relationshipMappings {
+	SLRelationMapping *organizationMapping = [[SLRelationMapping alloc] init];
+	organizationMapping.endPoint = @"/user/orgs";
+	organizationMapping.appearsAsCollection = YES;
+	organizationMapping.localToRemoteMapping = [[SLOrganization remoteMapping] localToRemoteMapping];
+	
+	return @[ organizationMapping ];
 }
 
 + (NSArray *)sortDescriptors {

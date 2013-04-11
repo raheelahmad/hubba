@@ -17,6 +17,13 @@
 		59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
+		59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59905A551707AB7C003ABB08 /* SLRelationMapping.m */; };
+		59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
+		59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */; };
+		59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F161708ED620084C169 /* SLMappingSpec.m */; };
+		59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */; };
+		59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */; };
+		59A62F21170930230084C169 /* SLPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F20170930230084C169 /* SLPerson.m */; };
 		59ABA72016DB51E300F711DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA71F16DB51E300F711DB /* UIKit.framework */; };
 		59ABA72216DB51E300F711DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72116DB51E300F711DB /* Foundation.framework */; };
 		59ABA72416DB51E300F711DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59ABA72316DB51E300F711DB /* CoreGraphics.framework */; };
@@ -36,11 +43,14 @@
 		59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59ABA76516DB6D9100F711DB /* SLMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVC.m */; };
 		59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVC.xib */; };
+		59C39583170962700017998E /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
+		59C395AC170D2E7E0017998E /* SLCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C395AB170D2E7E0017998E /* SLCompany.m */; };
 		59CDF6FD16EBE40A00637007 /* SLAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF6FC16EBE40A00637007 /* SLAPIClient.m */; };
 		59CDF6FF16EBE83600637007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59CDF6FE16EBE83600637007 /* Security.framework */; };
 		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
 		59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */; };
+		76ABFB5B3E5141EBAE57DD74 /* libPods-HubbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0BAD1ED6345B1973DFDCE /* libPods-HubbaTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +81,15 @@
 		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Classes/SLUser.m; sourceTree = "<group>"; };
 		59627C8D16F5828C00E73178 /* SLMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMe.h; path = Classes/SLMe.h; sourceTree = "<group>"; };
 		59627C8E16F5828C00E73178 /* SLMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMe.m; path = Classes/SLMe.m; sourceTree = "<group>"; };
+		59905A541707AB7C003ABB08 /* SLRelationMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRelationMapping.h; path = Classes/SLRelationMapping.h; sourceTree = "<group>"; };
+		59905A551707AB7C003ABB08 /* SLRelationMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRelationMapping.m; path = Classes/SLRelationMapping.m; sourceTree = "<group>"; };
+		59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientSpecs.m; sourceTree = "<group>"; };
+		59A62F161708ED620084C169 /* SLMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLMappingSpec.m; sourceTree = "<group>"; };
+		59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackSpecs.m; sourceTree = "<group>"; };
+		59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCoreDataStackTestsHelper.h; sourceTree = "<group>"; };
+		59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackTestsHelper.m; sourceTree = "<group>"; };
+		59A62F1F170930230084C169 /* SLPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPerson.h; sourceTree = "<group>"; };
+		59A62F20170930230084C169 /* SLPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPerson.m; sourceTree = "<group>"; };
 		59ABA71C16DB51E300F711DB /* Hubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59ABA71F16DB51E300F711DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59ABA72116DB51E300F711DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +114,8 @@
 		59ABA76216DB6D9100F711DB /* SLMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMainVC.h; path = Classes/SLMainVC.h; sourceTree = "<group>"; };
 		59ABA76316DB6D9100F711DB /* SLMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMainVC.m; path = Classes/SLMainVC.m; sourceTree = "<group>"; };
 		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SLMainVC.xib; sourceTree = "<group>"; };
+		59C395AA170D2E7E0017998E /* SLCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCompany.h; sourceTree = "<group>"; };
+		59C395AB170D2E7E0017998E /* SLCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCompany.m; sourceTree = "<group>"; };
 		59CDF6FB16EBE40A00637007 /* SLAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLAPIClient.h; path = Classes/SLAPIClient.h; sourceTree = "<group>"; };
 		59CDF6FC16EBE40A00637007 /* SLAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLAPIClient.m; path = Classes/SLAPIClient.m; sourceTree = "<group>"; };
 		59CDF6FE16EBE83600637007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -105,6 +126,8 @@
 		59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteFetchable.h; path = Classes/SLRemoteFetchable.h; sourceTree = "<group>"; };
 		59FD7B5716F1801E00DE3D5C /* SLFSQCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSQCheckin.h; sourceTree = "<group>"; };
 		59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSQCheckin.m; sourceTree = "<group>"; };
+		68A0BAD1ED6345B1973DFDCE /* libPods-HubbaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HubbaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE187105199647BBA7472419 /* Pods-HubbaTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HubbaTests.xcconfig"; path = "Pods/Pods-HubbaTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +152,7 @@
 				59ABA74416DB51E300F711DB /* UIKit.framework in Frameworks */,
 				59ABA74516DB51E300F711DB /* Foundation.framework in Frameworks */,
 				59ABA74616DB51E300F711DB /* CoreData.framework in Frameworks */,
+				76ABFB5B3E5141EBAE57DD74 /* libPods-HubbaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +164,8 @@
 			children = (
 				59556F2E17079B7F00601A37 /* SLMapping.h */,
 				59556F2F17079B7F00601A37 /* SLMapping.m */,
+				59905A541707AB7C003ABB08 /* SLRelationMapping.h */,
+				59905A551707AB7C003ABB08 /* SLRelationMapping.m */,
 			);
 			name = Mappings;
 			sourceTree = "<group>";
@@ -166,6 +192,7 @@
 				59F3FA5216E9282D00566C09 /* Vendor */,
 				59ABA71E16DB51E300F711DB /* Frameworks */,
 				59ABA71D16DB51E300F711DB /* Products */,
+				EE187105199647BBA7472419 /* Pods-HubbaTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +214,7 @@
 				59ABA72316DB51E300F711DB /* CoreGraphics.framework */,
 				59ABA72516DB51E300F711DB /* CoreData.framework */,
 				59ABA74216DB51E300F711DB /* SenTestingKit.framework */,
+				68A0BAD1ED6345B1973DFDCE /* libPods-HubbaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,6 +248,11 @@
 				59ABA74A16DB51E300F711DB /* Supporting Files */,
 				592905BE16DB70C700B0B9FE /* SLOAuthClientTests.h */,
 				592905BF16DB70C700B0B9FE /* SLOAuthClientTests.m */,
+				59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */,
+				59A62F161708ED620084C169 /* SLMappingSpec.m */,
+				59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */,
+				59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */,
+				59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */,
 			);
 			path = HubbaTests;
 			sourceTree = "<group>";
@@ -229,6 +262,10 @@
 			children = (
 				59ABA74B16DB51E300F711DB /* HubbaTests-Info.plist */,
 				59ABA74C16DB51E300F711DB /* InfoPlist.strings */,
+				59A62F1F170930230084C169 /* SLPerson.h */,
+				59A62F20170930230084C169 /* SLPerson.m */,
+				59C395AA170D2E7E0017998E /* SLCompany.h */,
+				59C395AB170D2E7E0017998E /* SLCompany.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -324,6 +361,7 @@
 				59ABA73D16DB51E300F711DB /* Frameworks */,
 				59ABA73E16DB51E300F711DB /* Resources */,
 				59ABA73F16DB51E300F711DB /* ShellScript */,
+				525E85D5358C4586AEFEA7A2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -387,6 +425,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		525E85D5358C4586AEFEA7A2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-HubbaTests-resources.sh\"\n";
+		};
 		59ABA73F16DB51E300F711DB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +475,7 @@
 				59627C8F16F5828C00E73178 /* SLMe.m in Sources */,
 				591AED6916F977B900224B08 /* SLOrganization.m in Sources */,
 				59556F3017079B7F00601A37 /* SLMapping.m in Sources */,
+				59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,8 +483,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59C39583170962700017998E /* SLUser.m in Sources */,
+				59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */,
 				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
 				5951D59916E423060018764B /* SLFetcher.m in Sources */,
+				59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */,
+				59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */,
+				59A62F1B170909A70084C169 /* SLCoreDataStackSpecs.m in Sources */,
+				59A62F1E17092DE40084C169 /* SLCoreDataStackTestsHelper.m in Sources */,
+				59A62F21170930230084C169 /* SLPerson.m in Sources */,
+				59C395AC170D2E7E0017998E /* SLCompany.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,11 +615,13 @@
 		};
 		59ABA75816DB51E300F711DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE187105199647BBA7472419 /* Pods-HubbaTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hubba.app/Hubba";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";
@@ -571,11 +634,13 @@
 		};
 		59ABA75916DB51E300F711DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE187105199647BBA7472419 /* Pods-HubbaTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hubba.app/Hubba";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hubba/Hubba-Prefix.pch";

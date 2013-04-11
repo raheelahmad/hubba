@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * company;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSSet *ownedRepositories;
+@property (nonatomic, retain) NSSet *organizations;
 @property (nonatomic, strong) SLMe *me;
 
 @end
