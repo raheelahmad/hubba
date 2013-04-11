@@ -61,7 +61,7 @@ describe(@"Core Data stack", ^{
 				[personEntity.relationshipsByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 					if ([key isEqualToString:@"company"]) {
 						NSRelationshipDescription *companyRelationship = (NSRelationshipDescription *)obj;
-						[[theValue(companyRelationship.maxCount) should] equal:@(1)];
+						[[theValue(companyRelationship.maxCount) shouldNot] equal:@(1)];
 					}
 				}];
 			} else if ([key isEqualToString:@"SLCompany"]) {

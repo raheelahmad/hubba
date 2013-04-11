@@ -70,32 +70,33 @@ NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSA
 
 void addRelationships(NSEntityDescription *source, NSEntityDescription *destination,
 														  NSString *forwardName, NSString *reverseName, BOOL toMany) {
-	NSRelationshipDescription *forwardDescription = [[NSRelationshipDescription alloc] init];
-	forwardDescription.destinationEntity = destination;
-	forwardDescription.name = forwardName;
-	NSRelationshipDescription *reverseDescription = [[NSRelationshipDescription alloc] init];
-	reverseDescription.destinationEntity = source;
-	reverseDescription.name = reverseName;
+	NSRelationshipDescription *forwardRelationship = [[NSRelationshipDescription alloc] init];
+	forwardRelationship.destinationEntity = destination;
+	forwardRelationship.name = forwardName;
+	NSRelationshipDescription *reverseRelationship = [[NSRelationshipDescription alloc] init];
+	reverseRelationship.destinationEntity = source;
+	reverseRelationship.name = reverseName;
 	
-	forwardDescription.inverseRelationship = reverseDescription;
-	reverseDescription.inverseRelationship = forwardDescription;
+	forwardRelationship.inverseRelationship = reverseRelationship;
+	reverseRelationship.inverseRelationship = forwardRelationship;
 	
 	NSArray *existingForwardRelationships = source.properties;
-	NSMutableArray *newForwardRelationships = [NSMutableArray arrayWithObject:forwardDescription];
+	NSMutableArray *newForwardRelationships = [NSMutableArray arrayWithObject:forwardRelationship];
 	[newForwardRelationships addObjectsFromArray:existingForwardRelationships];
 	source.properties = newForwardRelationships;
 	
 	NSArray *existingReverseRelationships = destination.properties;
-	NSMutableArray *newReverseRelationships = [NSMutableArray arrayWithObject:reverseDescription];
+	NSMutableArray *newReverseRelationships = [NSMutableArray arrayWithObject:reverseRelationship];
 	[newReverseRelationships addObjectsFromArray:existingReverseRelationships];
 	destination.properties = newReverseRelationships;
 	
 	// use the toMany BOOL
 	if (toMany) {
-		forwardDescription.maxCount = -1;
+		forwardRelationship.maxCount = 0;
+		reverseRelationship.maxCount = 0;
 	} else {
-		forwardDescription.maxCount = 1;
+		forwardRelationship.maxCount = 1;
+		reverseRelationship.maxCount = 1;
 	}
-	reverseDescription.maxCount = 1;
 }
 
