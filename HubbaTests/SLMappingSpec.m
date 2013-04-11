@@ -38,11 +38,17 @@ describe(@"Property mapping", ^{
 		[[predicate.rightExpression.constantValue should] equal:@(1234)];
 	});
 	
-	describe(@"#updateWithRemoteInfo", ^{
+	describe(@"#updateWithRemoteInfo for attributes", ^{
 		__block NSArray *objects;
 		beforeEach(^{
 			setupStackWithEntities(buildEntities());
-			[[SLPerson remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522) }];
+			[[SLPerson remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522),
+																 @"company" : @{
+																	 @"title" : @"Fitbit Inc.",
+																	 @"address" : @"150 Spear St.",
+																	 @"id" : @(333)
+																 },
+			 }];
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPerson.class)];
 			objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
 		});
@@ -55,6 +61,22 @@ describe(@"Property mapping", ^{
 			SLPerson *newPerson = objects[0];
 			[[newPerson.name should] equal:@"Someone really new"];
 			[[newPerson.remoteID should] equal:@(4522)];
+		});
+		
+		it(@"should update relationships", ^{
+			SLPerson *newPerson = objects[0];
+			NSLog(@"99999999999999999999999999 Company: %@", newPerson.company);
+			id company = newPerson.company;
+			[company shouldNotBeNil];
+//			[[company.title should] equal:@"Fitbit Inc."];
+//			[[company.address should] equal:@"150 Spear St."];
+//			[[company.id should] equal:@(333)];
+		});
+		
+		it(@"should handle mocks properly", ^{
+			[SLPerson stub:@selector(remoteMapping) andReturn:@(22)];
+//			NSLog(@"00000000000000000 %@", [personMock remoteMapping]);
+			[[[SLPerson remoteMapping] should] equal:@(22)];
 		});
 	});
 	

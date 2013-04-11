@@ -10,6 +10,6 @@
 
 @interface SLRelationMapping : SLMapping
 
-@property (nonatomic, strong) NSString *localRelationKeypath; // the relationship in Core Data associated with this mapping
+@property (nonatomic, assign) BOOL useDestinationClassRemoteMapping;
 
 @end

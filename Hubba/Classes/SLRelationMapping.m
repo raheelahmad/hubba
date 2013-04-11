@@ -10,4 +10,14 @@
 
 @implementation SLRelationMapping
 
+#pragma mark - Initialization
+
+- (id)init {
+	self = [super init];
+	if (self) {
+		self.useDestinationClassRemoteMapping = YES;
+	}
+	return self;
+}
+
 @end

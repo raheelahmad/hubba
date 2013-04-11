@@ -22,6 +22,5 @@
 + (void)refresh;
 
 + (SLMapping *)remoteMapping;
-+ (NSArray *)relationshipMappings;
 
 @end

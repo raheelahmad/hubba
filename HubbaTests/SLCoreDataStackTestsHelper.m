@@ -96,5 +96,6 @@ void addRelationships(NSEntityDescription *source, NSEntityDescription *destinat
 	} else {
 		forwardDescription.maxCount = 1;
 	}
+	reverseDescription.maxCount = 1;
 }
 
