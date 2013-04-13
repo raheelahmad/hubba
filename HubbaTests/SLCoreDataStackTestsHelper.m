@@ -92,8 +92,8 @@ void addRelationships(NSEntityDescription *source, NSEntityDescription *destinat
 	
 	// use the toMany BOOL
 	if (toMany) {
-		forwardRelationship.maxCount = 0;
-		reverseRelationship.maxCount = 0;
+		forwardRelationship.maxCount = -1;
+		reverseRelationship.maxCount = 1;
 	} else {
 		forwardRelationship.maxCount = 1;
 		reverseRelationship.maxCount = 1;

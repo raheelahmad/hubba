@@ -13,4 +13,22 @@
 @dynamic address;
 @dynamic id;
 @dynamic persons;
+@dynamic departments;
+
++ (SLMapping *)remoteMapping {
+	SLMapping *mapping = [[SLMapping alloc] init];
+	mapping.endPoint = @"/dummy";
+	mapping.pathToObject = nil;
+	mapping.appearsAsCollection = NO;
+	mapping.modelClass = self;
+	mapping.localToRemoteMapping = @{
+								     @"title" : @"title",
+									 @"id" : @"id",
+									 @"address" : @"address",
+									 @"departments" : @"departments"
+									};
+	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"id", kRemoteUniquePropertyKey : @"id" };
+	return mapping;
+}
+
 @end

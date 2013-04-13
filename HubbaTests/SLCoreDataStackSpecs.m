@@ -58,12 +58,6 @@ describe(@"Core Data stack", ^{
 				[[[personEntity.attributesByName allKeys] should] contain:@"remoteID"];
 				// relationships
 				[[[personEntity.relationshipsByName allKeys] should] contain:@"company"];
-				[personEntity.relationshipsByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-					if ([key isEqualToString:@"company"]) {
-						NSRelationshipDescription *companyRelationship = (NSRelationshipDescription *)obj;
-						[[theValue(companyRelationship.maxCount) shouldNot] equal:@(1)];
-					}
-				}];
 			} else if ([key isEqualToString:@"SLCompany"]) {
 				NSEntityDescription *companyEntity = (NSEntityDescription *)obj;
 				// attributes
