@@ -3,6 +3,7 @@
 #import "SLCoreDataManager.h"
 #import "SLPerson.h"
 #import "SLCompany.h"
+#import "SLDepartment.h"
 #import "SLCoreDataStackTestsHelper.h"
 #import "Kiwi.h"
 
@@ -21,9 +22,15 @@ static NSArray *buildEntities() {
 							   attributeDescriptionForName(@"address", NSStringAttributeType, @"NSString"),
 							   attributeDescriptionForName(@"id", NSInteger32AttributeType, @"NSNumber")  ];
 	
-	addRelationships(companyEntity, personEntity, @"persons", @"company", YES);
+	NSEntityDescription *departmentEntity = [[NSEntityDescription alloc] init];
+	departmentEntity.name = NSStringFromClass([SLDepartment class]);
+	departmentEntity.managedObjectClassName = NSStringFromClass([SLDepartment class]);
+	departmentEntity.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString") ];
 	
-	return @[ companyEntity, personEntity ];
+	addRelationships(companyEntity, personEntity, @"persons", @"company", YES);
+	addRelationships(companyEntity, departmentEntity, @"departments", @"company", YES);
+	
+	return @[ companyEntity, personEntity, departmentEntity ];
 }
 
 
@@ -46,8 +53,12 @@ describe(@"Property mapping", ^{
 																 @"company" : @{
 																	 @"title" : @"Fitbit Inc.",
 																	 @"address" : @"150 Spear St.",
-																	 @"id" : @(333)
-																 },
+																	 @"id" : @(333),
+																	 @"departments" : @[
+																	 @{ @"name" : @"Development" },
+																	 @{ @"name" : @"Design" },
+																	]
+																 }
 			 }];
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPerson.class)];
 			objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
@@ -63,19 +74,24 @@ describe(@"Property mapping", ^{
 			[[newPerson.remoteID should] equal:@(4522)];
 		});
 		
-		it(@"should update relationships", ^{
+		it(@"should update a to-one relationship", ^{
 			SLPerson *newPerson = objects[0];
-			NSLog(@"99999999999999999999999999 Company: %@", newPerson.company);
-			id company = newPerson.company;
+			SLCompany *company = newPerson.company;
 			[company shouldNotBeNil];
-//			[[company.title should] equal:@"Fitbit Inc."];
-//			[[company.address should] equal:@"150 Spear St."];
-//			[[company.id should] equal:@(333)];
+			[[company.title should] equal:@"Fitbit Inc."];
+			[[company.address should] equal:@"150 Spear St."];
+			[[company.id should] equal:@(333)];
+		});
+		
+		it(@"should update a to-many relationship", ^{
+			SLPerson *newPerson = objects[0];
+			SLCompany *company = newPerson.company;
+			NSSet *departments = company.departments;
+			[[theValue(departments.count) should] equal:theValue(2)];
 		});
 		
 		it(@"should handle mocks properly", ^{
 			[SLPerson stub:@selector(remoteMapping) andReturn:@(22)];
-//			NSLog(@"00000000000000000 %@", [personMock remoteMapping]);
 			[[[SLPerson remoteMapping] should] equal:@(22)];
 		});
 	});

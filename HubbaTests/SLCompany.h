@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, strong) NSSet *persons;
+@property (nonatomic, strong) NSSet *departments;
+
 @end
