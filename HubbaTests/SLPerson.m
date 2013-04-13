@@ -21,7 +21,8 @@
 	mapping.modelClass = self;
 	mapping.localToRemoteMapping = @{
 								     @"name" : @"name",
-									 @"remoteID" : @"id"
+									 @"remoteID" : @"id",
+									 @"company" : @"company",
 			 };
 	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 	return mapping;

@@ -88,27 +88,47 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 					Class destinationClass = NSClassFromString(relationshipDescription.destinationEntity.managedObjectClassName);
 					if ([destinationClass isSubclassOfClass:[SLManagedRemoteObject class]]) {
 						// if this is a remote managed object, we can insert/update it
-						SLManagedRemoteObject *destinationObject = nil;
-						if ([localPropertyPathArray lastObject] == key) {
-							// if this is the last key, then since it maps to an object, we should expect
-							// that the remoteValue is a dictionary, and try to fetch and update it as we do in
-							// + updateWithRemoteInfo
-							destinationObject = [[destinationClass remoteMapping] objectForRemoteInfo:remoteValue];
-							[[destinationClass remoteMapping] updateObject:destinationObject withRemoteInfo:remoteValue];
-							
-							[receiver setValue:destinationObject forKeyPath:key];
-						} else {
-							// if an intermediate relation, then we just make sure that there is a placeholder
-							// relationship object whose values will be set in further runs of this loop
-							destinationObject = [receiver valueForKey:key];
-							if (!destinationObject) {
-								destinationObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(destinationClass)
-																				  inManagedObjectContext:receiver.managedObjectContext];
-								[receiver setValue:destinationObject forKey:key];
+						if (relationshipDescription.isToMany) {
+							// then we should be dealing with an array of remote obejcts
+							NSArray *remoteObjects = nil;
+							if ([remoteValue isKindOfClass:[NSArray class]]) {
+								// making sure it *is* an array
+								remoteObjects = remoteValue;
+							} else {
+								// we are pretending that remoteValue in this case is a dictionary for a single object
+								remoteObjects = @[ remoteValue ];
 							}
+							NSMutableArray *allObjects = [NSMutableArray arrayWithCapacity:remoteObjects.count];
+							for (id aRemoteObject in remoteObjects) {
+								id localObject = [[destinationClass remoteMapping] objectForRemoteInfo:aRemoteObject];
+								[[destinationClass remoteMapping] updateObject:localObject withRemoteInfo:aRemoteObject];
+								[allObjects addObject:localObject];
+							}
+							NSSet *relationshipObjects = [NSSet setWithArray:allObjects];
+							[receiver setValue:relationshipObjects forKey:key];
+						} else {
+							SLManagedRemoteObject *destinationObject = nil;
+							if ([localPropertyPathArray lastObject] == key) {
+								// if this is the last key, then since it maps to an object, we should expect
+								// that the remoteValue is a dictionary, and try to fetch and update it as we do in
+								// + updateWithRemoteInfo
+								destinationObject = [[destinationClass remoteMapping] objectForRemoteInfo:remoteValue];
+								[[destinationClass remoteMapping] updateObject:destinationObject withRemoteInfo:remoteValue];
+								
+								[receiver setValue:destinationObject forKeyPath:key];
+							} else {
+								// if an intermediate relation, then we just make sure that there is a placeholder
+								// relationship object whose values will be set in further runs of this loop
+								destinationObject = [receiver valueForKey:key];
+								if (!destinationObject) {
+									destinationObject = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(destinationClass)
+																					  inManagedObjectContext:receiver.managedObjectContext];
+									[receiver setValue:destinationObject forKey:key];
+								}
+							}
+							
+							receiver = destinationObject; // get ready for the next run of the loop
 						}
-						
-						receiver = destinationObject; // get ready for the next run of the loop
 					} else { // FUTURE: not bothering with the case when the relationship is to a non-managed object
 						
 					}
