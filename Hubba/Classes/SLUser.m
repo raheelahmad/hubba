@@ -27,7 +27,7 @@
 	};
 	mapping.appearsAsCollection = NO;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 			   @"remoteID"		: @"id",
 			   @"name"			: @"name",
 			   @"login"			: @"login",
@@ -42,7 +42,7 @@
 	SLRelationMapping *organizationMapping = [[SLRelationMapping alloc] init];
 	organizationMapping.endPoint = @"/user/orgs";
 	organizationMapping.appearsAsCollection = YES;
-	organizationMapping.localToRemoteMapping = [[SLOrganization remoteMapping] localToRemoteMapping];
+	organizationMapping.propertyMappings = [[SLOrganization remoteMapping] propertyMappings];
 	
 	return @[ organizationMapping ];
 }

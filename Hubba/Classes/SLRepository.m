@@ -22,7 +22,7 @@
 	mapping.endPoint = @"/user/repos";
 	mapping.appearsAsCollection = YES;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 			   @"remoteID"			: @"id",
 			   @"name"				: @"name",
 			   @"remoteDescription"	: @"description",

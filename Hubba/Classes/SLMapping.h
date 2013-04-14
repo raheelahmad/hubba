@@ -15,7 +15,7 @@ extern NSString * const kRemoteUniquePropertyKey;
 @interface SLMapping : NSObject
 
 @property (nonatomic, strong) Class modelClass;
-@property (nonatomic, strong) NSDictionary *localToRemoteMapping;
+@property (nonatomic, strong) NSDictionary *propertyMappings;
 @property (nonatomic, strong) NSDictionary *uniquePropertyMapping;
 @property (nonatomic, strong) NSString * (^endPointForObject) (id);
 @property (nonatomic, strong) NSString *endPoint;

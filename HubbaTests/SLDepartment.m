@@ -17,7 +17,7 @@
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.appearsAsCollection = NO;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 								  @"name" : @"name"
 		  };
 	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"name", kRemoteUniquePropertyKey : @"name" };

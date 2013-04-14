@@ -19,7 +19,7 @@
 	mapping.pathToObject = nil;
 	mapping.appearsAsCollection = NO;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 								     @"name" : @"name",
 									 @"remoteID" : @"id",
 									 @"company" : @"company",

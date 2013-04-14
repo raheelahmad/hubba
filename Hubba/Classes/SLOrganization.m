@@ -35,7 +35,7 @@
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 			   @"id"			: @"id",
 			   @"name"			: @"name",
 			   @"login"			: @"login",

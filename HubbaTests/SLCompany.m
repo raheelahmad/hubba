@@ -21,7 +21,7 @@
 	mapping.pathToObject = nil;
 	mapping.appearsAsCollection = NO;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 								     @"title" : @"title",
 									 @"id" : @"id",
 									 @"address" : @"address",

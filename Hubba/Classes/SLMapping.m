@@ -72,7 +72,7 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 
 - (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {
 	SLMapping *mapping = [self.modelClass remoteMapping];
-	NSDictionary *mappingDictioanry = mapping.localToRemoteMapping;
+	NSDictionary *mappingDictioanry = mapping.propertyMappings;
 	for (NSString *localPropertyPath in [mappingDictioanry allKeys]) {
 		NSString *remotePropery = mappingDictioanry[localPropertyPath];
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];
