@@ -38,7 +38,7 @@
 	return mapping;
 }
 
-+ (NSArray *)relationshipMappings {
+- (NSArray *)relationshipMappings {
 	SLRelationMapping *organizationMapping = [[SLRelationMapping alloc] init];
 	organizationMapping.endPoint = @"/user/orgs";
 	organizationMapping.appearsAsCollection = YES;

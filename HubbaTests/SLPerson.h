@@ -10,7 +10,10 @@
 
 @class SLCompany;
 @interface SLPerson : SLManagedRemoteObject
+
 @property (strong) NSString *name;
 @property (strong) NSNumber *remoteID;
 @property (strong) SLCompany *company;
+@property (strong) SLCompany *previousCompany;
+
 @end
