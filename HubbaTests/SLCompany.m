@@ -14,6 +14,7 @@
 @dynamic id;
 @dynamic persons;
 @dynamic departments;
+@dynamic previousEmployees;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
@@ -21,7 +22,7 @@
 	mapping.pathToObject = nil;
 	mapping.appearsAsCollection = NO;
 	mapping.modelClass = self;
-	mapping.localToRemoteMapping = @{
+	mapping.propertyMappings = @{
 								     @"title" : @"title",
 									 @"id" : @"id",
 									 @"address" : @"address",
