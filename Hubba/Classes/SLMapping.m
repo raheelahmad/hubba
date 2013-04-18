@@ -44,6 +44,7 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 - (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObjectInfo {
 	NSString *localProperty = self.uniquePropertyMapping[kLocalUniquePropertyKey];
 	id remoteValue = [remoteObjectInfo valueForKey:self.uniquePropertyMapping[kRemoteUniquePropertyKey]];
+	
 	return [NSPredicate predicateWithFormat:@"%K == %@", localProperty, remoteValue];
 }
 
@@ -72,7 +73,7 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 
 - (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {
 	SLMapping *mapping = [self.modelClass remoteMapping];
-	NSDictionary *mappingDictioanry = mapping.localToRemoteMapping;
+	NSDictionary *mappingDictioanry = mapping.propertyMappings;
 	for (NSString *localPropertyPath in [mappingDictioanry allKeys]) {
 		NSString *remotePropery = mappingDictioanry[localPropertyPath];
 		id remoteValue = [remoteInfo valueForKeyPath:remotePropery];

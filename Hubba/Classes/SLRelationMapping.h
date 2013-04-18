@@ -10,6 +10,8 @@
 
 @interface SLRelationMapping : SLMapping
 
-@property (nonatomic, assign) BOOL useDestinationClassRemoteMapping;
+@property (nonatomic, assign) BOOL usesDestinationClassRemoteMapping;
+@property (nonatomic, assign) SLManagedRemoteObject *sourceObject;
+@property (nonatomic, assign) NSString *sourceRelationshipKeypath;
 
 @end

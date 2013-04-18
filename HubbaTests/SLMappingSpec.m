@@ -29,6 +29,7 @@ static NSArray *buildEntities() {
 	
 	addRelationships(companyEntity, personEntity, @"persons", @"company", YES);
 	addRelationships(companyEntity, departmentEntity, @"departments", @"company", YES);
+	addRelationships(companyEntity, personEntity, @"previousEmployees", @"previousCompany", YES);
 	
 	return @[ companyEntity, personEntity, departmentEntity ];
 }
@@ -49,8 +50,23 @@ describe(@"Property mapping", ^{
 		__block NSArray *objects;
 		beforeEach(^{
 			setupStackWithEntities(buildEntities());
+			
+			// for testing updates in the "main" endpoint
+			
+			SLMapping *mapping = [[SLMapping alloc] init];
+			mapping.endPoint = @"/dummy";
+			mapping.pathToObject = nil;
+			mapping.appearsAsCollection = NO;
+			mapping.modelClass = self;
+			
+			mapping.propertyMappings = @{
+											 @"name" : @"name",
+											 @"remoteID" : @"id",
+											 @"company" : @"company",
+					 };
+			mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 			[[SLPerson remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522),
-																 @"company" : @{
+																	@"company" : @{
 																	 @"title" : @"Fitbit Inc.",
 																	 @"address" : @"150 Spear St.",
 																	 @"id" : @(333),
@@ -60,6 +76,7 @@ describe(@"Property mapping", ^{
 																	]
 																 }
 			 }];
+			
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(SLPerson.class)];
 			objects = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
 		});
@@ -74,7 +91,7 @@ describe(@"Property mapping", ^{
 			[[newPerson.remoteID should] equal:@(4522)];
 		});
 		
-		it(@"should update a to-one relationship", ^{
+		it(@"should update a to-one relationship that is included in the main response", ^{
 			SLPerson *newPerson = objects[0];
 			SLCompany *company = newPerson.company;
 			[company shouldNotBeNil];
@@ -83,11 +100,28 @@ describe(@"Property mapping", ^{
 			[[company.id should] equal:@(333)];
 		});
 		
-		it(@"should update a to-many relationship", ^{
+		it(@"should update a to-many relationship that is included in the main response", ^{
 			SLPerson *newPerson = objects[0];
 			SLCompany *company = newPerson.company;
 			NSSet *departments = company.departments;
 			[[theValue(departments.count) should] equal:theValue(2)];
+		});
+		
+		it(@"should update a to-one relationship at a different endpoint from the main", ^{
+			// for testing relationship updates that require a separate endpoint
+			SLPerson *newPerson = objects[0];
+			SLRelationMapping *relationMapping = [newPerson relationshipMappings][0];
+			[relationMapping updateWithRemoteResponse:@{
+			 @"title" : @"Manchester U.", @"address" : @"604 E. College Ave.", @"id" : @(332)
+			 }];
+			[newPerson.previousCompany shouldNotBeNil];
+			[[newPerson.previousCompany.title should] equal:@"Manchester U."];
+			[[newPerson.previousCompany.address should] equal:@"604 E. College Ave."];
+			[[newPerson.previousCompany.id should] equal:@(332)];
+			[[newPerson.previousCompany.previousEmployees should] contain:newPerson];
+		});
+		
+		it(@"should update a to-many relationship at a different endpoint from the main", ^{
 		});
 		
 		it(@"should handle mocks properly", ^{

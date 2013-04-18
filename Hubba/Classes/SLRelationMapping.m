@@ -7,6 +7,12 @@
 //
 
 #import "SLRelationMapping.h"
+#import "SLCoreDataManager.h"
+#import "SLManagedRemoteObject.h"
+
+@interface SLRelationMapping ()
+@property NSMutableSet *updatedObjects;
+@end
 
 @implementation SLRelationMapping
 
@@ -15,9 +21,63 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-		self.useDestinationClassRemoteMapping = YES;
+		self.usesDestinationClassRemoteMapping = YES;
 	}
 	return self;
+}
+
+- (NSDictionary *)propertyMappings {
+	// by default use the property mappings of the destination class
+	return [[self.modelClass remoteMapping] propertyMappings];
+}
+
+- (NSDictionary *)uniquePropertyMapping {
+	return [[self.modelClass remoteMapping] uniquePropertyMapping];
+}
+
+- (void)updateWithRemoteResponse:(id)remoteResponse {
+	self.updatedObjects = [NSMutableSet setWithCapacity:4]; // will hold all objects updated by the super call below
+	[super updateWithRemoteResponse:remoteResponse];
+	NSSet *existingDestinationObjects = [self.sourceObject valueForKeyPath:self.sourceRelationshipKeypath];
+	if (existingDestinationObjects) {
+		[self.updatedObjects addObjectsFromArray:[existingDestinationObjects allObjects]];
+	}
+	
+	NSRelationshipDescription *relationship = [self relationshipDescription];
+	if (relationship) {
+		if (relationship.isToMany) {
+			[self.sourceObject setValue:self.updatedObjects forKeyPath:self.sourceRelationshipKeypath];
+		} else {
+			id updatedRelationshipObject = [self.updatedObjects anyObject];
+			[self.sourceObject setValue:updatedRelationshipObject forKey:self.sourceRelationshipKeypath];
+		}
+		
+		NSError *error = nil;
+		if (![[[SLCoreDataManager sharedManager] managedObjectContext] save:&error]) {
+			NSLog(@"Error saving after updating %@ with remote response: %@", NSStringFromClass(self.modelClass), error);
+		}
+	} else {
+		NSLog(@"Error no relation %@ on %@", self.sourceRelationshipKeypath, NSStringFromClass(self.sourceObject.class));
+	}
+}
+
+- (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {
+	[super updateObject:object withRemoteInfo:remoteInfo];
+	[self.updatedObjects addObject:object];
+}
+
+#pragma mark - Helpers
+
+- (NSRelationshipDescription *)relationshipDescription {
+	__block NSRelationshipDescription *relationshipDescription;
+	NSEntityDescription *sourceEntity = [self.sourceObject entity];
+	[[sourceEntity relationshipsByName] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		if ([key isEqualToString:self.sourceRelationshipKeypath]) {
+			relationshipDescription = obj;
+			*stop = YES;
+		}
+	}];
+	return relationshipDescription;
 }
 
 @end

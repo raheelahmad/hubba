@@ -25,7 +25,7 @@
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.endPoint = @"/user";
 	mapping.appearsAsCollection = NO;
-	NSDictionary *userMappings = [[SLUser remoteMapping] localToRemoteMapping];
+	NSDictionary *userMappings = [[SLUser remoteMapping] propertyMappings];
 	NSMutableDictionary *mappings = [NSMutableDictionary dictionaryWithCapacity:12];
 	[userMappings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		NSString *localKeyPath = (NSString *)key;
@@ -42,7 +42,7 @@
 		  @"planSpace"						: @"plan.space",
 		  @"planCollaborators"				: @"plan.collaborators",
 	  }];
-	mapping.localToRemoteMapping = mappings;
+	mapping.propertyMappings = mappings;
 	mapping.modelClass = self;
 	
 	return mapping;

@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, strong) NSSet *persons;
 @property (nonatomic, strong) NSSet *departments;
+@property (nonatomic, strong) NSSet *previousEmployees;
 
 @end
