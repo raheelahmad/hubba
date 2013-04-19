@@ -15,6 +15,7 @@
 @dynamic persons;
 @dynamic departments;
 @dynamic previousEmployees;
+@dynamic peopleThinkWeAreDesirable;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];

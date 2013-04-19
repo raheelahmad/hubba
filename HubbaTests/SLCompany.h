@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSSet *persons;
 @property (nonatomic, strong) NSSet *departments;
 @property (nonatomic, strong) NSSet *previousEmployees;
+@property (nonatomic, strong) NSSet *peopleThinkWeAreDesirable;
 
 @end

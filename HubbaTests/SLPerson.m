@@ -15,6 +15,7 @@
 @dynamic remoteID;
 @dynamic company;
 @dynamic previousCompany;
+@dynamic desirableCompanies;
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
@@ -41,7 +42,14 @@
 	previousCompanyMapping.sourceObject = self;
 	previousCompanyMapping.sourceRelationshipKeypath = @"previousCompany";
 	
-	return @[ previousCompanyMapping ];
+	SLRelationMapping *desirableCompaniesMapping = [[SLRelationMapping alloc] init];
+	desirableCompaniesMapping.endPoint = @"/dummy";
+	desirableCompaniesMapping.pathToObject = nil;
+	desirableCompaniesMapping.appearsAsCollection = YES;
+	desirableCompaniesMapping.modelClass = [SLCompany class];
+	desirableCompaniesMapping.sourceObject = self;
+	desirableCompaniesMapping.sourceRelationshipKeypath = @"desirableCompanies";
+	return @[ previousCompanyMapping, desirableCompaniesMapping ];
 }
 
 @end
