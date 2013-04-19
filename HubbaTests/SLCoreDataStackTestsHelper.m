@@ -16,7 +16,8 @@ NSString * const kRelationshipSourceKey = @"kRelationshipSourceKey";
 NSString * const kRelationshipDestinationKey = @"kRelationshipDestinationKey";
 NSString * const kRelationshipForwardNameKey = @"kRelationshipForwardNameKey";
 NSString * const kRelationshipReverseNameKey = @"kRelationshipReverseNameKey";
-NSString * const kRelationshipHasManyNumKey = @"kRelationshipHasManyNumKey";
+NSString * const kRelationshipForwardHasManyNumKey = @"kRelationshipHasManyNumKey";
+NSString * const kRelationshipReverseHasManyNumKey = @"kRelationshipReverseHasManyNumKey";
 
 void setupStackWithEntities(NSArray *entities) {
 	[[SLCoreDataManager sharedManager] setManagedObjectContext:nil];
@@ -56,7 +57,8 @@ NSEntityDescription *setupEntity(NSString *entityName, Class entityClass, NSArra
 	
 	for (NSDictionary *relationshipInfo in relationshipsInfo) {
 		addRelationships(entity, relationshipInfo[kRelationshipDestinationKey],
-						 relationshipInfo[kRelationshipForwardNameKey], relationshipInfo[kRelationshipReverseNameKey], [relationshipInfo[kRelationshipHasManyNumKey] boolValue]);
+						 relationshipInfo[kRelationshipForwardNameKey], relationshipInfo[kRelationshipReverseNameKey],
+						 [relationshipInfo[kRelationshipForwardHasManyNumKey] boolValue], [relationshipInfo[kRelationshipReverseHasManyNumKey] boolValue]);
 	}
 	return entity;
 }
@@ -69,7 +71,7 @@ NSAttributeDescription *attributeDescriptionForName(NSString *attributeName, NSA
 }
 
 void addRelationships(NSEntityDescription *source, NSEntityDescription *destination,
-														  NSString *forwardName, NSString *reverseName, BOOL toMany) {
+														  NSString *forwardName, NSString *reverseName, BOOL forwardIsToMany, BOOL reverseIsToMany) {
 	NSRelationshipDescription *forwardRelationship = [[NSRelationshipDescription alloc] init];
 	forwardRelationship.destinationEntity = destination;
 	forwardRelationship.name = forwardName;
@@ -91,11 +93,15 @@ void addRelationships(NSEntityDescription *source, NSEntityDescription *destinat
 	destination.properties = newReverseRelationships;
 	
 	// use the toMany BOOL
-	if (toMany) {
+	if (forwardIsToMany) {
 		forwardRelationship.maxCount = -1;
-		reverseRelationship.maxCount = 1;
 	} else {
 		forwardRelationship.maxCount = 1;
+	}
+	
+	if (reverseIsToMany) {
+		reverseRelationship.maxCount = -1;
+	} else {
 		reverseRelationship.maxCount = 1;
 	}
 }

@@ -15,5 +15,6 @@
 @property (strong) NSNumber *remoteID;
 @property (strong) SLCompany *company;
 @property (strong) SLCompany *previousCompany;
+@property (strong) NSSet *desirableCompanies;
 
 @end

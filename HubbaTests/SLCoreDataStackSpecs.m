@@ -20,7 +20,7 @@ NSArray *buildEntities() {
 								@{	kRelationshipDestinationKey : personEntity,
 		   kRelationshipForwardNameKey	: @"persons",
 		   kRelationshipReverseNameKey : @"company",
-		   kRelationshipHasManyNumKey	: @(YES),
+		   kRelationshipForwardHasManyNumKey	: @(YES),
 		   }
 		];
 	

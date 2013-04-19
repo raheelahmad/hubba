@@ -27,9 +27,10 @@ static NSArray *buildEntities() {
 	departmentEntity.managedObjectClassName = NSStringFromClass([SLDepartment class]);
 	departmentEntity.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString") ];
 	
-	addRelationships(companyEntity, personEntity, @"persons", @"company", YES);
-	addRelationships(companyEntity, departmentEntity, @"departments", @"company", YES);
-	addRelationships(companyEntity, personEntity, @"previousEmployees", @"previousCompany", YES);
+	addRelationships(companyEntity, personEntity, @"persons", @"company", YES, NO);
+	addRelationships(companyEntity, departmentEntity, @"departments", @"company", YES, NO);
+	addRelationships(companyEntity, personEntity, @"previousEmployees", @"previousCompany", YES, NO);
+	addRelationships(personEntity, companyEntity, @"desirableCompanies", @"peopleThinkWeAreDesirable", YES, YES);
 	
 	return @[ companyEntity, personEntity, departmentEntity ];
 }
@@ -110,10 +111,12 @@ describe(@"Property mapping", ^{
 		it(@"should update a to-one relationship at a different endpoint from the main", ^{
 			// for testing relationship updates that require a separate endpoint
 			SLPerson *newPerson = objects[0];
-			SLRelationMapping *relationMapping = [newPerson relationshipMappings][0];
-			[relationMapping updateWithRemoteResponse:@{
+			SLRelationMapping *perviousCompanyMapping = [newPerson relationshipMappings][0]; // the first one is the to-one relationship
+			
+			[perviousCompanyMapping updateWithRemoteResponse:@{
 			 @"title" : @"Manchester U.", @"address" : @"604 E. College Ave.", @"id" : @(332)
 			 }];
+			
 			[newPerson.previousCompany shouldNotBeNil];
 			[[newPerson.previousCompany.title should] equal:@"Manchester U."];
 			[[newPerson.previousCompany.address should] equal:@"604 E. College Ave."];
@@ -122,6 +125,16 @@ describe(@"Property mapping", ^{
 		});
 		
 		it(@"should update a to-many relationship at a different endpoint from the main", ^{
+			SLPerson *newPerson = objects[0];
+			SLRelationMapping *desirableCompaniesMapping = [newPerson relationshipMappings][1]; // the to-many relationship
+			[desirableCompaniesMapping updateWithRemoteResponse:@[
+			 @{@"title":@"Manchester U.", @"address":@"604 E. College Ave.", @"id":@(332)},
+			 @{@"title":@"Fitbit", @"address":@"150 Spear St.", @"id":@(212)}
+			 ]
+			 ];
+			[[theValue(newPerson.desirableCompanies.count) should] equal:theValue(2)];
+			[[[newPerson.desirableCompanies valueForKey:@"title"] should] contain:@"Manchester U."];
+			[[[newPerson.desirableCompanies valueForKey:@"title"] should] contain:@"Fitbit"];
 		});
 		
 		it(@"should handle mocks properly", ^{
