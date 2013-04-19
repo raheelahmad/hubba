@@ -137,6 +137,15 @@ describe(@"Property mapping", ^{
 			[[[newPerson.desirableCompanies valueForKey:@"title"] should] contain:@"Fitbit"];
 		});
 		
+		it(@"should call the after udpate block", ^{
+			__block int i = 23;
+			SLMapping *mappingToTestAfterBlock = [SLPerson remoteMapping];
+			mappingToTestAfterBlock.afterRemoteUpdate = ^{
+				i = 25;
+			};
+			[mappingToTestAfterBlock updateWithRemoteResponse:@{}];
+			[[theValue(i) should] equal:theValue(25)];
+		});
 		it(@"should handle mocks properly", ^{
 			[SLPerson stub:@selector(remoteMapping) andReturn:@(22)];
 			[[[SLPerson remoteMapping] should] equal:@(22)];

@@ -69,6 +69,10 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 	if (![[[SLCoreDataManager sharedManager] managedObjectContext] save:&error]) {
 		NSLog(@"Error saving after updating %@ with remote response: %@", NSStringFromClass(self.modelClass), error);
 	}
+	
+	if (self.afterRemoteUpdate) {
+		self.afterRemoteUpdate();
+	}
 }
 
 - (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {
