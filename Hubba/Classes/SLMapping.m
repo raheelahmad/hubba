@@ -15,6 +15,15 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 
 @implementation SLMapping
 
+- (id)init {
+	self = [super init];
+	if (self) {
+		self.shouldRefreshRelationships = YES;
+	}
+	
+	return self;
+}
+
 - (SLManagedRemoteObject *)objectForRemoteInfo:(NSDictionary *)remoteInfo {
 	SLManagedRemoteObject * localObject = nil;
 	NSManagedObjectContext *context = [[SLCoreDataManager sharedManager] managedObjectContext];
@@ -60,14 +69,18 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 				SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteInfo];
 				[self updateObject:localObject withRemoteInfo:remoteInfo];
 				[updatedObjects addObject:localObject];
-				[localObject refreshRelationships];
+				if (self.shouldRefreshRelationships) {
+					[localObject refreshRelationships];
+				}
 			}
 		}
 	} else {
 		SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteResponse];
 		[self updateObject:localObject withRemoteInfo:remoteResponse];
 		[updatedObjects addObject:localObject];
-		[localObject refreshRelationships];
+		if (self.shouldRefreshRelationships) {
+			[localObject refreshRelationships];
+		}
 	}
 	
 	NSError *error = nil;

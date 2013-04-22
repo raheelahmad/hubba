@@ -22,6 +22,7 @@
 	self = [super init];
 	if (self) {
 		self.usesDestinationClassRemoteMapping = YES;
+		self.shouldRefreshRelationships = NO; // do not refresh relationships of relationships
 	}
 	return self;
 }

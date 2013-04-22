@@ -23,6 +23,7 @@ extern NSString * const kRemoteUniquePropertyKey;
 @property (nonatomic, strong) NSString *endPoint;
 @property (nonatomic, strong) NSString *pathToObject;
 @property (nonatomic) BOOL appearsAsCollection;
+@property (nonatomic) BOOL shouldRefreshRelationships;
 @property (nonatomic, strong) AfterRemoteUpdate afterRemoteUpdate;
 
 - (void)updateWithRemoteResponse:(id)remoteResponse;
