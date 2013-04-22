@@ -59,6 +59,12 @@
 	} else {
 		NSLog(@"Error no relation %@ on %@", self.sourceRelationshipKeypath, NSStringFromClass(self.sourceObject.class));
 	}
+#ifdef LOG_NETWORKING
+	NSLog(@"---- Fetched %@->%@ relationship to %@", NSStringFromClass(self.sourceObject.class), self.sourceRelationshipKeypath, NSStringFromClass(self.modelClass));
+	for (id object in self.updatedObjects) {
+		NSLog(@"Updated: %@", object);
+	}
+#endif
 }
 
 - (void)updateObject:(SLManagedRemoteObject *)object withRemoteInfo:(NSDictionary *)remoteInfo {

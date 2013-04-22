@@ -51,9 +51,10 @@
 		[[SLAPIClient sharedClient] get:[relationMapping endPoint] onCompletion:^(BOOL success, id response) {
 			if (success) {
 				[relationMapping updateWithRemoteResponse:response];
-				NSLog(@"Fetched %@->%@ relationship for %@", NSStringFromClass(relationMapping.modelClass), relationMapping.sourceRelationshipKeypath, NSStringFromClass(self.class));
 			} else {
+#ifdef LOG_NETWORKING
 				NSLog(@"Could not fetch %@ relationship for %@", NSStringFromClass(self.class), NSStringFromClass(relationMapping.modelClass));
+#endif
 			}
 		}];
 	}
