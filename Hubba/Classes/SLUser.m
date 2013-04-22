@@ -19,6 +19,8 @@
 @dynamic email;
 @dynamic ownedRepositories;
 @dynamic repositories;
+@dynamic followers;
+@dynamic following;
 @dynamic me;
 @dynamic organizations;
 
@@ -60,7 +62,16 @@
 	repositoryMapping.sourceRelationshipKeypath = @"repositories";
 	repositoryMapping.pathToObject = nil;
 	repositoryMapping.appearsAsCollection = YES;
-	return @[ organizationMapping, repositoryMapping ];
+	
+	SLRelationMapping *followersMapping = [[SLRelationMapping alloc] init];
+	followersMapping.endPoint = [NSString stringWithFormat:@"/user/%@/followers", self.remoteID];
+	followersMapping.sourceObject = self;
+	followersMapping.modelClass = [SLUser class];
+	followersMapping.sourceRelationshipKeypath = @"followers";
+	followersMapping.pathToObject = nil;
+	followersMapping.appearsAsCollection = YES;
+	
+	return @[ organizationMapping, repositoryMapping, followersMapping ];
 }
 
 + (NSArray *)sortDescriptors {

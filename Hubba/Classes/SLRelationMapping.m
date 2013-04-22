@@ -60,10 +60,7 @@
 		NSLog(@"Error no relation %@ on %@", self.sourceRelationshipKeypath, NSStringFromClass(self.sourceObject.class));
 	}
 #ifdef LOG_NETWORKING
-	NSLog(@"---- Fetched %@->%@ relationship to %@", NSStringFromClass(self.sourceObject.class), self.sourceRelationshipKeypath, NSStringFromClass(self.modelClass));
-	for (id object in self.updatedObjects) {
-		NSLog(@"Updated: %@", object);
-	}
+	NSLog(@"---- Fetched %d objects for %@->%@ relationship to %@", self.updatedObjects.count, self.sourceObject, self.sourceRelationshipKeypath, NSStringFromClass(self.modelClass));
 #endif
 }
 

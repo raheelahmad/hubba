@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSSet *ownedRepositories;
 @property (nonatomic, retain) NSSet *repositories;
 @property (nonatomic, retain) NSSet *organizations;
+@property (nonatomic, retain) NSSet *following;
+@property (nonatomic, retain) NSSet *followers;
 @property (nonatomic, strong) SLMe *me;
 
 @end
