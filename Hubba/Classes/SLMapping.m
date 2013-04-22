@@ -49,6 +49,7 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 }
 
 - (void)updateWithRemoteResponse:(id)remoteResponse {
+	NSMutableArray *updatedObjects = [NSMutableArray arrayWithCapacity:4];
 	// if nested, let's access the branch
 	if (self.pathToObject) {
 		remoteResponse = [remoteResponse valueForKeyPath:self.pathToObject];
@@ -58,11 +59,15 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 			for (NSDictionary *remoteInfo in remoteResponse) {
 				SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteInfo];
 				[self updateObject:localObject withRemoteInfo:remoteInfo];
+				[updatedObjects addObject:localObject];
+				[localObject refreshRelationships];
 			}
 		}
 	} else {
 		SLManagedRemoteObject *localObject = [self objectForRemoteInfo:remoteResponse];
 		[self updateObject:localObject withRemoteInfo:remoteResponse];
+		[updatedObjects addObject:localObject];
+		[localObject refreshRelationships];
 	}
 	
 	NSError *error = nil;
@@ -71,7 +76,7 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 	}
 	
 	if (self.afterRemoteUpdate) {
-		self.afterRemoteUpdate();
+		self.afterRemoteUpdate(updatedObjects);
 	}
 }
 

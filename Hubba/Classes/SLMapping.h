@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AfterRemoteUpdate)();
+typedef void (^AfterRemoteUpdate)(NSArray *updatedObjects);
 
 extern NSString * const kLocalUniquePropertyKey;
 extern NSString * const kRemoteUniquePropertyKey;

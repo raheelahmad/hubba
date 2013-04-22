@@ -27,4 +27,8 @@
 @property (nonatomic, retain) NSNumber * publicGists;
 @property (nonatomic, retain) NSDate * createdAt;
 
+@property (nonatomic, strong) NSSet *users;
+@property (nonatomic, strong) NSSet *repositories;
+
+
 @end

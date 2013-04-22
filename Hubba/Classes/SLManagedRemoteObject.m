@@ -42,10 +42,16 @@
 
 - (void)refreshRelationships {
 	for (SLRelationMapping *relationMapping in [self relationshipMappings]) {
+		__block SLRelationMapping *_mapping = relationMapping;
+		relationMapping.afterRemoteUpdate = ^(NSArray *updateObjects){
+			for (id object in updateObjects) {
+				NSLog(@"Fetched: %@ for %@", object, [_mapping sourceRelationshipKeypath]);
+			}
+		};
 		[[SLAPIClient sharedClient] get:[relationMapping endPoint] onCompletion:^(BOOL success, id response) {
 			if (success) {
-				NSLog(@"Fetched %@ relationship for %@", NSStringFromClass(self.class), NSStringFromClass(relationMapping.modelClass));
 				[relationMapping updateWithRemoteResponse:response];
+				NSLog(@"Fetched %@->%@ relationship for %@", NSStringFromClass(relationMapping.modelClass), relationMapping.sourceRelationshipKeypath, NSStringFromClass(self.class));
 			} else {
 				NSLog(@"Could not fetch %@ relationship for %@", NSStringFromClass(self.class), NSStringFromClass(relationMapping.modelClass));
 			}

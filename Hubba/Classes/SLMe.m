@@ -21,6 +21,10 @@
 @dynamic planCollaborators;
 @dynamic user;
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"Me: %@, %@ (%@)", self.remoteID, self.user.name, self.user.email];
+}
+
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.endPoint = @"/user";
@@ -44,6 +48,13 @@
 	  }];
 	mapping.propertyMappings = mappings;
 	mapping.modelClass = self;
+	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
+	// refresh user's relationship
+	mapping.afterRemoteUpdate = ^(NSArray *updatedObjects){
+		for (SLMe *me in updatedObjects) {
+			[me.user refreshRelationships];
+		}
+	};
 	
 	return mapping;
 }

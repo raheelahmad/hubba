@@ -140,11 +140,19 @@ describe(@"Property mapping", ^{
 		it(@"should call the after udpate block", ^{
 			__block int i = 23;
 			SLMapping *mappingToTestAfterBlock = [SLPerson remoteMapping];
-			mappingToTestAfterBlock.afterRemoteUpdate = ^{
+			mappingToTestAfterBlock.afterRemoteUpdate = ^(NSArray *updatedObjects){
+				SLPerson *person = updatedObjects[0];
+				person.name = @"Raheel Afterthought";
 				i = 25;
 			};
 			[mappingToTestAfterBlock updateWithRemoteResponse:@{}];
+			
 			[[theValue(i) should] equal:theValue(25)];
+			
+			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLPerson class])];
+			request.predicate = [NSPredicate predicateWithFormat:@"name = 'Raheel Afterthought'"];
+			NSArray *resultset = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:request error:NULL];
+			[[theValue(resultset.count) should] equal:theValue(1)];
 		});
 		it(@"should handle mocks properly", ^{
 			[SLPerson stub:@selector(remoteMapping) andReturn:@(22)];

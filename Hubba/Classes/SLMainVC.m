@@ -37,6 +37,17 @@
 	if ([SLAPIClient sharedClient].authenticated) {
 		[SLMe refresh];
 		[SLRepository refresh];
+		NSArray *mes = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLMe class])]
+																				error:nil];
+		if (mes.count) {
+			SLMe *me = mes[0];
+			for (SLOrganization *org in me.user.organizations) {
+				NSLog(@"Org: %@", org.login);
+				for (SLRepository *repository in org.repositories) {
+					NSLog(@"  Repo: %@", repository.name);
+				}
+			}
+		}
 	}
 }
 

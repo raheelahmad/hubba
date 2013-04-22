@@ -7,6 +7,7 @@
 //
 
 #import "SLOrganization.h"
+#import "SLRepository.h"
 
 @implementation SLOrganization
 
@@ -24,6 +25,12 @@
 @dynamic publicRepos;
 @dynamic publicGists;
 @dynamic createdAt;
+@dynamic users;
+@dynamic repositories;
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"Organization: %@, %@, %@", self.id, self.name, self.login];
+}
 
 + (NSArray *)sortDescriptors {
 	return @[ [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES] ];
@@ -31,6 +38,18 @@
 
 + (NSPredicate *)localPredicateForRemoteObject:(NSDictionary *)remoteObject {
 	return [NSPredicate predicateWithFormat:@"id == %@", [remoteObject valueForKey:@"id"]];
+}
+
+- (NSArray *)relationshipMappings {
+	SLRelationMapping *repositoryMapping = [[SLRelationMapping alloc] init];
+	repositoryMapping.modelClass = [SLRepository class];
+	repositoryMapping.sourceObject = self;
+	repositoryMapping.sourceRelationshipKeypath = @"repositories";
+	repositoryMapping.appearsAsCollection = YES;
+	repositoryMapping.pathToObject = nil;
+	repositoryMapping.endPoint = [NSString stringWithFormat:@"/orgs/%@/repos", self.id];
+	
+	return @[ repositoryMapping ];
 }
 
 + (SLMapping *)remoteMapping {
@@ -49,6 +68,7 @@
 			   @"publicGists"	: @"public_gists",
 			   @"createdat"		: @"created_at",
 	  };
+	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"id", kRemoteUniquePropertyKey : @"id" };
 	
 	return mapping;
 }

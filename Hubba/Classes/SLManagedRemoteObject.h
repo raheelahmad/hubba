@@ -20,6 +20,7 @@
 #pragma mark - Remote
 
 + (void)refresh;
+- (void)refreshRelationships;
 - (NSArray *)relationshipMappings;
 + (SLMapping *)remoteMapping;
 

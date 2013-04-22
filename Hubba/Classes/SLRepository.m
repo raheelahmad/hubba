@@ -9,6 +9,7 @@
 #import "SLRepository.h"
 #import "SLCoreDataManager.h"
 #import "SLUser.h"
+#import "SLOrganization.h"
 
 @implementation SLRepository
 
@@ -16,10 +17,14 @@
 @dynamic name;
 @dynamic remoteDescription;
 @dynamic owner;
+@dynamic organization;
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"Repository: %@, %@", self.remoteID, self.name];
+}
 
 + (SLMapping *)remoteMapping {
 	SLMapping *mapping = [[SLMapping alloc] init];
-	mapping.endPoint = @"/user/repos";
 	mapping.appearsAsCollection = YES;
 	mapping.modelClass = self;
 	mapping.propertyMappings = @{
@@ -28,6 +33,7 @@
 			   @"remoteDescription"	: @"description",
 			   @"owner"				: @"owner",
 		   };
+	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 	return mapping;
 }
 
