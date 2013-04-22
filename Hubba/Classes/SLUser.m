@@ -7,6 +7,7 @@
 //
 
 #import "SLUser.h"
+#import "SLRepository.h"
 #import "SLOrganization.h"
 
 @implementation SLUser
@@ -17,6 +18,7 @@
 @dynamic company;
 @dynamic email;
 @dynamic ownedRepositories;
+@dynamic repositories;
 @dynamic me;
 @dynamic organizations;
 
@@ -50,9 +52,15 @@
 	organizationMapping.sourceRelationshipKeypath = @"organizations";
 	organizationMapping.pathToObject = nil;
 	organizationMapping.appearsAsCollection = YES;
-	organizationMapping.propertyMappings = [[SLOrganization remoteMapping] propertyMappings];
 	
-	return @[ organizationMapping ];
+	SLRelationMapping *repositoryMapping = [[SLRelationMapping alloc] init];
+	repositoryMapping.endPoint = [NSString stringWithFormat:@"/user/%@/repos", self.remoteID];
+	repositoryMapping.sourceObject = self;
+	repositoryMapping.modelClass = [SLRepository class];
+	repositoryMapping.sourceRelationshipKeypath = @"repositories";
+	repositoryMapping.pathToObject = nil;
+	repositoryMapping.appearsAsCollection = YES;
+	return @[ organizationMapping, repositoryMapping ];
 }
 
 + (NSArray *)sortDescriptors {

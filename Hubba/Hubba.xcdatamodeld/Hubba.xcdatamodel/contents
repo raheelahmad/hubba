@@ -39,6 +39,7 @@
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLOrganization" inverseName="repositories" inverseEntity="SLOrganization" syncable="YES"/>
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLUser" inverseName="ownedRepositories" inverseEntity="SLUser" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLUser" inverseName="repositories" inverseEntity="SLUser" syncable="YES"/>
     </entity>
     <entity name="SLUser" representedClassName="SLUser" syncable="YES">
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
@@ -49,12 +50,13 @@
         <relationship name="me" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SLMe" inverseName="user" inverseEntity="SLMe" syncable="YES"/>
         <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLOrganization" inverseName="users" inverseEntity="SLOrganization" syncable="YES"/>
         <relationship name="ownedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLRepository" inverseName="owner" inverseEntity="SLRepository" syncable="YES"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLRepository" inverseName="users" inverseEntity="SLRepository" syncable="YES"/>
     </entity>
     <elements>
         <element name="SLFSQCheckin" positionX="160" positionY="192" width="128" height="90"/>
         <element name="SLMe" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SLOrganization" positionX="160" positionY="192" width="128" height="285"/>
-        <element name="SLRepository" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="SLUser" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="SLRepository" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="SLUser" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
 </model>
