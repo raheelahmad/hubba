@@ -88,6 +88,13 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 		NSLog(@"Error saving after updating %@ with remote response: %@", NSStringFromClass(self.modelClass), error);
 	}
 	
+	if ([self isKindOfClass:[SLRelationMapping class]]) {
+		SLRelationMapping *mapping = (SLRelationMapping *)self;
+		for (id object in updatedObjects) {
+			NSLog(@"Fetched: %@ for %@", object, [mapping sourceRelationshipKeypath]);
+		}
+	}
+	
 	if (self.afterRemoteUpdate) {
 		self.afterRemoteUpdate(updatedObjects);
 	}

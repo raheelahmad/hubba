@@ -10,6 +10,7 @@
 #import "SLCoreDataManager.h"
 #import "SLUser.h"
 #import "SLOrganization.h"
+#import "SLIssue.h"
 
 @implementation SLRepository
 
@@ -18,9 +19,10 @@
 @dynamic remoteDescription;
 @dynamic owner;
 @dynamic organization;
+@dynamic issues;
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"Repository: %@, %@", self.remoteID, self.name];
+	return [NSString stringWithFormat:@"Repository: %@, %@, Owner: %@ (%@)", self.remoteID, self.name, self.owner.login, self.owner.remoteID];
 }
 
 + (SLMapping *)remoteMapping {
@@ -35,6 +37,19 @@
 		   };
 	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 	return mapping;
+}
+
+- (NSArray *)relationshipMappings {
+	SLRelationMapping *issuesMapping = [[SLRelationMapping alloc] init];
+	issuesMapping.modelClass = [SLIssue class];
+	issuesMapping.sourceObject = self;
+	issuesMapping.sourceRelationshipKeypath = @"issues";
+	issuesMapping.appearsAsCollection = YES;
+	issuesMapping.pathToObject = nil;
+	issuesMapping.endPoint = [NSString stringWithFormat:@"/repos/%@/%@/issues", self.owner.login, self.name];
+	
+	return @[ issuesMapping ];
+	
 }
 
 + (NSArray *)sortDescriptors {

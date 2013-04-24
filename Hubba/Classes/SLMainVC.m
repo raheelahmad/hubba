@@ -13,6 +13,7 @@
 
 #import "SLRepository.h"
 #import "SLUser.h"
+#import "SLIssue.h"
 #import "SLMe.h"
 #import "SLOrganization.h"
 
@@ -36,11 +37,14 @@
 - (void)refresh {
 	if ([SLAPIClient sharedClient].authenticated) {
 		[SLMe refresh];
-		NSArray *repositories = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLRepository class])]
+		NSArray *issues = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLIssue class])]
 																				error:nil];
-		for (SLRepository *repo in repositories) {
-			NSLog(@"Repo: %@", repo);
+		for (SLIssue *issue in issues) {
+			NSLog(@"Issue: %@", issue);
 		}
+//		[[SLAPIClient sharedClient] get:@"/issues" onCompletion:^(BOOL success, id response) {
+//			NSLog(@"Issues: %@", response);
+//		}];
 	}
 }
 

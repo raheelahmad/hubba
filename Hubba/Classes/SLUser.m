@@ -23,6 +23,8 @@
 @dynamic following;
 @dynamic me;
 @dynamic organizations;
+@dynamic issues;
+@dynamic assignedIssues;
 
 - (NSString *)description {
 	return [NSString stringWithFormat:@"User: %@, %@ (%@)", self.remoteID, self.name, self.login];
@@ -62,6 +64,11 @@
 	repositoryMapping.sourceRelationshipKeypath = @"repositories";
 	repositoryMapping.pathToObject = nil;
 	repositoryMapping.appearsAsCollection = YES;
+	repositoryMapping.afterRemoteUpdate = ^(NSArray *updatedObjects) {
+		for (SLRepository *repository in updatedObjects) {
+			[repository refreshRelationships];
+		}
+	};
 	
 	SLRelationMapping *followersMapping = [[SLRelationMapping alloc] init];
 	followersMapping.endPoint = [NSString stringWithFormat:@"/user/%@/followers", self.remoteID];

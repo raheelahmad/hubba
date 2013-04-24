@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString * remoteDescription;
 @property (nonatomic, retain) SLUser *owner;
 @property (nonatomic, strong) SLOrganization *organization;
+@property (nonatomic, strong) NSSet *issues;
 
 @end

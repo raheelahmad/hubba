@@ -24,5 +24,7 @@
 @property (nonatomic, retain) NSSet *following;
 @property (nonatomic, retain) NSSet *followers;
 @property (nonatomic, strong) SLMe *me;
+@property (nonatomic, strong) NSSet *issues;
+@property (nonatomic, strong) NSSet *assignedIssues;
 
 @end

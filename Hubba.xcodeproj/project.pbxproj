@@ -17,6 +17,7 @@
 		59559BB116F4245D007A2E2A /* SLManagedRemoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 59559BB016F4245D007A2E2A /* SLManagedRemoteObject.m */; };
 		59627C8716F4E59A00E73178 /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
+		596882CE1726352D00DFE837 /* SLIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 596882CD1726352D00DFE837 /* SLIssue.m */; };
 		59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59905A551707AB7C003ABB08 /* SLRelationMapping.m */; };
 		59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */; };
@@ -82,6 +83,8 @@
 		59627C8616F4E59A00E73178 /* SLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUser.m; path = Classes/SLUser.m; sourceTree = "<group>"; };
 		59627C8D16F5828C00E73178 /* SLMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMe.h; path = Classes/SLMe.h; sourceTree = "<group>"; };
 		59627C8E16F5828C00E73178 /* SLMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMe.m; path = Classes/SLMe.m; sourceTree = "<group>"; };
+		596882CC1726352D00DFE837 /* SLIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLIssue.h; path = Classes/SLIssue.h; sourceTree = "<group>"; };
+		596882CD1726352D00DFE837 /* SLIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLIssue.m; path = Classes/SLIssue.m; sourceTree = "<group>"; };
 		59905A541707AB7C003ABB08 /* SLRelationMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRelationMapping.h; path = Classes/SLRelationMapping.h; sourceTree = "<group>"; };
 		59905A551707AB7C003ABB08 /* SLRelationMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRelationMapping.m; path = Classes/SLRelationMapping.m; sourceTree = "<group>"; };
 		59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientSpecs.m; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 		59CDF70016EC726000637007 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				596882CC1726352D00DFE837 /* SLIssue.h */,
+				596882CD1726352D00DFE837 /* SLIssue.m */,
 				59556F2D17079A2700601A37 /* Mappings */,
 				59FD7B5716F1801E00DE3D5C /* SLFSQCheckin.h */,
 				59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */,
@@ -481,6 +486,7 @@
 				591AED6916F977B900224B08 /* SLOrganization.m in Sources */,
 				59556F3017079B7F00601A37 /* SLMapping.m in Sources */,
 				59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */,
+				596882CE1726352D00DFE837 /* SLIssue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

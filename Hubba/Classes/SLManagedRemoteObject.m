@@ -42,12 +42,6 @@
 
 - (void)refreshRelationships {
 	for (SLRelationMapping *relationMapping in [self relationshipMappings]) {
-		__block SLRelationMapping *_mapping = relationMapping;
-		relationMapping.afterRemoteUpdate = ^(NSArray *updateObjects){
-			for (id object in updateObjects) {
-				NSLog(@"Fetched: %@ for %@", object, [_mapping sourceRelationshipKeypath]);
-			}
-		};
 		[[SLAPIClient sharedClient] get:[relationMapping endPoint] onCompletion:^(BOOL success, id response) {
 			if (success) {
 				[relationMapping updateWithRemoteResponse:response];
