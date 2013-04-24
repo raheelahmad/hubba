@@ -14,7 +14,7 @@ static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticato
 static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
 static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
 static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/authorize";;
-static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&client_secret=%@";
+static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&client_secret=%@&scope=%@";
 static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
 static NSString * const kSLTokenParamString = @"client_id=%@&client_secret=%@&code=%@";
 //static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
@@ -144,7 +144,7 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 }
 
 - (NSURLRequest *)authorizationRequest {
-	NSString *queryString = [NSString stringWithFormat:kSLAuthorizationQueryStringFormat, kSLClientID, kSLClientSecret];
+	NSString *queryString = [NSString stringWithFormat:kSLAuthorizationQueryStringFormat, kSLClientID, kSLClientSecret, @"repo,user"];
 	NSString *URLString = [NSString stringWithFormat:@"%@?%@", kSLAuthorizationURL, queryString];
 	NSURL *url = [NSURL URLWithString:URLString];
 	return [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];

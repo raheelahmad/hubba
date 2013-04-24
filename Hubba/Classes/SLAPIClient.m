@@ -39,7 +39,7 @@
 }
 
 - (NSURL *)URLForPath:(NSString *)path {
-	NSString *URLString = [self.baseURL stringByAppendingFormat:@"%@?oauth_token=%@", path, self.oauthClient.token];
+	NSString *URLString = [self.baseURL stringByAppendingFormat:@"%@?access_token=%@", path, self.oauthClient.token];
 	return [NSURL URLWithString:URLString];
 }
 
