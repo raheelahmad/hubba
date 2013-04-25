@@ -36,6 +36,10 @@
 	return [[self.modelClass remoteMapping] uniquePropertyMapping];
 }
 
+- (NSArray *)transformerInfo {
+	return [[self.modelClass remoteMapping] transformerInfo];
+}
+
 - (void)updateWithRemoteResponse:(id)remoteResponse {
 	self.updatedObjects = [NSMutableSet setWithCapacity:4]; // will hold all objects updated by the super call below
 	[super updateWithRemoteResponse:remoteResponse];

@@ -13,7 +13,10 @@ static NSArray *buildEntities() {
 	NSEntityDescription *personEntity = [[NSEntityDescription alloc] init];
 	personEntity.name = NSStringFromClass([SLPerson class]);
 	personEntity.managedObjectClassName = NSStringFromClass([SLPerson class]);
-	personEntity.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString"),  attributeDescriptionForName(@"remoteID", NSInteger32AttributeType, @"NSNumber")  ];
+	personEntity.properties = @[ attributeDescriptionForName(@"name", NSStringAttributeType, @"NSString"),
+														attributeDescriptionForName(@"title", NSStringAttributeType, @"NSString"),
+														attributeDescriptionForName(@"remoteID", NSInteger32AttributeType, @"NSNumber")
+							  ];
 	
 	NSEntityDescription *companyEntity = [[NSEntityDescription alloc] init];
 	companyEntity.name = NSStringFromClass([SLCompany class]);
@@ -54,27 +57,17 @@ describe(@"Property mapping", ^{
 			
 			// for testing updates in the "main" endpoint
 			
-			SLMapping *mapping = [[SLMapping alloc] init];
-			mapping.endPoint = @"/dummy";
-			mapping.pathToObject = nil;
-			mapping.appearsAsCollection = NO;
-			mapping.modelClass = self;
-			
-			mapping.propertyMappings = @{
-											 @"name" : @"name",
-											 @"remoteID" : @"id",
-											 @"company" : @"company",
-					 };
-			mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
-			[[SLPerson remoteMapping] updateWithRemoteResponse:@{ @"name" : @"Someone really new", @"id" : @(4522),
-																	@"company" : @{
-																	 @"title" : @"Fitbit Inc.",
-																	 @"address" : @"150 Spear St.",
-																	 @"id" : @(333),
-																	 @"departments" : @[
-																	 @{ @"name" : @"Development" },
-																	 @{ @"name" : @"Design" },
-																	]
+			[[SLPerson remoteMapping] updateWithRemoteResponse:@{
+							@"name" : @"Someone really new", @"id" : @(4522),
+					 @"title" : @"Developer",
+					 @"company" : @{
+																			 @"title" : @"Fitbit Inc.",
+																			 @"address" : @"150 Spear St.",
+																			 @"id" : @(333),
+																			 @"departments" : @[
+																			 @{ @"name" : @"Development" },
+																			 @{ @"name" : @"Design" },
+																			]
 																 }
 			 }];
 			
@@ -90,6 +83,11 @@ describe(@"Property mapping", ^{
 			SLPerson *newPerson = objects[0];
 			[[newPerson.name should] equal:@"Someone really new"];
 			[[newPerson.remoteID should] equal:@(4522)];
+		});
+		
+		it(@"should update a property with its associated transformer", ^{
+			SLPerson *newPerson = objects[0];
+			[[newPerson.title should] equal:@"Senior Developer"];
 		});
 		
 		it(@"should update a to-one relationship that is included in the main response", ^{
