@@ -164,6 +164,13 @@ NSString * const kRemoteUniquePropertyKey = @"kRemoteUniquePropertyKey";
 					}
 				} else {
 					// key is a property
+					for (NSDictionary *transformerInfo in self.transformerInfo) {
+						if ([[transformerInfo allKeys] containsObject:key]) {
+							RemoteToLocalTransformer transformer = transformerInfo[key];
+							remoteValue = transformer(remoteValue);
+							break;
+						}
+					}
 					[receiver setValue:remoteValue forKeyPath:key];
 				}
 			}

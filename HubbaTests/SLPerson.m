@@ -12,6 +12,7 @@
 @implementation SLPerson
 
 @dynamic name;
+@dynamic title;
 @dynamic remoteID;
 @dynamic company;
 @dynamic previousCompany;
@@ -26,10 +27,17 @@
 	
 	mapping.propertyMappings = @{
 								     @"name" : @"name",
-									 @"remoteID" : @"id",
+								     @"title" : @"title",
+			 @"remoteID" : @"id",
 									 @"company" : @"company",
 			 };
 	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
+	RemoteToLocalTransformer titleTransformer = (id)^(id remoteValue) {
+		return [NSString stringWithFormat:@"Senior %@", remoteValue];
+	};
+	mapping.transformerInfo = @[
+						  @{ @"title" : titleTransformer }
+		];
 	return mapping;
 }
 

@@ -12,6 +12,7 @@
 @interface SLPerson : SLManagedRemoteObject
 
 @property (strong) NSString *name;
+@property (strong) NSString *title;
 @property (strong) NSNumber *remoteID;
 @property (strong) SLCompany *company;
 @property (strong) SLCompany *previousCompany;

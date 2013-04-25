@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^AfterRemoteUpdate)(NSArray *updatedObjects);
+typedef id (^RemoteToLocalTransformer)(id remoteValue);
 
 extern NSString * const kLocalUniquePropertyKey;
 extern NSString * const kRemoteUniquePropertyKey;
@@ -18,6 +19,7 @@ extern NSString * const kRemoteUniquePropertyKey;
 
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, strong) NSDictionary *propertyMappings;
+@property (nonatomic, strong) NSArray *transformerInfo;
 @property (nonatomic, strong) NSDictionary *uniquePropertyMapping;
 @property (nonatomic, strong) NSString * (^endPointForObject) (id);
 @property (nonatomic, strong) NSString *endPoint;
