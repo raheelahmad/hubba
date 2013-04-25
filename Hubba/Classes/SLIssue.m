@@ -31,6 +31,16 @@
 	SLMapping *mapping = [[SLMapping alloc] init];
 	mapping.appearsAsCollection = YES;
 	mapping.modelClass = self;
+	RemoteToLocalTransformer dateTransformer = ^(NSString *createdAtString) {
+								 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+								 [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+								 [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+								 return [dateFormatter dateFromString:createdAtString];
+	};
+	mapping.transformerInfo = @[
+							 @{ @"createdAt" : dateTransformer},
+							 @{ @"updatedAt" : dateTransformer},
+		];
 	mapping.propertyMappings = @{
 							  @"number" : @"number",
 							  @"htmlURL" : @"html_url",
