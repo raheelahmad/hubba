@@ -17,6 +17,7 @@
 @dynamic remoteID;
 @dynamic company;
 @dynamic email;
+@dynamic avatarURL;
 @dynamic ownedRepositories;
 @dynamic repositories;
 @dynamic followers;
@@ -43,6 +44,7 @@
 			   @"login"			: @"login",
 			   @"company"		: @"company",
 			   @"email"			: @"email",
+			   @"avatarURL"		: @"avatar_url",
 	  };
 	mapping.uniquePropertyMapping = @{ kLocalUniquePropertyKey : @"remoteID", kRemoteUniquePropertyKey : @"id" };
 	return mapping;

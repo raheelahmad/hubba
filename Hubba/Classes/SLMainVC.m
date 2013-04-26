@@ -10,6 +10,7 @@
 #import "SLAPIClient.h"
 #import "SLFSQCheckin.h"
 #import "SLCoreDataManager.h"
+#import "SLUserVC.h"
 
 #import "SLRepository.h"
 #import "SLUser.h"
@@ -154,13 +155,6 @@
 }
 
 - (IBAction)logout:(id)sender {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([SLMe class])];
-	NSArray *mes = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:fetchRequest error:nil];
-	SLMe *me = [mes lastObject];
-	SLUser *user = me.user;
-	NSLog(@"Me: %@", me);
-	NSLog(@"Me user: %@", user);
-	
 	[[SLCoreDataManager sharedManager] resetCoreDataStack];
 	[[SLAPIClient sharedClient] resetAuthentication];
 	[self updateUI];
@@ -171,8 +165,13 @@
 
 #pragma mark - UI
 
-- (void)showUser {
-	
+- (IBAction)showUser:(id)sender {
+	SLUserVC *userVC = [[SLUserVC alloc] initWithNibName:nil bundle:nil];
+	SLMe *meUser = [[[SLMe allObjcetsController] fetchedObjects] lastObject];
+	userVC.user = [meUser user];
+	[self presentViewController:userVC animated:YES completion:^{
+		
+	}];
 }
 
 - (void)updateUI {
