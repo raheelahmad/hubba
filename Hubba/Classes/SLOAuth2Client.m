@@ -9,6 +9,7 @@
 #import "SLOAuth2Client.h"
 #import "SLFetcher.h"
 #import "SFHFKeychainUtils.h"
+#import "SLURLRequest.h"
 
 static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
 static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
@@ -58,7 +59,7 @@ static NSString * const kServiceName = @"com.sakunlabs.access_tokens";
 }
 
 - (void)fetchTokenForRequest:(NSURLRequest *)request {
-	NSURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
+	SLURLRequest *redirectedRequestForToken = [self tokenRequestForCode:[self codeFromRequest:request]];
 	[[NSURLCache sharedURLCache] removeCachedResponseForRequest:redirectedRequestForToken];
 	[self.fetcher request:redirectedRequestForToken completion:^(BOOL success, NSString *response) {
 		if (success) {
@@ -143,25 +144,29 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	return components.count >= 2 && clientSecretRange.location == NSNotFound;
 }
 
-- (NSURLRequest *)authorizationRequest {
+- (SLURLRequest *)authorizationRequest {
 	NSString *queryString = [NSString stringWithFormat:kSLAuthorizationQueryStringFormat, kSLClientID, kSLClientSecret];
 	NSString *URLString = [NSString stringWithFormat:@"%@?%@", kSLAuthorizationURL, queryString];
 	NSURL *url = [NSURL URLWithString:URLString];
-	return [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+	SLURLRequest *request = [SLURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+	request.parseOption = NSSTRING_PARSED_OUTPUT;
+	return request;
 }
 
-- (NSURLRequest *)tokenRequestForCode:(NSString *)code {
+- (SLURLRequest *)tokenRequestForCode:(NSString *)code {
 	NSString *queryString = [NSString stringWithFormat:kSLTokenParamString, kSLClientID, kSLClientSecret, code];
-	NSURLRequest *request = nil;
+	SLURLRequest *request = nil;
 	if (kSLUsePostForTokenRequest) {
 		NSURL *tokenRequestURL = [NSURL URLWithString:kSLTokenRequestURL];
-		request = [[NSMutableURLRequest alloc] initWithURL:tokenRequestURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
-		[(NSMutableURLRequest *)request setHTTPMethod:@"POST"];
-		[(NSMutableURLRequest *)request setHTTPBody:[queryString dataUsingEncoding:NSUTF8StringEncoding]];
+		request = [[SLURLRequest alloc] initWithURL:tokenRequestURL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+		[request setHTTPMethod:@"POST"];
+		[request setHTTPBody:[queryString dataUsingEncoding:NSUTF8StringEncoding]];
 	} else {
 		NSURL *tokenRequestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", kSLTokenRequestURL, queryString]];
-		request = [NSURLRequest requestWithURL:tokenRequestURL];
+		request = [SLURLRequest requestWithURL:tokenRequestURL];
 	}
+	request.parseOption = NSSTRING_PARSED_OUTPUT;
+	
 	return request;
 }
 
@@ -187,7 +192,7 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	self.webView.delegate = nil;
 	self.webView = webView;
 	self.webView.delegate = self;
-	NSURLRequest *authorizationRequest = self.authorizationRequest;
+	SLURLRequest *authorizationRequest = self.authorizationRequest;
 	[[NSURLCache sharedURLCache] removeCachedResponseForRequest:authorizationRequest];
 	[webView loadRequest:authorizationRequest];
 }
@@ -198,7 +203,6 @@ BOOL isTemporaryCodeRequest(NSURLRequest *request) {
 	self = [super init];
 	if (self) {
 		_fetcher = [[SLFetcher alloc] init];
-		_fetcher.parseAsJSON = NO;
 		_APIName = APIName;
 	}
 	return self;

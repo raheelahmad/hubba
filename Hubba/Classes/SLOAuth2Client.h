@@ -10,6 +10,7 @@
 
 typedef void (^AuthenticationCompletionBlock) (BOOL success);
 
+@class SLURLRequest;
 @interface SLOAuth2Client : NSObject <UIWebViewDelegate, NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) NSString *APIName;
@@ -22,8 +23,8 @@ typedef void (^AuthenticationCompletionBlock) (BOOL success);
 
 // exposing for testing
 - (NSString *)codeFromRequest:(NSURLRequest *)request;
-- (NSURLRequest *)tokenRequestForCode:(NSString *)code;
-- (NSURLRequest *)authorizationRequest;
+- (SLURLRequest *)tokenRequestForCode:(NSString *)code;
+- (SLURLRequest *)authorizationRequest;
 - (NSString *)accessTokenFromResponse:(NSString *)response;
 BOOL isTemporaryCodeRequest(NSURLRequest *request);
 	

@@ -7,6 +7,7 @@
 //
 
 #import "SLAPIClient.h"
+#import "SLURLRequest.h"
 
 @interface SLAPIClient ()
 
@@ -20,10 +21,14 @@
 #pragma mark - Requests
 
 - (void)get:(NSString *)getURLString onCompletion:(FetchCompletionBlock)completionBlock {
-	if (!self.authenticated) {
+	[self get:getURLString needsAuthentication:YES onCompletion:completionBlock];
+}
+
+- (void)get:(NSString *)getURLString needsAuthentication:(BOOL)needsAuthentication onCompletion:(FetchCompletionBlock)completionBlock {
+	if (needsAuthentication && !self.authenticated) {
 		completionBlock(NO, nil);
 	} else {
-		NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForPath:getURLString]];
+		SLURLRequest *request = [SLURLRequest requestWithURL:[self URLForPath:getURLString needsAuthentication:needsAuthentication]];
 		SLFetcher *fetcher = [[SLFetcher alloc] init];
 		[self.fetchers addObject:fetcher];
 		// construct our wrapper completiobn block, so we can let go of fetcher upon its completion
@@ -38,8 +43,19 @@
 	}
 }
 
-- (NSURL *)URLForPath:(NSString *)path {
-	NSString *URLString = [self.baseURL stringByAppendingFormat:@"%@?access_token=%@", path, self.oauthClient.token];
+- (NSURL *)URLForPath:(NSString *)path needsAuthentication:(BOOL)needsAuthentication {
+	if (path == nil) {
+		return nil;
+	}
+	
+	NSRange httpLocation = [path rangeOfString:@"http"];
+	NSString *URLString = path;
+	if (httpLocation.location == NSNotFound || httpLocation.location != 0) {
+		URLString = [self.baseURL stringByAppendingString:URLString];
+	}
+	if (needsAuthentication) {
+		URLString = [URLString stringByAppendingFormat:@"?access_token=%@", self.oauthClient.token];
+	}
 	return [NSURL URLWithString:URLString];
 }
 

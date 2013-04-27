@@ -10,11 +10,12 @@
 
 typedef void (^FetchCompletionBlock) (BOOL success, id response);
 
+@class SLURLRequest;
+
 @interface SLFetcher : NSObject
 
-@property (nonatomic, assign) BOOL parseAsJSON;
-
++ (void)request:(SLURLRequest *)request completion:(FetchCompletionBlock)completion;
 // the string argument in callback will be nil if request fails
-- (void)request:(NSURLRequest *)request completion:(FetchCompletionBlock)completion;
+- (void)request:(SLURLRequest *)request completion:(FetchCompletionBlock)completion;
 
 @end
