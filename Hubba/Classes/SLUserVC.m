@@ -8,6 +8,7 @@
 
 #import "SLUserVC.h"
 #import "SLUser.h"
+#import "UIImageView+Remote.h"
 
 @interface SLUserVC ()
 @property (strong, nonatomic) IBOutlet UILabel *loginLabel;
@@ -30,6 +31,13 @@
 	
 	self.loginLabel.text = self.user.login;
 	self.emailLabel.text = self.user.email;
+	[self.avatarImageView setupWithImageAtURL:self.user.avatarURL completion:^(UIImage * image) {
+		
+	}];
 }
 
+- (IBAction)dismiss:(id)sender {
+	[self dismissViewControllerAnimated:YES
+							 completion:nil];
+}
 @end

@@ -52,7 +52,8 @@
 		59CDF70316EC726F00637007 /* SLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CDF70216EC726F00637007 /* SLRepository.m */; };
 		59CEE9931728ED67005BB14D /* SLUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEE9911728ED67005BB14D /* SLUserVC.m */; };
 		59CEE9941728ED67005BB14D /* SLUserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59CEE9921728ED67005BB14D /* SLUserVC.xib */; };
-		59CEE99717297BB7005BB14D /* UIImage+Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEE99617297BB7005BB14D /* UIImage+Remote.m */; };
+		59CEE99717297BB7005BB14D /* UIImageView+Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEE99617297BB7005BB14D /* UIImageView+Remote.m */; };
+		59DC2F7D172ADFD1000E5ADA /* SLURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 59DC2F7C172ADFD1000E5ADA /* SLURLRequest.m */; };
 		59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */; };
 		76ABFB5B3E5141EBAE57DD74 /* libPods-HubbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0BAD1ED6345B1973DFDCE /* libPods-HubbaTests.a */; };
@@ -133,8 +134,10 @@
 		59CEE9901728ED67005BB14D /* SLUserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLUserVC.h; path = Classes/SLUserVC.h; sourceTree = "<group>"; };
 		59CEE9911728ED67005BB14D /* SLUserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLUserVC.m; path = Classes/SLUserVC.m; sourceTree = "<group>"; };
 		59CEE9921728ED67005BB14D /* SLUserVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SLUserVC.xib; path = Classes/SLUserVC.xib; sourceTree = "<group>"; };
-		59CEE99517297BB7005BB14D /* UIImage+Remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Remote.h"; path = "Classes/UIImage+Remote.h"; sourceTree = "<group>"; };
-		59CEE99617297BB7005BB14D /* UIImage+Remote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Remote.m"; path = "Classes/UIImage+Remote.m"; sourceTree = "<group>"; };
+		59CEE99517297BB7005BB14D /* UIImageView+Remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Remote.h"; path = "Classes/UIImageView+Remote.h"; sourceTree = "<group>"; };
+		59CEE99617297BB7005BB14D /* UIImageView+Remote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Remote.m"; path = "Classes/UIImageView+Remote.m"; sourceTree = "<group>"; };
+		59DC2F7B172ADFD1000E5ADA /* SLURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLURLRequest.h; path = Classes/SLURLRequest.h; sourceTree = "<group>"; };
+		59DC2F7C172ADFD1000E5ADA /* SLURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLURLRequest.m; path = Classes/SLURLRequest.m; sourceTree = "<group>"; };
 		59F3FA5316E9286C00566C09 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Vendor/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Vendor/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteFetchable.h; path = Classes/SLRemoteFetchable.h; sourceTree = "<group>"; };
@@ -305,10 +308,12 @@
 				59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */,
 				5951D59616E423060018764B /* SLFetcher.h */,
 				5951D59716E423060018764B /* SLFetcher.m */,
+				59DC2F7B172ADFD1000E5ADA /* SLURLRequest.h */,
+				59DC2F7C172ADFD1000E5ADA /* SLURLRequest.m */,
 				59CDF6FB16EBE40A00637007 /* SLAPIClient.h */,
 				59CDF6FC16EBE40A00637007 /* SLAPIClient.m */,
-				59CEE99517297BB7005BB14D /* UIImage+Remote.h */,
-				59CEE99617297BB7005BB14D /* UIImage+Remote.m */,
+				59CEE99517297BB7005BB14D /* UIImageView+Remote.h */,
+				59CEE99617297BB7005BB14D /* UIImageView+Remote.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -502,7 +507,8 @@
 				59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */,
 				596882CE1726352D00DFE837 /* SLIssue.m in Sources */,
 				59CEE9931728ED67005BB14D /* SLUserVC.m in Sources */,
-				59CEE99717297BB7005BB14D /* UIImage+Remote.m in Sources */,
+				59CEE99717297BB7005BB14D /* UIImageView+Remote.m in Sources */,
+				59DC2F7D172ADFD1000E5ADA /* SLURLRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
