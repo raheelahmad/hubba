@@ -10,6 +10,6 @@
 
 @interface UIImageView (Remote)
 
-- (void)setupWithImageAtURL:(NSString *)URLString completion:(void (^) (UIImage *))completion;
+- (void)setupWithImageAtURL:(NSString *)URLString;
 
 @end

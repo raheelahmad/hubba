@@ -31,9 +31,7 @@
 	
 	self.loginLabel.text = self.user.login;
 	self.emailLabel.text = self.user.email;
-	[self.avatarImageView setupWithImageAtURL:self.user.avatarURL completion:^(UIImage * image) {
-		
-	}];
+	[self.avatarImageView setupWithImageAtURL:self.user.avatarURL];
 }
 
 - (IBAction)dismiss:(id)sender {

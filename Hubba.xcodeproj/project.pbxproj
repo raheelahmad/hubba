@@ -19,6 +19,7 @@
 		59627C8F16F5828C00E73178 /* SLMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8E16F5828C00E73178 /* SLMe.m */; };
 		596882CE1726352D00DFE837 /* SLIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 596882CD1726352D00DFE837 /* SLIssue.m */; };
 		59905A561707AB7C003ABB08 /* SLRelationMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 59905A551707AB7C003ABB08 /* SLRelationMapping.m */; };
+		599A396C1733950E009F6520 /* SLImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 599A396B1733950E009F6520 /* SLImageCache.m */; };
 		59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59A62F141708E93F0084C169 /* SLOAuthClientSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */; };
 		59A62F171708ED620084C169 /* SLMappingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A62F161708ED620084C169 /* SLMappingSpec.m */; };
@@ -91,6 +92,8 @@
 		596882CD1726352D00DFE837 /* SLIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLIssue.m; path = Classes/SLIssue.m; sourceTree = "<group>"; };
 		59905A541707AB7C003ABB08 /* SLRelationMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRelationMapping.h; path = Classes/SLRelationMapping.h; sourceTree = "<group>"; };
 		59905A551707AB7C003ABB08 /* SLRelationMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLRelationMapping.m; path = Classes/SLRelationMapping.m; sourceTree = "<group>"; };
+		599A396A1733950E009F6520 /* SLImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLImageCache.h; path = Classes/SLImageCache.h; sourceTree = "<group>"; };
+		599A396B1733950E009F6520 /* SLImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLImageCache.m; path = Classes/SLImageCache.m; sourceTree = "<group>"; };
 		59A62F131708E93F0084C169 /* SLOAuthClientSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLOAuthClientSpecs.m; sourceTree = "<group>"; };
 		59A62F161708ED620084C169 /* SLMappingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLMappingSpec.m; sourceTree = "<group>"; };
 		59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCoreDataStackSpecs.m; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				59ABA75B16DB69FA00F711DB /* Networking */,
 				59ABA73016DB51E300F711DB /* SLAppDelegate.h */,
 				59ABA73116DB51E300F711DB /* SLAppDelegate.m */,
+				599A396A1733950E009F6520 /* SLImageCache.h */,
+				599A396B1733950E009F6520 /* SLImageCache.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				59CEE9931728ED67005BB14D /* SLUserVC.m in Sources */,
 				59CEE99717297BB7005BB14D /* UIImageView+Remote.m in Sources */,
 				59DC2F7D172ADFD1000E5ADA /* SLURLRequest.m in Sources */,
+				599A396C1733950E009F6520 /* SLImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
