@@ -11,6 +11,10 @@
 #import "SLAPIClient.h"
 #import "SLCoreDataManager.h"
 
+@interface SLAppDelegate ()
+@property (nonatomic, strong) UINavigationController *mainNavigationController;
+@end
+
 @implementation SLAppDelegate
 
 NSString * const kServiceName = @"Github";
@@ -25,7 +29,9 @@ NSString * const kServiceBaseURL = @"https://api.github.com";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-	self.window.rootViewController = [[SLMainVC alloc] init];
+	SLMainVC *mainVC = [[SLMainVC alloc] initWithNibName:nil bundle:nil];
+	self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+	self.window.rootViewController = self.mainNavigationController;
 	
     [self.window makeKeyAndVisible];
     return YES;

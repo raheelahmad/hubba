@@ -55,6 +55,7 @@
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SLUser" inverseName="repositories" inverseEntity="SLUser" syncable="YES"/>
     </entity>
     <entity name="SLUser" representedClassName="SLUser" syncable="YES">
+        <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,6 +76,6 @@
         <element name="SLMe" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SLOrganization" positionX="160" positionY="192" width="128" height="285"/>
         <element name="SLRepository" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="SLUser" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="SLUser" positionX="160" positionY="192" width="128" height="255"/>
     </elements>
 </model>

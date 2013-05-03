@@ -1,5 +1,6 @@
 #import "Kiwi.h"
 #import "SLOAuth2Client.h"
+#import "SLURLRequest.h"
 
 SPEC_BEGIN(OAuthClientTests)
 
@@ -13,7 +14,7 @@ describe(@"Authentication Code", ^{
 	describe(@"should detect an authorization request", ^{
 		__block NSArray *componentsWithClientId = nil;
 		beforeAll(^{
-			NSURLRequest *request = [client authorizationRequest];
+			SLURLRequest *request = [client authorizationRequest];
 			NSString *string = [request.URL absoluteString];
 			componentsWithClientId = [string componentsSeparatedByString:@"client_id="];
 		});

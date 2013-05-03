@@ -25,5 +25,8 @@
 
 // Requests
 - (void)get:(NSString *)getURLString onCompletion:(FetchCompletionBlock)completionBlock;
+- (void)get:(NSString *)getURLString
+		needsAuthentication:(BOOL)needsAuthentication
+		onCompletion:(FetchCompletionBlock)completionBlock;
 
 @end

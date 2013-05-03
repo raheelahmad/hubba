@@ -8,6 +8,7 @@
 
 #import "SLOAuthClientTests.h"
 #import "SLOAuth2Client.h"
+#import "SLURLRequest.h"
 
 @interface SLOAuthClientTests ()
 @property (nonatomic, strong) SLOAuth2Client *client;
@@ -45,7 +46,7 @@
 }
 
 - (void)testAuthorizationRequest {
-	NSURLRequest *request = [self.client authorizationRequest];
+	SLURLRequest *request = [self.client authorizationRequest];
 	NSString *string = [request.URL absoluteString];
 	NSArray *componentsWithClientId = [string componentsSeparatedByString:@"client_id="];
 	STAssertEquals(componentsWithClientId.count, (NSUInteger)2, @"URL should be splittable by client_id");

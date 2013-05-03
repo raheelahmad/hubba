@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSString * company;
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * avatarURL;
 @property (nonatomic, retain) NSSet *ownedRepositories;
 @property (nonatomic, retain) NSSet *repositories;
 @property (nonatomic, retain) NSSet *organizations;

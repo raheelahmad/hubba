@@ -7,9 +7,10 @@
 //
 
 #import "SLFetcher.h"
+#import "SLURLRequest.h"
 
 @interface SLFetcher ()
-@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, strong) SLURLRequest *request;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, copy) FetchCompletionBlock completionBlock;
@@ -17,9 +18,24 @@
 
 @implementation SLFetcher
 
-#pragma mark - NSURLConnection delegate
+#pragma mark - Accessors
 
-- (void)request:(NSURLRequest *)request completion:(FetchCompletionBlock)completion {
++ (SLFetcher *)sharedFetcher {
+	static SLFetcher *_sharedFetcher = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		_sharedFetcher = [[SLFetcher alloc] init];
+	});
+	return _sharedFetcher;
+}
+
+#pragma mark - Making requests
+
++ (void)request:(SLURLRequest *)request completion:(FetchCompletionBlock)completion {
+	[[self sharedFetcher] request:request completion:completion];
+}
+
+- (void)request:(SLURLRequest *)request completion:(FetchCompletionBlock)completion {
 	self.request = request;
 	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	if (self.connection) {
@@ -29,6 +45,8 @@
 		completion(NO, nil);
 	}
 }
+
+#pragma mark - NSURLConnection delegate
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	NSLog(@"Error loading: %@", error);
@@ -49,10 +67,12 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	NSError *error;
 	id response = nil;
-	if (self.parseAsJSON) {
+	if (self.request.parseOption == JSON_PARSED_OUTPUT) {
 		response = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableContainers error:&error];
-	} else {
+	} else if (self.request.parseOption == NSSTRING_PARSED_OUTPUT) {
 		response = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+	} else {
+		response = self.responseData;
 	}
 	if (!response) {
 		NSLog(@"Could not parse response: %@", error);
@@ -62,14 +82,6 @@
 		self.completionBlock(YES, response);
 	}
 	self.connection = nil;
-}
-
-- (id)init {
-	self = [super init];
-	if (self) {
-		self.parseAsJSON = YES;
-	}
-	return self;
 }
 
 @end
