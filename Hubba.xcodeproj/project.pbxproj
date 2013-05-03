@@ -45,6 +45,8 @@
 		59ABA75E16DB6A1300F711DB /* SLOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA75D16DB6A1300F711DB /* SLOAuth2Client.m */; };
 		59ABA76516DB6D9100F711DB /* SLMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59ABA76316DB6D9100F711DB /* SLMainVC.m */; };
 		59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59ABA76916DB6DBB00F711DB /* SLMainVC.xib */; };
+		59B22E601734220B00522848 /* TestImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B22E5F1734220B00522848 /* TestImage.png */; };
+		59B22E611734235600522848 /* SLImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 599A396B1733950E009F6520 /* SLImageCache.m */; };
 		59C2051917178A8B00AA7A02 /* SLDepartment.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C2051817178A8B00AA7A02 /* SLDepartment.m */; };
 		59C39583170962700017998E /* SLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 59627C8616F4E59A00E73178 /* SLUser.m */; };
 		59C395AC170D2E7E0017998E /* SLCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 59C395AB170D2E7E0017998E /* SLCompany.m */; };
@@ -55,6 +57,7 @@
 		59CEE9941728ED67005BB14D /* SLUserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59CEE9921728ED67005BB14D /* SLUserVC.xib */; };
 		59CEE99717297BB7005BB14D /* UIImageView+Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEE99617297BB7005BB14D /* UIImageView+Remote.m */; };
 		59DC2F7D172ADFD1000E5ADA /* SLURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 59DC2F7C172ADFD1000E5ADA /* SLURLRequest.m */; };
+		59E78C10173428EF00C16AEA /* SLImageCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E78C0F173428EF00C16AEA /* SLImageCacheTests.m */; };
 		59F3FA5516E9286C00566C09 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59FD7B5916F1801E00DE3D5C /* SLFSQCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FD7B5816F1801E00DE3D5C /* SLFSQCheckin.m */; };
 		76ABFB5B3E5141EBAE57DD74 /* libPods-HubbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0BAD1ED6345B1973DFDCE /* libPods-HubbaTests.a */; };
@@ -125,6 +128,7 @@
 		59ABA76216DB6D9100F711DB /* SLMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLMainVC.h; path = Classes/SLMainVC.h; sourceTree = "<group>"; };
 		59ABA76316DB6D9100F711DB /* SLMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLMainVC.m; path = Classes/SLMainVC.m; sourceTree = "<group>"; };
 		59ABA76816DB6DBB00F711DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SLMainVC.xib; sourceTree = "<group>"; };
+		59B22E5F1734220B00522848 /* TestImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestImage.png; sourceTree = "<group>"; };
 		59C2051717178A8B00AA7A02 /* SLDepartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDepartment.h; sourceTree = "<group>"; };
 		59C2051817178A8B00AA7A02 /* SLDepartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDepartment.m; sourceTree = "<group>"; };
 		59C395AA170D2E7E0017998E /* SLCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCompany.h; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 		59CEE99617297BB7005BB14D /* UIImageView+Remote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Remote.m"; path = "Classes/UIImageView+Remote.m"; sourceTree = "<group>"; };
 		59DC2F7B172ADFD1000E5ADA /* SLURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLURLRequest.h; path = Classes/SLURLRequest.h; sourceTree = "<group>"; };
 		59DC2F7C172ADFD1000E5ADA /* SLURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLURLRequest.m; path = Classes/SLURLRequest.m; sourceTree = "<group>"; };
+		59E78C0E173428EF00C16AEA /* SLImageCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLImageCacheTests.h; sourceTree = "<group>"; };
+		59E78C0F173428EF00C16AEA /* SLImageCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLImageCacheTests.m; sourceTree = "<group>"; };
 		59F3FA5316E9286C00566C09 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Vendor/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		59F3FA5416E9286C00566C09 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Vendor/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		59FD7B5616F1794400DE3D5C /* SLRemoteFetchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLRemoteFetchable.h; path = Classes/SLRemoteFetchable.h; sourceTree = "<group>"; };
@@ -251,6 +257,7 @@
 		59ABA72816DB51E300F711DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59B22E5F1734220B00522848 /* TestImage.png */,
 				59ABA72916DB51E300F711DB /* Hubba-Info.plist */,
 				59ABA72A16DB51E300F711DB /* InfoPlist.strings */,
 				59ABA72D16DB51E300F711DB /* main.m */,
@@ -273,6 +280,8 @@
 				59A62F1A170909A70084C169 /* SLCoreDataStackSpecs.m */,
 				59A62F1C17092DE40084C169 /* SLCoreDataStackTestsHelper.h */,
 				59A62F1D17092DE40084C169 /* SLCoreDataStackTestsHelper.m */,
+				59E78C0E173428EF00C16AEA /* SLImageCacheTests.h */,
+				59E78C0F173428EF00C16AEA /* SLImageCacheTests.m */,
 			);
 			path = HubbaTests;
 			sourceTree = "<group>";
@@ -445,6 +454,7 @@
 				59ABA73816DB51E300F711DB /* Default-568h@2x.png in Resources */,
 				59ABA76716DB6DBB00F711DB /* SLMainVC.xib in Resources */,
 				59CEE9941728ED67005BB14D /* SLUserVC.xib in Resources */,
+				59B22E601734220B00522848 /* TestImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B22E611734235600522848 /* SLImageCache.m in Sources */,
 				59C39583170962700017998E /* SLUser.m in Sources */,
 				59A62F0E1708E7070084C169 /* SLOAuth2Client.m in Sources */,
 				592905C016DB70C700B0B9FE /* SLOAuthClientTests.m in Sources */,
@@ -533,6 +544,7 @@
 				59A62F21170930230084C169 /* SLPerson.m in Sources */,
 				59C395AC170D2E7E0017998E /* SLCompany.m in Sources */,
 				59C2051917178A8B00AA7A02 /* SLDepartment.m in Sources */,
+				59E78C10173428EF00C16AEA /* SLImageCacheTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

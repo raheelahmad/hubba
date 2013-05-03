@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface SLImageCache : NSObject
-+ (void)setImageForURLString:(NSString *)URLString;
++ (void)setImage:(UIImage *)image forURLString:(NSString *)URLString;
 + (UIImage *)imageForURLString:(NSString *)URLString;
 @end

@@ -25,7 +25,7 @@
 	request.parseOption = NO_PARSED_OUTPUT;
 	[SLFetcher request:request completion:^(BOOL success, id response) {
 		UIImage *image = [UIImage imageWithData:response];
-		[SLImageCache setImageForURLString:URLString];
+		[SLImageCache setImage:image forURLString:URLString];
 		self.image = image;
 	}];
 }

@@ -8,14 +8,27 @@
 
 #import "SLImageCache.h"
 
+@interface SLImageCache ()
+@end
+
 @implementation SLImageCache
 
-+ (void)setImageForURLString:(NSString *)URLString {
+static NSMutableDictionary *imageCacheForURLString;
+
++ (void)initialize {
+	imageCacheForURLString = [NSMutableDictionary dictionaryWithCapacity:10];
+}
+
++ (void)setImage:(UIImage *)image forURLString:(NSString *)URLString {
+	if (!image || !URLString) {
+		return;
+	}
 	
+	[imageCacheForURLString setValue:image forKey:URLString];
 }
 
 + (UIImage *)imageForURLString:(NSString *)URLString {
-	return nil;
+	return imageCacheForURLString[URLString];
 }
 
 @end
