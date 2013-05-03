@@ -38,14 +38,6 @@
 - (void)refresh {
 	if ([SLAPIClient sharedClient].authenticated) {
 		[SLMe refresh];
-		NSArray *issues = [[[SLCoreDataManager sharedManager] managedObjectContext] executeFetchRequest:[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([SLIssue class])]
-																				error:nil];
-		for (SLIssue *issue in issues) {
-			NSLog(@"Issue: %@", issue);
-		}
-//		[[SLAPIClient sharedClient] get:@"/issues" onCompletion:^(BOOL success, id response) {
-//			NSLog(@"Issues: %@", response);
-//		}];
 	}
 }
 
@@ -169,16 +161,16 @@
 	SLUserVC *userVC = [[SLUserVC alloc] initWithNibName:nil bundle:nil];
 	SLMe *meUser = [[[SLMe allObjcetsController] fetchedObjects] lastObject];
 	userVC.user = [meUser user];
-	[self presentViewController:userVC animated:YES completion:^{
-		
-	}];
+	UINavigationController *navController = self.navigationController;
+	[navController pushViewController:userVC animated:YES];
 }
 
 - (void)updateUI {
+	[self.navigationItem setRightBarButtonItem:self.loginButton];
 	if ([SLAPIClient sharedClient].authenticated) {
 		self.loginButton.action = @selector(logout:);
 		[self.loginButton setTitle:NSLocalizedString(@"Logout", nil)];
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showUser)];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showUser:)];
 	} else {
 		self.loginButton.action = @selector(initiateLogin:);
 		[self.loginButton setTitle:NSLocalizedString(@"Log In", nil)];
@@ -190,7 +182,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"SLMainVC" bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
@@ -209,8 +201,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = [[SLAPIClient sharedClient] APIName];
-	self.loginButton.target = self;
+	self.loginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(login)];
 	
 	[self refresh];
 	[self updateUI];
