@@ -12,15 +12,15 @@
 #import "SLURLRequest.h"
 
 static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
-static NSString * const kSLClientID = @"0cd6f03185bbf7def542";
-static NSString * const kSLClientSecret = @"a2ca98bb09b0b95ef284d87515d84bde6db9194c";
+static NSString * const kSLClientID = @"__ClientID__";
+static NSString * const kSLClientSecret = @"__ClientSecret__";
 static NSString * const kSLAuthorizationURL = @"https://github.com/login/oauth/authorize";;
 static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&client_secret=%@";
 static NSString * const kSLTokenRequestURL = @"https://github.com/login/oauth/access_token";
 static NSString * const kSLTokenParamString = @"client_id=%@&client_secret=%@&code=%@";
 //static NSString * const kSLRedirectURI = @"http://sakunlabs.com/fsq_authenticator";
-//static NSString * const kSLClientID = @"DMPRD2BLYBQCBSSYK2RL42VMDQEHFVXIDEDOTKFP2YNR3BFU";
-//static NSString * const kSLClientSecret = @"OO01YZOEGYA0O2NAXWSI14CYEBR2IOTYOKTDTU2RQQWLNUGI";
+//static NSString * const kSLClientID = @"__ClientID__";
+//static NSString * const kSLClientSecret = @"__ClientSecret__";
 //static NSString * const kSLAuthorizationURL = @"https://foursquare.com/oauth2/authenticate";;
 //static NSString * const kSLAuthorizationQueryStringFormat = @"client_id=%@&response_type=code&redirect_uri=%@";
 //static NSString * const kSLTokenRequestURL = @"https://foursquare.com/oauth2/access_token";
